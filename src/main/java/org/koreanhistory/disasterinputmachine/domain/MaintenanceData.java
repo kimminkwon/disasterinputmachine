@@ -86,14 +86,14 @@ public class MaintenanceData {
     private String remark;
 
     @Builder
-    public MaintenanceData(Long mno, String indexKR, String indexCN,
+    public MaintenanceData(String indexKR, String indexCN,
                            String lclasKR, String lclasCN, String mclasKR, String mclasCN, String sclasKR, String sclaeCN,
                            String articlSumry, String articlOrginl, String ltrtreNM, String sourceKR, String sourceCN,
                            String yearNameOfTomb, int yearAD, int month,
                            String nationKR, String dynastyKR, String nationCN, String dynastyCN,
                            String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                            String referIndex, String remark) {
-        this.mno = mno; this.indexKR = indexKR; this.indexCN = indexCN;
+        this.indexKR = indexKR; this.indexCN = indexCN;
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclaeCN = sclaeCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
         this.yearNameOfTomb = yearNameOfTomb; this.yearAD = yearAD; this.month = month;
