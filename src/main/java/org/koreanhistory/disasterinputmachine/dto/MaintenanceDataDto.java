@@ -16,9 +16,6 @@ import java.sql.Timestamp;
 @ToString
 public class MaintenanceDataDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Primary Key (Maintenace Number)
     private Long mno;
 
     // Created time for debug
@@ -85,6 +82,7 @@ public class MaintenanceDataDto {
     private String remark;
 
     public MaintenanceDataDto(MaintenanceData entity) {
+        this.mno = entity.getMno();
         this.createTime = entity.getCreateTime(); this.modifyTime = entity.getModifyTime();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclaeCN = entity.getSclaeCN();
