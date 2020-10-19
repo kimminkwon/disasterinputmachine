@@ -26,6 +26,7 @@ public class MaintenanceDataRepositoryTest {
     @Autowired
     MaintenanceDataRepository repository;
 
+    @Test
     public void cleanUp() {
         repository.deleteAll();
     }
