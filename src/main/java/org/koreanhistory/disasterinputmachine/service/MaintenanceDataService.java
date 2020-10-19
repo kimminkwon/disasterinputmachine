@@ -37,4 +37,11 @@ public class MaintenanceDataService {
 
         return resultOfDto;
     }
+
+    @Transactional
+    public MaintenanceDataDto findById(Long mno) {
+        MaintenanceData entity = repository.findById(mno)
+                .orElseThrow(() -> new IllegalArgumentException("id가 존재하지 않습니다. id: " + mno));
+        return new MaintenanceDataDto(entity);
+    }
 }

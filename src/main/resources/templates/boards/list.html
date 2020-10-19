@@ -127,7 +127,7 @@ layout:decorate="~{layout/layout1}">
             $(".boardLink").click(function (e){
                 e.preventDefault();
                 var boardNo = $(this).attr("href");
-                formObj.attr("action", [[@{'/boards/view'}]]);
+                formObj.attr("action", [[@{'/boards/viewOfMaintenance'}]]);
                 formObj.append("<input type='hidden' name='bno' value='" + boardNo + "'>");
                 formObj.submit();
 

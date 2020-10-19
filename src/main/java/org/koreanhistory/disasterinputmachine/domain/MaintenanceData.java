@@ -42,7 +42,7 @@ public class MaintenanceData {
 
     // 소분류 Small_classification_kr (한글, 한자)
     private String sclasKR;
-    private String sclaeCN;
+    private String sclasCN;
 
     // 기사 관련 Data
     @Column(columnDefinition = "TEXT")
@@ -94,7 +94,7 @@ public class MaintenanceData {
                            String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                            String referIndex, String remark) {
         this.indexKR = indexKR; this.indexCN = indexCN;
-        this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclaeCN = sclaeCN;
+        this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclaeCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
         this.yearNameOfTomb = yearNameOfTomb; this.yearAD = yearAD; this.month = month;
         this.nationKR = nationKR; this.dynastyKR = dynastyKR; this.nationCN = nationCN; this.dynastyCN = dynastyCN;

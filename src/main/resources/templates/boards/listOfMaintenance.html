@@ -100,6 +100,11 @@
         </form>
     </div>
     <!-- end panel -->
+
+    <div class="panel-body pull-right">
+        <h4><a class="label label-default" th:href="@{register}">RESERVATION</a></h4>
+        <h4><a class="label label-default" th:href="@{register}">DELETE</a></h4>
+    </div>
     
 </div>
 <!-- end fragment -->
@@ -143,7 +148,7 @@
             $(".boardLink").click(function (e){
                 e.preventDefault();
                 var boardNo = $(this).attr("href");
-                formObj.attr("action", [[@{'/boards/view'}]]);
+                formObj.attr("action", [[@{'/boards/viewOfMaintenance'}]]);
                 formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
                 formObj.submit();
 

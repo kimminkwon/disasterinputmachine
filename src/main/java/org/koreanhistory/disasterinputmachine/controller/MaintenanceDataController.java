@@ -32,4 +32,14 @@ public class MaintenanceDataController {
 
         model.addAttribute("listOfDto", new PageMaker(listOfDto));
     }
+
+    @GetMapping("/viewOfMaintenance")
+    public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
+        log.info("IN CONTROLLER: view() called...");
+        log.info("MNO: " + mno);
+        MaintenanceDataDto dto = service.findById(mno);
+        log.info("DTO: " + dto);
+        model.addAttribute("dto", dto);
+    }
+
 }
