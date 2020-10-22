@@ -3,6 +3,7 @@ package org.koreanhistory.disasterinputmachine.domain;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -100,5 +101,15 @@ public class MaintenanceData {
         this.nationKR = nationKR; this.dynastyKR = dynastyKR; this.nationCN = nationCN; this.dynastyCN = dynastyCN;
         this.area1KR = area1KR; this.area1CN = area1CN; this.area2KR = area2KR; this.area2CN = area2CN; this.area3KR = area3KR; this.area3CN = area3CN;
         this.referIndex = referIndex; this.remark = remark;
+    }
+
+    public void update(MaintenanceDataModifyDto dto) {
+        this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
+        this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
+        this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
+        this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();
+        this.nationKR = dto.getNationKR(); this.dynastyKR = dto.getDynastyKR(); this.nationCN = dto.getNationCN(); this.dynastyCN = dto.getDynastyCN();
+        this.area1KR = dto.getArea1KR(); this.area1CN = dto.getArea1CN(); this.area2KR = dto.getArea2KR(); this.area2CN = dto.getArea2CN(); this.area3KR = dto.getArea3KR(); this.area3CN = dto.getArea3CN();
+        this.referIndex = dto.getReferIndex(); this.remark = dto.getRemark();
     }
 }
