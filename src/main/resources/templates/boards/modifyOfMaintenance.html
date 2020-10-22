@@ -8,10 +8,13 @@
 
         <form id = 'f1'>
 
+<<<<<<< HEAD
             <div class="form-group">
                 <label>분류번호</label>
                 <input class="form-control" name="mno" th:value="${dto.mno}" readonly="readonly" />
             </div>
+=======
+>>>>>>> ec36832... make view for modify jobs
 
             <div class="form-group" style="width: 49%; float: left;" >
                 <label>색인어(한글)</label>
@@ -170,6 +173,10 @@
         <div class="pull-right">
 
             <a href="#" class="btn btn-warning modbtn">Modify</a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec36832... make view for modify jobs
             <a href="#" class="btn btn-danger delbtn">Delete</a>
 
             <a th:href="@{ listOfMaintenance(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.mno}) }"
