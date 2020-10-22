@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
+import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
 import org.koreanhistory.disasterinputmachine.service.MaintenanceDataService;
 import org.koreanhistory.disasterinputmachine.vo.PageMaker;
@@ -62,10 +63,46 @@ public class MaintenanceDataController {
 
     @GetMapping("/modifyOfMaintenance")
     public void modifyGET(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
-        log.info("IN CONTROLLER: modiftGET() called...");
+        log.info("IN CONTROLLER: modifyGET() called...");
         log.info("MNO: " + mno);
         MaintenanceDataDto dto = service.findById(mno);
         log.info("FIND DTO: " + dto);
         model.addAttribute("dto", dto);
+    }
+
+    // modifyGET()에서 데이터를 입력 후 Submit했을 경우
+    @PostMapping("/modifyOfMaintenance")
+    public String modifyPOST(MaintenanceDataModifyDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN CONTROLLER: modifyPOST() called...");
+        log.info("MODIFY DTO: " + dto);
+        service.modify(dto);
+
+        rttr.addFlashAttribute("msg", "success");
+        rttr.addAttribute("mno", dto.getMno());
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/boards/viewOfMaintenance";
+    }
+
+    @PostMapping("/deleteOfMaintenance")
+    public String delete(Long mno, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN CONTROLLER: delete() called...");
+        log.info("MNO: " + mno);
+        service.deleteById(mno);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/boards/listOfMaintenance";
     }
 }
