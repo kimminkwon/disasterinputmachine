@@ -1,5 +1,6 @@
 package org.koreanhistory.disasterinputmachine.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import javax.persistence.Column;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class MaintenanceDataModifyDto {
 
     private Long mno;
