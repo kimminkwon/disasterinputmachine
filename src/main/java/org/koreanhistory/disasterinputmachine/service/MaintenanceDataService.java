@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
@@ -42,7 +41,6 @@ public class MaintenanceDataService {
 
     @Transactional
     public MaintenanceDataDto findById(Long mno) {
-        log.info("IN MaintenanceDataService: findById() called...");
         MaintenanceData entity = repository.findById(mno)
                 .orElseThrow(() -> new IllegalArgumentException("id가 존재하지 않습니다. id: " + mno));
         return new MaintenanceDataDto(entity);
@@ -50,22 +48,6 @@ public class MaintenanceDataService {
 
     @Transactional
     public void save(MaintenanceDataSaveDto dto) {
-        log.info("IN MaintenanceDataService: save() called...");
         repository.save(dto.toEntity());
-    }
-
-    @Transactional
-    public void deleteById(Long mno) {
-        log.info("IN MaintenanceDataService: deleteById() called...");
-        repository.deleteById(mno);
-    }
-
-    @Transactional
-    public void modify(MaintenanceDataModifyDto dto) {
-        log.info("IN MaintenanceDataService: modify() called...");
-        log.info("DTO" + dto);
-        MaintenanceData entity = repository.findById(dto.getMno())
-                .orElseThrow(() -> new IllegalArgumentException("id가 존재하지 않습니다. id: " + dto.getMno()));
-        entity.update(dto);
     }
 }
