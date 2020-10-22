@@ -59,4 +59,13 @@ public class MaintenanceDataController {
 
         return "redirect:/boards/listOfMaintenance";
     }
+
+    @GetMapping("/modifyOfMaintenance")
+    public void modifyGET(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
+        log.info("IN CONTROLLER: modiftGET() called...");
+        log.info("MNO: " + mno);
+        MaintenanceDataDto dto = service.findById(mno);
+        log.info("FIND DTO: " + dto);
+        model.addAttribute("dto", dto);
+    }
 }
