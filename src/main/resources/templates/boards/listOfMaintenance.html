@@ -5,8 +5,14 @@
 <div layout:fragment="content">
 
     <div class="panel-heading">List of Maintenance</div>
+    <div class="panel-body pull-left">
+        <h4>
+            <a class="label label-default" th:href="@{listOfReservation}">TO RESERVATION LIST</a>
+            <a class="label label-default" th:href="@{listOfDelete}">TO DELETE LIST</a>
+        </h4>
+    </div>
     <div class="panel-body pull-right">
-        <h4><a class="label label-default" th:href="@{registerOfMaintenance}">RESISTER</a></h4>
+        <h4><a class="label label-primary" th:href="@{registerOfMaintenance}">RESISTER</a></h4>
     </div>
     <div class="panel-body">
 
@@ -51,7 +57,7 @@
             </table>
 
             <!-- Search Space -->
-            <div>
+            <div style="float: left;">
                 <select id='searchType'>
                     <option>--</option>
                     <option value='index' th:selected="${pageVO.type} == 'index'">색인어</option>
@@ -63,12 +69,11 @@
                 <button id='searchBtn'>Search</button>
             </div>
 
-
             <!-- Paging size -->
-            <div>
+            <div style="float: right;">
                 <input type="number" id="pageSize" min="10" max="50" step="5" placeholder="size" required >
                 <button id='pageBtn'>Submit</button>
-            </div>
+            </div> <div style="clear:both;"></div>
 
         </div>
 
@@ -107,11 +112,6 @@
     </div>
     <!-- end panel -->
 
-    <div class="panel-body pull-right">
-        <h4><a class="label label-default" th:href="@{register}">RESERVATION</a></h4>
-        <h4><a class="label label-default" th:href="@{register}">DELETE</a></h4>
-    </div>
-    
 </div>
 <!-- end fragment -->
 
