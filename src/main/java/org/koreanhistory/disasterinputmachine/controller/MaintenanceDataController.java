@@ -2,7 +2,9 @@ package org.koreanhistory.disasterinputmachine.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
+import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
 import org.koreanhistory.disasterinputmachine.service.MaintenanceDataService;
 import org.koreanhistory.disasterinputmachine.vo.PageMaker;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
@@ -42,4 +44,9 @@ public class MaintenanceDataController {
         model.addAttribute("dto", dto);
     }
 
+    // 데이터를 저장하는 페이지로 이동한다.
+    @GetMapping("/registerOfMaintenance")
+    public void registerGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
+        log.info("IN CONTROLLER: registerGET() called...");
+    }
 }
