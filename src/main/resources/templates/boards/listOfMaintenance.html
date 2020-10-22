@@ -63,6 +63,13 @@
                 <button id='searchBtn'>Search</button>
             </div>
 
+
+            <!-- Paging size -->
+            <div>
+                <input type="number" id="pageSize" min="10" max="50" step="5" placeholder="size" required >
+                <button id='pageBtn'>Submit</button>
+            </div>
+
         </div>
 
         <!-- Paging -->
@@ -130,6 +137,15 @@
                 formObj.find("[name='type']").val(typeStr);
                 formObj.find("[name='keyword']").val(keywordStr);
                 formObj.find("[name='page']").val("1");
+                formObj.submit();
+            });
+
+            // pageSize 버튼이 클릭되었을 때
+            $("#pageBtn").click(function(e) {
+                var pageSizeStr = $("#pageSize").val();
+                console.log("", pageSizeStr);
+
+                formObj.find("[name='size']").val(pageSizeStr);
                 formObj.submit();
             });
 
