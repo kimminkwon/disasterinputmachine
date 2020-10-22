@@ -12,10 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Log
@@ -48,5 +46,17 @@ public class MaintenanceDataController {
     @GetMapping("/registerOfMaintenance")
     public void registerGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
         log.info("IN CONTROLLER: registerGET() called...");
+    }
+
+    // registerGet()에서 데이터를 입력 후 submit했을 경우
+    @PostMapping("/registerOfMaintenance")
+    public String registerPOST(@ModelAttribute("dto") MaintenanceDataSaveDto dto, RedirectAttributes rttr) {
+        log.info("IN CONTROLLER: registerPOST() called...");
+        log.info("SAVE DTO: " + dto);
+
+        service.save(dto);
+        rttr.addFlashAttribute("msg", "success");
+
+        return "redirect:/boards/listOfMaintenance";
     }
 }

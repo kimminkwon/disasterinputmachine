@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
+import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.data.domain.Page;
@@ -43,5 +44,10 @@ public class MaintenanceDataService {
         MaintenanceData entity = repository.findById(mno)
                 .orElseThrow(() -> new IllegalArgumentException("id가 존재하지 않습니다. id: " + mno));
         return new MaintenanceDataDto(entity);
+    }
+
+    @Transactional
+    public void save(MaintenanceDataSaveDto dto) {
+        repository.save(dto.toEntity());
     }
 }
