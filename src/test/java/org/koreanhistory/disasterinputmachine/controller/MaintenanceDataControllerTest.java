@@ -212,8 +212,16 @@ public class MaintenanceDataControllerTest {
     }
 
     @Test
-    public void 데이터삭제() {
+    @Transactional
+    public void 데이터삭제() throws Exception {
+        String url = "http://localhost:" + port + "/boards/deleteOfMaintenance";
 
+        Long beforeSize = repository.count();
+        log.info("BEFORE SIZE: " + beforeSize);
+        mockMvc.perform(post(url).param("mno", "106"));
+
+        log.info("AFTER SIZE: " + repository.count());
+        assertThat(repository.count()).isLessThan(beforeSize);
     }
 
 }
