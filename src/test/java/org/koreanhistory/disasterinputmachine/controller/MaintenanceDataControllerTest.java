@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
+import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -55,10 +57,12 @@ public class MaintenanceDataControllerTest {
 
     private MockMvc mockMvc;
     private MaintenanceData entity;
+    private ObjectMapper mapper;
 
     @Before
-    public void 목객체생성() {
+    public void 목과매퍼객체생성() {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mapper = new ObjectMapper();
     }
 
     public void 예제데이터삽입() {
@@ -175,8 +179,6 @@ public class MaintenanceDataControllerTest {
         String url = "http://localhost:" + port + "/boards/registerOfMaintenance";
         예제데이터삽입();
         MaintenanceDataSaveDto dto = new MaintenanceDataSaveDto(entity);
-        log.info("TEST ENTITY: " + entity);
-        log.info("TEST DTO: " + dto);
         Long beforeSize = repository.count();
         mockMvc.perform(post(url).flashAttr("dto", dto));
 
@@ -190,7 +192,28 @@ public class MaintenanceDataControllerTest {
         assertThat(list.get(0).getIndexKR()).contains("TEST");
     }
 
+    @Test
+    @Transactional
+    public void 데이터수정Modify() throws Exception {
+        String url = "http://localhost:" + port + "/boards/modifyOfMaintenance";
+        예제데이터삽입();
+        MaintenanceDataModifyDto dto = new MaintenanceDataModifyDto(entity);
+        dto.setMno(100l); // 100번 데이터가 수정될 예정
+        log.info("DTO: " + dto);
 
+        mockMvc.perform(post(url).flashAttr("dto", dto));
 
+        Optional<MaintenanceData> optionalMaintenanceData = repository.findById(100l);
+        MaintenanceData entity = optionalMaintenanceData.get();
+        log.info("ENTITY: " + entity);
+
+        assertThat(entity.getMno()).isEqualTo(100l);
+        assertThat(entity.getIndexKR()).contains("TEST");
+    }
+
+    @Test
+    public void 데이터삭제() {
+
+    }
 
 }

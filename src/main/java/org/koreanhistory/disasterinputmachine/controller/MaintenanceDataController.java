@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 @RequestMapping("/boards/")
 public class MaintenanceDataController {
+
     private final MaintenanceDataService service;
 
     @GetMapping("/listOfMaintenance")
@@ -73,7 +74,7 @@ public class MaintenanceDataController {
 
     // modifyGET()에서 데이터를 입력 후 Submit했을 경우
     @PostMapping("/modifyOfMaintenance")
-    public String modifyPOST(MaintenanceDataModifyDto dto, PageVO vo, RedirectAttributes rttr) {
+    public String modifyPOST(@ModelAttribute("dto") MaintenanceDataModifyDto dto, PageVO vo, RedirectAttributes rttr) {
         log.info("IN CONTROLLER: modifyPOST() called...");
         log.info("MODIFY DTO: " + dto);
         service.modify(dto);
