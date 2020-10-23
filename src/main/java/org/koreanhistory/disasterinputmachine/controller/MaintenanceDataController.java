@@ -26,7 +26,8 @@ public class MaintenanceDataController {
     @GetMapping("/listOfMaintenance")
     public void listOfMaintenance(@ModelAttribute("pageVO") PageVO vo, Model model) {
         Pageable pageable = vo.makePageable(0, "mno");
-        Page<MaintenanceDataDto> listOfDto = service.list(vo);log.info("IN MAINTENANCE DATA CONTROLLER: calling listOfMaintenance()...");
+        Page<MaintenanceDataDto> listOfDto = service.list(vo);
+        log.info("IN MAINTENANCE DATA CONTROLLER: calling listOfMaintenance()...");
         log.info("" + pageable);
         log.info("" + listOfDto);
         log.info("TOTAL PAGE NUMBER: " + listOfDto.getTotalPages());

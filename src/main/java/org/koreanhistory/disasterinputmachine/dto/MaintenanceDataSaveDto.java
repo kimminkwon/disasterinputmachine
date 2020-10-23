@@ -69,6 +69,16 @@ public class MaintenanceDataSaveDto {
     @Column(columnDefinition = "TEXT")
     private String remark;
 
+    public MaintenanceDataSaveDto(MaintenanceData entity) {
+        this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
+        this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
+        this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
+        this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
+        this.nationKR = entity.getNationKR(); this.dynastyKR = entity.getDynastyKR(); this.nationCN = entity.getNationCN(); this.dynastyCN = entity.getDynastyCN();
+        this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
+        this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
+    }
+
     public MaintenanceData toEntity() {
         return MaintenanceData.builder()
                 .indexKR(this.indexKR).indexCN(this.indexCN)
