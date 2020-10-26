@@ -2,21 +2,16 @@ package org.koreanhistory.disasterinputmachine.service;
 import lombok.extern.java.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
-import org.koreanhistory.disasterinputmachine.for_test.MakeEntity;
-import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
+import org.koreanhistory.disasterinputmachine.for_test.MakeEntityMaintenance;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -75,9 +70,9 @@ public class MaintenanceDataServiceTest {
     @Transactional
     public void save테스트() {
         // given
-        MakeEntity makeEntity = new MakeEntity();
+        MakeEntityMaintenance makeEntityMaintenance = new MakeEntityMaintenance();
         String subString = "SaveTest";
-        MaintenanceDataSaveDto saveDto = makeEntity.getSaveDto(subString);
+        MaintenanceDataSaveDto saveDto = makeEntityMaintenance.getSaveDto(subString);
         PageVO vo = new PageVO();
         vo.setPage(1);
         vo.setSize(10);
@@ -111,8 +106,8 @@ public class MaintenanceDataServiceTest {
         // given
         Long modifiedId = getTestId(0);
 
-        MakeEntity makeEntity = new MakeEntity();
-        MaintenanceDataModifyDto modifyDto = makeEntity.getModifyDto("Modify");
+        MakeEntityMaintenance makeEntityMaintenance = new MakeEntityMaintenance();
+        MaintenanceDataModifyDto modifyDto = makeEntityMaintenance.getModifyDto("Modify");
         modifyDto.setMno(modifiedId);
         // when
         service.modify(modifyDto);

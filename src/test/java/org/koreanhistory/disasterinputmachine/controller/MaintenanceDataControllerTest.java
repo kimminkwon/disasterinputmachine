@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
-import org.koreanhistory.disasterinputmachine.for_test.MakeEntity;
+import org.koreanhistory.disasterinputmachine.for_test.MakeEntityMaintenance;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,7 +55,7 @@ public class MaintenanceDataControllerTest {
     }
 
     public void 예제데이터삽입() {
-        this.entity = new MakeEntity().getEntity("TEST");
+        this.entity = new MakeEntityMaintenance().getEntity("TEST");
         entity.setMno(10000l);
     }
 

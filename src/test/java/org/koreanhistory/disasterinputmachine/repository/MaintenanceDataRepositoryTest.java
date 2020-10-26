@@ -5,7 +5,7 @@ import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
-import org.koreanhistory.disasterinputmachine.for_test.MakeEntity;
+import org.koreanhistory.disasterinputmachine.for_test.MakeEntityMaintenance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -36,11 +36,11 @@ public class MaintenanceDataRepositoryTest {
     @Transactional
     public void 데이터정상적인저장_확인() {
 
-        MakeEntity makeEntity = new MakeEntity();
+        MakeEntityMaintenance makeEntityMaintenance = new MakeEntityMaintenance();
 
         // when: 예제 데이터 입력
         for (int i = 0; i < 100; i++) {
-            repository.save(makeEntity.getEntity(String.valueOf(i)));
+            repository.save(makeEntityMaintenance.getEntity(String.valueOf(i)));
         }
 
         // then
@@ -64,11 +64,11 @@ public class MaintenanceDataRepositoryTest {
     @Test
     public void 예제데이터_삽입() {
         // given: 예제 데이터 작성
-        MakeEntity makeEntity = new MakeEntity();
+        MakeEntityMaintenance makeEntityMaintenance = new MakeEntityMaintenance();
 
         // when: 예제 데이터 입력
         for (int i = 0; i < 100; i++) {
-            repository.save(makeEntity.getEntity(String.valueOf(i)));
+            repository.save(makeEntityMaintenance.getEntity(String.valueOf(i)));
         }
 
         // then

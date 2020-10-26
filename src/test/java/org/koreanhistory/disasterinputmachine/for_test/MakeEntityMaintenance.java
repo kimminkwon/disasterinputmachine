@@ -7,7 +7,7 @@ import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
 
 @NoArgsConstructor
-public class MakeEntity {
+public class MakeEntityMaintenance {
 
     public MaintenanceDataModifyDto getModifyDto(String subString) {
         MaintenanceData entity = getEntity(subString);
