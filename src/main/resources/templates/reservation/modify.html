@@ -1,0 +1,215 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout1}">
+
+<div layout:fragment="content">
+    <div class="panel panel-warning">
+        <div class="panel-heading">Modify Page In Reservation</div>
+    </div>
+    <div class="panel-body">
+
+        <form id = 'f1'>
+
+            <div class="form-group">
+                <label>분류번호</label>
+                <input class="form-control" name="rno" th:value="${dto.rno}" readonly="readonly" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: left;" >
+                <label>색인어(한글)</label>
+                <input class="form-control" name="indexKR" th:value="${dto.indexKR}"  />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>색인어(한자)</label>
+                <input class="form-control" name="indexCN" th:value="${dto.indexCN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>대분류(한글)</label>
+                <input class="form-control" name="lclasKR" th:value="${dto.lclasKR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>대분류(한자)</label>
+                <input class="form-control" name="lclasCN" th:value="${dto.lclasCN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>중분류(한글)</label>
+                <input class="form-control" name="mclasKR" th:value="${dto.mclasKR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>중분류(한자)</label>
+                <input class="form-control" name="mclasCN" th:value="${dto.mclasCN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>소분류(한글)</label>
+                <input class="form-control" name="sclasKR" th:value="${dto.sclasKR}"  />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>소분류(한자)</label>
+                <input class="form-control" name="sclasCN" th:value="${dto.sclasCN}"  />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group">
+                <label>기사 개요</label>
+                <textarea class="form-control" rows="3" name="articlSumry" th:text="${dto.articlSumry}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 원문</label>
+                <textarea class="form-control" rows="10" name="articlOrginl" th:text="${dto.articlOrginl}" ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 문헌 명칭</label>
+                <input class="form-control" name="ltrtreNM" th:value="${dto.ltrtreNM}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>출전(한글)</label>
+                <input class="form-control" name="sourceKR" th:value="${dto.sourceKR}"  />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>출전(한자)</label>
+                <input class="form-control" name="sourceCN" th:value="${dto.sourceCN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 30%; float: left;">
+                <label>연도(모호년)</label>
+                <input class="form-control" name="yearNameOfTomb" th:value="${dto.yearNameOfTomb}"  />
+            </div>
+
+            <div class="form-group" style="width: 30%; float: right;">
+                <label>월</label>
+                <input class="form-control" name="month" th:value="${dto.month}" />
+            </div>
+
+            <div class="form-group" style="width: 30%; margin: 0 auto; ">
+                <label>연도(서기)</label>
+                <input class="form-control" name="yearAD" th:value="${dto.yearAD}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>국가(한글)</label>
+                <input class="form-control" name="nationKR" th:value="${dto.nationKR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>국가(한자)</label>
+                <input class="form-control" name="nationCN" th:value="${dto.nationCN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>왕조(한글)</label>
+                <input class="form-control" name="dynastyKR" th:value="${dto.dynastyKR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>왕조(한자)</label>
+                <input class="form-control" name="dynastyCN" th:value="${dto.dynastyCN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>지역 1(한글)</label>
+                <input class="form-control" name="area1KR" th:value="${dto.area1KR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>지역 1(한자)</label>
+                <input class="form-control" name="area1CN" th:value="${dto.area1CN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>지역 2(한글)</label>
+                <input class="form-control" name="area2KR" th:value="${dto.area2KR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>지역 2(한자)</label>
+                <input class="form-control" name="area2CN" th:value="${dto.area2CN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>지역 3(한글)</label>
+                <input class="form-control" name="area3KR" th:value="${dto.area3KR}" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>지역 3(한자)</label>
+                <input class="form-control" name="area3CN" th:value="${dto.area3CN}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group">
+                <label>참고 색인어</label>
+                <input class="form-control" name="referIndex" th:value="${dto.referIndex}" />
+            </div>
+
+            <div class="form-group">
+                <label>비고</label>
+                <input class="form-control" name="remark" th:value="${dto.remark}"  />
+            </div>
+
+
+            <!-- Paging 유지를 위한 히든 데이터 -->
+            <input type="hidden" name="page" th:value="${pageVO.page}">
+            <input type="hidden" name="size" th:value="${pageVO.size}">
+            <input type="hidden" name="type" th:value="${pageVO.type}">
+            <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+
+        </form>
+
+        <div class="form-group">
+            <label>수정시간</label>
+            <input class="form-control" name="regDate" th:value="${#dates.format(dto.modifyTime, 'yyyy-MM-dd')}" readonly="readonly" />
+        </div>
+
+        <div class="pull-left" style="float: left;">
+
+            <a href="#" class="btn btn-default toreservationbtn" style="float: left; margin-right: 10px;">To Reservation</a>
+            <a href="#" class="btn btn-default todeletebtn" style="float: right;">To Delete</a>
+
+        </div>
+
+        <div class="pull-right" style="float: right;">
+
+            <a href="#" class="btn btn-warning modbtn">Modify</a>
+            <a href="#" class="btn btn-danger delbtn">Delete</a>
+
+            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, rno=${dto.rno}) }"
+               class="btn btn-primary">Cancel</a>
+
+        </div> <div style="clear:both;"></div>
+
+
+    </div>
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        $(document).ready(function () {
+
+            var formObj = $("#f1");
+
+            $(".delbtn").click(function () {
+                formObj.attr("action", "delete");
+                formObj.attr("method", "post");
+                formObj.submit();
+            });
+
+            $(".modbtn").click(function () {
+                formObj.attr("action", "modify");
+                formObj.attr("method", "post");
+                formObj.submit();
+            });
+
+        });
+    </script>
+</th:block>
