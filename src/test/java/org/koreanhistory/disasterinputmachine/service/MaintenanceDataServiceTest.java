@@ -64,7 +64,7 @@ public class MaintenanceDataServiceTest {
     @Test
     public void findById테스트() {
         // given
-        Long testId = 100l;
+        Long testId = getTestId(0);
         // when
         MaintenanceDataDto testDto = service.findById(testId);
         // then
@@ -108,11 +108,7 @@ public class MaintenanceDataServiceTest {
     @Test
     public void modify테스트() {
         // given
-        PageVO vo = new PageVO();
-        vo.setPage(1);
-        vo.setSize(10);
-        Page<MaintenanceDataDto> listOfDto = service.list(vo);
-        Long modifiedId = listOfDto.getContent().get(0).getMno();
+        Long modifiedId = getTestId(0);
 
         MakeEntity makeEntity = new MakeEntity();
         MaintenanceDataModifyDto modifyDto = makeEntity.getModifyDto("Modify");
@@ -122,5 +118,14 @@ public class MaintenanceDataServiceTest {
         // then
         MaintenanceDataDto dto = service.findById(modifiedId);
         assertThat(dto.getIndexKR()).contains("Modify");
+    }
+
+    public Long getTestId(int num) {
+        PageVO vo = new PageVO();
+        vo.setPage(1);
+        vo.setSize(10);
+        Page<MaintenanceDataDto> listOfDto = service.list(vo);
+        Long id = listOfDto.getContent().get(num).getMno();
+        return id;
     }
 }
