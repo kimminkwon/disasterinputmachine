@@ -1,6 +1,9 @@
 package org.koreanhistory.disasterinputmachine.dto;
 
 import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 
 import javax.persistence.Column;
