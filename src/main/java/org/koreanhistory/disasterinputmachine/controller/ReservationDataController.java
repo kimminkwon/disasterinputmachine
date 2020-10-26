@@ -107,4 +107,17 @@ public class ReservationDataController {
 
         return "redirect:/reservation/list";
     }
+
+    @PostMapping("/tomaintenance")
+    public String toMaintenance(Long rno, @ModelAttribute("dto") MaintenanceDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN RESERVATION DATA CONTROLLER: toMaintenance() called...");
+        log.info("DELETE RNO: " + rno);
+        log.info("MOVING DTO: " + dto);
+
+        service.toMaintenance(rno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+        // 페이징 유지 불필요
+        return "redirect:/maintenance/list";
+    }
 }

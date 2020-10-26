@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
-import org.koreanhistory.disasterinputmachine.dto.ReservationDataDto;
-import org.koreanhistory.disasterinputmachine.dto.ReservationDataModifyDto;
-import org.koreanhistory.disasterinputmachine.dto.ReservationDataSaveDto;
+import org.koreanhistory.disasterinputmachine.dto.*;
 import org.koreanhistory.disasterinputmachine.repository.ReservationDataRepository;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.data.domain.Page;
@@ -23,6 +20,7 @@ import java.util.function.Function;
 public class ReservationDataService {
 
     private final ReservationDataRepository repository;
+    private final DataExchangeService dataExchangeService;
 
     @Transactional
     public Page<ReservationDataDto> list(PageVO vo) {
@@ -70,5 +68,14 @@ public class ReservationDataService {
     public void deleteById(Long rno) {
         log.info("IN ReservationDataService: deleteById() called...");
         repository.deleteById(rno);
+    }
+
+    @Transactional
+    public void toMaintenance(Long rno, MaintenanceDataSaveDto dto) {
+        log.info("IN MaintenanceDataService: toReservation() called...");
+        log.info("DTO" + dto);
+
+        dataExchangeService.reservationToMaintanance(dto);
+        deleteById(rno);
     }
 }

@@ -171,7 +171,7 @@
 
         <div class="pull-left" style="float: left;">
 
-            <a href="#" class="btn btn-default toreservationbtn" style="float: left; margin-right: 10px;">To Reservation</a>
+            <a href="#" class="btn btn-default tomaintenancebtn" style="float: left; margin-right: 10px;">To Maintenance</a>
             <a href="#" class="btn btn-default todeletebtn" style="float: right;">To Delete</a>
 
         </div>
@@ -197,6 +197,12 @@
         $(document).ready(function () {
 
             var formObj = $("#f1");
+
+            $(".tomaintenancebtn").click(function () {
+                formObj.attr("action", "tomaintenance");
+                formObj.attr("method", "post");
+                formObj.submit();
+            });
 
             $(".delbtn").click(function () {
                 formObj.attr("action", "delete");
