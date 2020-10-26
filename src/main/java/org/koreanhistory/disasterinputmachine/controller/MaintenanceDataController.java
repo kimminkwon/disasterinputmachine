@@ -39,7 +39,7 @@ public class MaintenanceDataController {
     @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN CONTROLLER: view() called...");
-        log.info("MNO: " + mno);
+        log.info("RNO: " + mno);
         MaintenanceDataDto dto = service.findById(mno);
         log.info("DTO: " + dto);
         model.addAttribute("dto", dto);

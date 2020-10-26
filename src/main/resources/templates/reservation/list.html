@@ -165,7 +165,7 @@
                 e.preventDefault();
                 var boardNo = $(this).attr("href");
                 formObj.attr("action", [[@{'/reservation/view'}]]);
-                formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
+                formObj.append("<input type='hidden' name='rno' value='" + boardNo + "'>");
                 formObj.submit();
             });
         });

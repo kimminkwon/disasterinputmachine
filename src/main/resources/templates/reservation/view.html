@@ -3,12 +3,12 @@
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
-    <div class="panel-heading">View Page In Maintenance</div>
+    <div class="panel-heading">View Page In Reservation</div>
     <div class="panel-body">
 
         <div class="form-group">
             <label>분류번호</label>
-            <input class="form-control" name="mno" th:value="${dto.mno}" readonly="readonly" />
+            <input class="form-control" name="rno" th:value="${dto.rno}" readonly="readonly" />
         </div>
 
         <div class="form-group" style="width: 49%; float: left;">
@@ -53,7 +53,7 @@
 
         <div class="form-group" style="width: 49%; float: left;">
             <label>소분류(한글)</label>
-           <input class="form-control" name="sclasKR" th:value="${dto.sclasKR}" readonly="readonly" />
+            <input class="form-control" name="sclasKR" th:value="${dto.sclasKR}" readonly="readonly" />
         </div>
 
         <div class="form-group" style="width: 49%; float: right;">
@@ -163,15 +163,14 @@
 
         <div class="pull-right">
 
-            <a th:href="@{ modify(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.mno}) }"
+            <a th:href="@{ modify(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.rno}) }"
                class="btn btn-default">Modify or Delete</a>
 
-            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.mno}) }"
+            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.rno}) }"
                class="btn btn-primary">Back</a>
 
         </div>
     </div>
-
 
 </div>
 <!-- end fragment -->

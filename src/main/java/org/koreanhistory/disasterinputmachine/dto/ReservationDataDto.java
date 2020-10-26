@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 @Getter
 @ToString
-public class RerservationDataDto {
+public class ReservationDataDto {
 
     private Long rno;
 
@@ -77,7 +77,7 @@ public class RerservationDataDto {
     @Column(columnDefinition = "TEXT")
     private String remark;
 
-    public RerservationDataDto(ReservationData entity) {
+    public ReservationDataDto(ReservationData entity) {
         this.rno = entity.getRno();
         this.createTime = entity.getCreateTime(); this.modifyTime = entity.getModifyTime();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
