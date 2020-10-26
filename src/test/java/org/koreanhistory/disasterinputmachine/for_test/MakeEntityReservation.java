@@ -1,32 +1,12 @@
 package org.koreanhistory.disasterinputmachine.for_test;
 
-import lombok.NoArgsConstructor;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
+import org.koreanhistory.disasterinputmachine.domain.ReservationData;
 
-@NoArgsConstructor
-public class MakeEntityMaintenance {
+public class MakeEntityReservation {
 
-    public MaintenanceDataModifyDto getModifyDto(String subString) {
-        MaintenanceData entity = getEntity(subString);
-        MaintenanceDataModifyDto modifyDto = new MaintenanceDataModifyDto(entity);
-        return modifyDto;
-    }
-
-    public MaintenanceDataSaveDto getSaveDto(String subString) {
-        MaintenanceData entity = getEntity(subString);
-        MaintenanceDataSaveDto saveDto = new MaintenanceDataSaveDto(entity);
-        return saveDto;
-    }
-    public MaintenanceDataDto getDto(String subString) {
-        MaintenanceData entity = getEntity(subString);
-        MaintenanceDataDto dto = new MaintenanceDataDto(entity);
-        return dto;
-    }
-    public MaintenanceData getEntity(String subString) {
-        String frontString = "m_";
+    public ReservationData getEntity(String subString) {
+        String frontString = "r_";
         String indexKR = frontString + "indexKR_" + subString;
         String indexCN = frontString + "indexCN_" + subString;
         String lclasKR = frontString + "lclasKR_" + subString;
@@ -59,7 +39,7 @@ public class MakeEntityMaintenance {
         String referIndex = frontString + "referIndex_" + subString;
         String remark = frontString + "remark_" + subString;
 
-        MaintenanceData entity = new MaintenanceData(
+        ReservationData entity = new ReservationData(
                 indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,
@@ -73,5 +53,4 @@ public class MakeEntityMaintenance {
         );
         return entity;
     }
-
 }

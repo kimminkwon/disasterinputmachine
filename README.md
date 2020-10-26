@@ -1,5 +1,4 @@
-<h1> Disaster Database Input Machine <br>
-<sub> for Korea Disaster Research Center </sub> <h1>
+<h1> Disaster DB Input Machine <sub>for Korea Disaster Research Center</sub><h1>
 
 <h3> Program </h3>
 <p> This program is database input machine consisted of Spring Boot of Disaster Data for Research of Korea Disaster Research Center. </p>
