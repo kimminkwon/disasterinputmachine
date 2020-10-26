@@ -6,6 +6,7 @@ import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
+import org.koreanhistory.disasterinputmachine.dto.ReservationDataSaveDto;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import java.util.function.Function;
 @Log
 public class MaintenanceDataService {
     private final MaintenanceDataRepository repository;
+    private final DataExchangeService dataExchangeService;
 
     @Transactional
     public Page<MaintenanceDataDto> list(PageVO vo) {
@@ -67,5 +69,14 @@ public class MaintenanceDataService {
         MaintenanceData entity = repository.findById(dto.getMno())
                 .orElseThrow(() -> new IllegalArgumentException("id가 존재하지 않습니다. id: " + dto.getMno()));
         entity.update(dto);
+    }
+
+    @Transactional
+    public void toReservation(Long mno, ReservationDataSaveDto dto) {
+        log.info("IN MaintenanceDataService: toReservation() called...");
+        log.info("DTO" + dto);
+
+        dataExchangeService.maintenanceToReservation(dto);
+        deleteById(mno);
     }
 }

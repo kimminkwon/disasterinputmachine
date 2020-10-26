@@ -6,6 +6,7 @@ import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
+import org.koreanhistory.disasterinputmachine.dto.ReservationDataSaveDto;
 import org.koreanhistory.disasterinputmachine.service.MaintenanceDataService;
 import org.koreanhistory.disasterinputmachine.vo.PageMaker;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
@@ -38,7 +39,7 @@ public class MaintenanceDataController {
 
     @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
-        log.info("IN CONTROLLER: view() called...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: view() called...");
         log.info("RNO: " + mno);
         MaintenanceDataDto dto = service.findById(mno);
         log.info("DTO: " + dto);
@@ -48,13 +49,13 @@ public class MaintenanceDataController {
     // 데이터를 저장하는 페이지로 이동한다.
     @GetMapping("/register")
     public void registerGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
-        log.info("IN CONTROLLER: registerGET() called...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: registerGET() called...");
     }
 
     // registerGet()에서 데이터를 입력 후 submit했을 경우
     @PostMapping("/register")
     public String registerPOST(@ModelAttribute("dto") MaintenanceDataSaveDto dto, RedirectAttributes rttr) {
-        log.info("IN CONTROLLER: registerPOST() called...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: registerPOST() called...");
         log.info("SAVE DTO: " + dto);
 
         service.save(dto);
@@ -65,7 +66,7 @@ public class MaintenanceDataController {
 
     @GetMapping("/modify")
     public void modifyGET(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
-        log.info("IN CONTROLLER: modifyGET() called...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: modifyGET() called...");
         log.info("MNO: " + mno);
         MaintenanceDataDto dto = service.findById(mno);
         log.info("FIND DTO: " + dto);
@@ -75,7 +76,7 @@ public class MaintenanceDataController {
     // modifyGET()에서 데이터를 입력 후 Submit했을 경우
     @PostMapping("/modify")
     public String modifyPOST(@ModelAttribute("dto") MaintenanceDataModifyDto dto, PageVO vo, RedirectAttributes rttr) {
-        log.info("IN CONTROLLER: modifyPOST() called...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: modifyPOST() called...");
         log.info("MODIFY DTO: " + dto);
         service.modify(dto);
 
@@ -93,7 +94,7 @@ public class MaintenanceDataController {
 
     @PostMapping("/delete")
     public String delete(Long mno, PageVO vo, RedirectAttributes rttr) {
-        log.info("IN CONTROLLER: delete() called...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: delete() called...");
         log.info("MNO: " + mno);
         service.deleteById(mno);
 
@@ -106,5 +107,18 @@ public class MaintenanceDataController {
         rttr.addAttribute("keyword", vo.getKeyword());
 
         return "redirect:/maintenance/list";
+    }
+
+    @PostMapping("/toreservation")
+    public String toReservation(Long mno, @ModelAttribute("dto") ReservationDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: toReservation() called...");
+        log.info("DELETE MNO: " + mno);
+        log.info("MOVING DTO: " + dto);
+
+        service.toReservation(mno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+        // 페이징 유지 불필요
+        return "redirect:/reservation/list";
     }
 }

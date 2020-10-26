@@ -83,4 +83,5 @@ public class MaintenanceDataModifyDto {
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
         this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
     }
+
 }
