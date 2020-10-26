@@ -90,4 +90,21 @@ public class ReservationDataController {
 
         return "redirect:/reservation/view";
     }
+
+    @PostMapping("/delete")
+    public String delete(Long rno, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN RESERVATION DATA CONTROLLER: delete() called...");
+        log.info("RNO: " + rno);
+        service.deleteById(rno);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/reservation/list";
+    }
 }

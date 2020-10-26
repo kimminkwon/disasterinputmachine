@@ -91,7 +91,7 @@ public class MaintenanceDataController {
         return "redirect:/maintenance/view";
     }
 
-    @PostMapping("/deleteOfMaintenance")
+    @PostMapping("/delete")
     public String delete(Long mno, PageVO vo, RedirectAttributes rttr) {
         log.info("IN CONTROLLER: delete() called...");
         log.info("MNO: " + mno);
