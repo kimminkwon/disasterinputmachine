@@ -106,6 +106,7 @@ public class MaintenanceDataServiceTest {
     }
 
     @Test
+    @Transactional
     public void modify테스트() {
         // given
         Long modifiedId = getTestId(0);

@@ -5,9 +5,15 @@
 <div layout:fragment="content">
 
     <div class="panel-heading">List of Maintenance</div>
-    <div class="panel-body pull-right">
-        <h4><a class="label label-default" th:href="@{registerOfMaintenance}">RESISTER</a></h4>
+    <div class="panel-body pull-left" style="float: left;">
+        <h4 style="float: left; margin-right: 10px;"><a class="label label-default" th:href="@{../reservation/list}">RESERVATION LIST</a></h4>
+        <h4 style="float: right;"><a class="label label-default" th:href="@{../delete/list}">DELETE LIST</a></h4>
     </div>
+
+    <div class="panel-body pull-right" style="float: right;">
+        <h4><a class="label label-primary" th:href="@{register}">RESISTER</a></h4>
+    </div> <div style="clear:both;"></div>
+
     <div class="panel-body">
 
         <div th:with="listOfDto=${listOfDto.result}">
@@ -98,7 +104,7 @@
         </nav>
 
         <!-- Form for Data passing -->
-        <form id='f1' th:action="@{listOfMaintenance}" method="get">
+        <form id='f1' th:action="@{list}" method="get">
             <input type='hidden' name='page' th:value=${listOfDto.currentPageNum}>
             <input type='hidden' name='size' th:value=${listOfDto.currentPage.pageSize}>
             <input type='hidden' name='type' th:value=${pageVO.type}>
@@ -106,11 +112,6 @@
         </form>
     </div>
     <!-- end panel -->
-
-    <div class="panel-body pull-right">
-        <h4><a class="label label-default" th:href="@{register}">RESERVATION</a></h4>
-        <h4><a class="label label-default" th:href="@{register}">DELETE</a></h4>
-    </div>
     
 </div>
 <!-- end fragment -->
@@ -163,7 +164,7 @@
             $(".boardLink").click(function (e){
                 e.preventDefault();
                 var boardNo = $(this).attr("href");
-                formObj.attr("action", [[@{'/boards/viewOfMaintenance'}]]);
+                formObj.attr("action", [[@{'/maintenance/view'}]]);
                 formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
                 formObj.submit();
             });

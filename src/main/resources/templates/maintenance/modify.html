@@ -167,15 +167,22 @@
             <input class="form-control" name="regDate" th:value="${#dates.format(dto.modifyTime, 'yyyy-MM-dd')}" readonly="readonly" />
         </div>
 
-        <div class="pull-right">
+        <div class="pull-left" style="float: left;">
+
+            <a href="#" class="btn btn-default toreservationbtn" style="float: left; margin-right: 10px;">To Reservation</a>
+            <a href="#" class="btn btn-default todeletebtn" style="float: right;">To Delete</a>
+
+        </div>
+
+        <div class="pull-right" style="float: right;">
 
             <a href="#" class="btn btn-warning modbtn">Modify</a>
             <a href="#" class="btn btn-danger delbtn">Delete</a>
 
-            <a th:href="@{ listOfMaintenance(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.mno}) }"
+            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.mno}) }"
                class="btn btn-primary">Cancel</a>
 
-        </div>
+        </div> <div style="clear:both;"></div>
 
 
     </div>
@@ -190,13 +197,13 @@
             var formObj = $("#f1");
 
             $(".delbtn").click(function () {
-                formObj.attr("action", "deleteOfMaintenance");
+                formObj.attr("action", "delete");
                 formObj.attr("method", "post");
                 formObj.submit();
             });
 
             $(".modbtn").click(function () {
-                formObj.attr("action", "modifyOfMaintenance");
+                formObj.attr("action", "modify");
                 formObj.attr("method", "post");
                 formObj.submit();
             });

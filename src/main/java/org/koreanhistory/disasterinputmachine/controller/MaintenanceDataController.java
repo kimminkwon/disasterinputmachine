@@ -19,16 +19,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Log
 @RequiredArgsConstructor
-@RequestMapping("/boards/")
+@RequestMapping("/maintenance/")
 public class MaintenanceDataController {
 
     private final MaintenanceDataService service;
 
-    @GetMapping("/listOfMaintenance")
-    public void listOfMaintenance(@ModelAttribute("pageVO") PageVO vo, Model model) {
+    @GetMapping("/list")
+    public void list(@ModelAttribute("pageVO") PageVO vo, Model model) {
         Pageable pageable = vo.makePageable(0, "mno");
         Page<MaintenanceDataDto> listOfDto = service.list(vo);
-        log.info("IN MAINTENANCE DATA CONTROLLER: calling listOfMaintenance()...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: calling list()...");
         log.info("" + pageable);
         log.info("" + listOfDto);
         log.info("TOTAL PAGE NUMBER: " + listOfDto.getTotalPages());
@@ -36,7 +36,7 @@ public class MaintenanceDataController {
         model.addAttribute("listOfDto", new PageMaker(listOfDto));
     }
 
-    @GetMapping("/viewOfMaintenance")
+    @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN CONTROLLER: view() called...");
         log.info("MNO: " + mno);
@@ -46,13 +46,13 @@ public class MaintenanceDataController {
     }
 
     // 데이터를 저장하는 페이지로 이동한다.
-    @GetMapping("/registerOfMaintenance")
+    @GetMapping("/register")
     public void registerGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
         log.info("IN CONTROLLER: registerGET() called...");
     }
 
     // registerGet()에서 데이터를 입력 후 submit했을 경우
-    @PostMapping("/registerOfMaintenance")
+    @PostMapping("/register")
     public String registerPOST(@ModelAttribute("dto") MaintenanceDataSaveDto dto, RedirectAttributes rttr) {
         log.info("IN CONTROLLER: registerPOST() called...");
         log.info("SAVE DTO: " + dto);
@@ -60,10 +60,10 @@ public class MaintenanceDataController {
         service.save(dto);
         rttr.addFlashAttribute("msg", "success");
 
-        return "redirect:/boards/listOfMaintenance";
+        return "redirect:/maintenance/list";
     }
 
-    @GetMapping("/modifyOfMaintenance")
+    @GetMapping("/modify")
     public void modifyGET(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN CONTROLLER: modifyGET() called...");
         log.info("MNO: " + mno);
@@ -73,7 +73,7 @@ public class MaintenanceDataController {
     }
 
     // modifyGET()에서 데이터를 입력 후 Submit했을 경우
-    @PostMapping("/modifyOfMaintenance")
+    @PostMapping("/modify")
     public String modifyPOST(@ModelAttribute("dto") MaintenanceDataModifyDto dto, PageVO vo, RedirectAttributes rttr) {
         log.info("IN CONTROLLER: modifyPOST() called...");
         log.info("MODIFY DTO: " + dto);
@@ -88,7 +88,7 @@ public class MaintenanceDataController {
         rttr.addAttribute("type", vo.getType());
         rttr.addAttribute("keyword", vo.getKeyword());
 
-        return "redirect:/boards/viewOfMaintenance";
+        return "redirect:/maintenance/view";
     }
 
     @PostMapping("/deleteOfMaintenance")
@@ -105,6 +105,6 @@ public class MaintenanceDataController {
         rttr.addAttribute("type", vo.getType());
         rttr.addAttribute("keyword", vo.getKeyword());
 
-        return "redirect:/boards/listOfMaintenance";
+        return "redirect:/maintenance/list";
     }
 }
