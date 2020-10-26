@@ -6,6 +6,7 @@ import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
 import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
 import org.koreanhistory.disasterinputmachine.dto.ReservationDataDto;
+import org.koreanhistory.disasterinputmachine.dto.ReservationDataSaveDto;
 import org.koreanhistory.disasterinputmachine.repository.ReservationDataRepository;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.data.domain.Page;
@@ -47,5 +48,10 @@ public class ReservationDataService {
         ReservationData entity = repository.findById(rno)
                 .orElseThrow(() -> new IllegalArgumentException("id가 존재하지 않습니다. id: " + rno));
         return new ReservationDataDto(entity);
+    }
+
+    public void save(ReservationDataSaveDto dto) {
+        log.info("IN ReservationDataService: save() called...");
+        repository.save(dto.toEntity());
     }
 }

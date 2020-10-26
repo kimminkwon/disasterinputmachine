@@ -3,8 +3,9 @@
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
-
-    <div class="panel-heading">List of Maintenance</div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">List of Maintenance</div>
+    </div>
     <div class="panel-body pull-left" style="float: left;">
         <h4 style="float: left; margin-right: 10px;"><a class="label label-default" th:href="@{../reservation/list}">RESERVATION LIST</a></h4>
         <h4 style="float: right;"><a class="label label-default" th:href="@{../delete/list}">DELETE LIST</a></h4>
