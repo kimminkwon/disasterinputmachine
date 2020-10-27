@@ -21,6 +21,11 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
     @Query("delete from MaintenanceData m where m.mno in :ids")
     public void deleteAllByIdInQuery(@Param("ids") List<Long> ids);
 
+    @Transactional
+    @Modifying
+    @Query("select m from MaintenanceData m where m.mno in :ids")
+    public List<MaintenanceData> findAllByIdInQuery(@Param("ids") List<Long> ids);
+
     public default Predicate makePrdicate(String type, String keyword) {
         BooleanBuilder builder = new BooleanBuilder();
         QMaintenanceData mdata = QMaintenanceData.maintenanceData;

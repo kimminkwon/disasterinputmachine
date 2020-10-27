@@ -127,4 +127,23 @@ public class MaintenanceDataRepositoryTest {
         // then
         assertThat(repository.count()).isEqualTo(repositorySize - listSize);
     }
+
+    @Test
+    @Transactional
+    public void 일괄검색_테스트() {
+        // when
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "mno");
+        Page<MaintenanceData> result = repository.findAll(repository.makePrdicate("index", "1"), pageable);
+        Long startedNum = result.getContent().get(0).getMno();
+        List<Long> selectNums = new ArrayList<>();
+        // 6개의 숫자 지정
+        selectNums.add(startedNum); selectNums.add(startedNum - 1); selectNums.add(startedNum - 2); selectNums.add(startedNum - 3); selectNums.add(startedNum - 4); selectNums.add(startedNum - 5);
+        int listSize = selectNums.size();
+
+        // given
+        List<MaintenanceData> selecteList = repository.findAllByIdInQuery(selectNums);
+
+        // then
+        assertThat(selecteList.size()).isEqualTo(listSize);
+    }
 }
