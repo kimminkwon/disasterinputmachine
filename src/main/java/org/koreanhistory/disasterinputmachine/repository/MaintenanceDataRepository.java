@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public interface MaintenanceDataRepository extends CrudRepository<MaintenanceData, Long>, QuerydslPredicateExecutor<MaintenanceData> {
 
@@ -26,6 +27,27 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
     @Query("select m from MaintenanceData m where m.mno in :ids")
     public List<MaintenanceData> findAllByIdInQuery(@Param("ids") List<Long> ids);
 
+    public default Predicate makePrdicates(List<String> types, List<String> keywords) {
+        BooleanBuilder builder = new BooleanBuilder();
+        QMaintenanceData mdata = QMaintenanceData.maintenanceData;
+
+        // bno > 0
+        builder.and(mdata.mno.gt(0));
+
+        if(types == null)
+            return builder;
+
+        IntStream.range(0, types.size())
+                .forEach(
+                        i -> {
+                            String type = types.get(i);
+                            String keyword = keywords.get(i);
+                            typeSetForBuilder(mdata, builder, type, keyword);
+                        }
+                );
+        return builder;
+    }
+
     public default Predicate makePrdicate(String type, String keyword) {
         BooleanBuilder builder = new BooleanBuilder();
         QMaintenanceData mdata = QMaintenanceData.maintenanceData;
@@ -37,6 +59,12 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
         if(type == null)
             return builder;
 
+        typeSetForBuilder(mdata, builder, type, keyword);
+
+        return builder;
+    }
+
+    private void typeSetForBuilder(QMaintenanceData mdata, BooleanBuilder builder, String type, String keyword) {
         switch (type) {
             case "index":
                 builder.and(mdata.indexKR.like("%" + keyword + "%"));
@@ -84,8 +112,6 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
                 builder.and(mdata.remark.like("%" + type + "%"));
                 break;
         }
-
-        return builder;
     }
 
 }

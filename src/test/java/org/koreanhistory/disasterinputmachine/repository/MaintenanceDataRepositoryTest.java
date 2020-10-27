@@ -146,4 +146,21 @@ public class MaintenanceDataRepositoryTest {
         // then
         assertThat(selecteList.size()).isEqualTo(listSize);
     }
+
+    @Test
+    @Transactional
+    public void 복합검색_테스트() {
+        // when
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "mno");
+        List<String> types = new ArrayList<>();
+        List<String> keywords = new ArrayList<>();
+        types.add("index"); types.add("large");
+        keywords.add("9"); keywords.add("search");
+
+        Page<MaintenanceData> result = repository.findAll(repository.makePrdicates(types, keywords), pageable);
+        result.getContent().forEach(
+                maintenanceData -> log.info("" + maintenanceData)
+        );
+        log.info("SIZE : " + result.getContent().size());
+    }
 }

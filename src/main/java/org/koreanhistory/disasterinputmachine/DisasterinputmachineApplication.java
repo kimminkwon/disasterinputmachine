@@ -9,5 +9,4 @@ public class DisasterinputmachineApplication {
     public static void main(String[] args) {
         SpringApplication.run(DisasterinputmachineApplication.class, args);
     }
-
 }

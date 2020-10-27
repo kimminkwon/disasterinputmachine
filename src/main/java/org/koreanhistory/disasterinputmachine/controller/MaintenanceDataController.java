@@ -62,6 +62,24 @@ public class MaintenanceDataController {
         return "redirect:/maintenance/list";
     }
 
+    // 복합 검색하는 페이지로 이동한다.
+    @GetMapping("/search")
+    public void searchGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: searchGET() called...");
+    }
+
+    // registerGet()에서 데이터를 입력 후 submit했을 경우
+    @PostMapping("/search")
+    public String searchPOST(@ModelAttribute("dto") MaintenanceDataSaveDto dto, RedirectAttributes rttr) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: searchPOST() called...");
+        log.info("Search DTO: " + dto);
+
+        service.save(dto);
+        rttr.addFlashAttribute("msg", "success");
+
+        return "redirect:/maintenance/list";
+    }
+
     @GetMapping("/modify")
     public void modifyGET(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN MAINTENANCE DATA CONTROLLER: modifyGET() called...");

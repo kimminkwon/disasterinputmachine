@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"articlOrginl", "articlSumry"})
 @Table(name = "DSSTRDTA_RESRVE_TB")
 @NoArgsConstructor
 public class ReservationData {

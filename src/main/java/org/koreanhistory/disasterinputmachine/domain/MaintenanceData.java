@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"articlOrginl", "articlSumry"})
 @Table(name = "DSSTRDTA_MNTNC_TB")
 @NoArgsConstructor
 public class MaintenanceData {

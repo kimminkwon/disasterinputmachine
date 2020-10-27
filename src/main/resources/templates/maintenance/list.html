@@ -59,14 +59,8 @@
 
             <!-- Search Space -->
             <div>
-                <select id='searchType'>
-                    <option>--</option>
-                    <option value='index' th:selected="${pageVO.type} == 'index'">색인어</option>
-                    <option value='large' th:selected="${pageVO.type} == 'large'">대분류</option>
-                    <option value='middle' th:selected="${pageVO.type} == 'middle'">중분류</option>
-                    <option value='small' th:selected="${pageVO.type} == 'small'">소분류</option>
-                </select>
-                <input type='text' id='searchKeyword' th:value="${pageVO.keyword}">
+                <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1, type2, ...">
+                <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1, keyword2, ...">
                 <button id='searchBtn'>Search</button>
             </div>
 
@@ -132,7 +126,8 @@
 
             // Search 버튼이 클릭되었을 때
             $("#searchBtn").click(function(e) {
-                var typeStr = $("#searchType").find(":selected").val();
+                // var typeStr = $("#searchType").find(":selected").val();
+                var typeStr = $("#searchType").val();
                 var keywordStr = $("#searchKeyword").val();
                 console.log(typeStr, "", keywordStr);
 

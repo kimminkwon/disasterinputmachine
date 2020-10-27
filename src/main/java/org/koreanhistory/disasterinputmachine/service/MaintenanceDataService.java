@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.function.Function;
 
 @Service
@@ -27,7 +28,17 @@ public class MaintenanceDataService {
     @Transactional
     public Page<MaintenanceDataDto> list(PageVO vo) {
         Pageable pageable = vo.makePageable(0, "mno");
-        Page<MaintenanceData> result = repository.findAll(repository.makePrdicate(vo.getType(), vo.getKeyword()), pageable);
+        String type = vo.getType(); String keyword = vo.getKeyword();
+
+        log.info("TYPE" + type);
+        log.info("KEYWORD" + keyword);
+
+        List<String> types = type == null? null : splitTypesAndKeywords(type);
+        List<String> keywords = keyword == null? null : splitTypesAndKeywords(keyword);
+
+        log.info("TYPES" + types);
+        log.info("KEYWORDS" + keywords);
+        Page<MaintenanceData> result = repository.findAll(repository.makePrdicates(types, keywords), pageable);
         Page<MaintenanceDataDto> resultOfDto = result.map(new Function<MaintenanceData, MaintenanceDataDto>() {
             @Override
             public MaintenanceDataDto apply(MaintenanceData maintenanceData) {
@@ -41,6 +52,16 @@ public class MaintenanceDataService {
         log.info("" + resultOfDto);
 
         return resultOfDto;
+    }
+
+    private List<String> splitTypesAndKeywords(String str) {
+        StringTokenizer tokenizer = new StringTokenizer(str, ", ");
+        List<String> strList = new ArrayList<>();
+
+        while(tokenizer.hasMoreTokens())
+            strList.add(tokenizer.nextToken());
+
+        return strList;
     }
 
     @Transactional
