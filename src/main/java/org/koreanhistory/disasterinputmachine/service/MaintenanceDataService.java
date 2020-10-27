@@ -5,12 +5,15 @@ import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.dto.*;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
+import org.koreanhistory.disasterinputmachine.vo.MaintenanceModifyOnceVO;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 @Service
@@ -19,6 +22,7 @@ import java.util.function.Function;
 public class MaintenanceDataService {
     private final MaintenanceDataRepository repository;
     private final DataExchangeService dataExchangeService;
+    private final MaintenanceModifyOnceVO modifyOnceVO;
 
     @Transactional
     public Page<MaintenanceDataDto> list(PageVO vo) {
@@ -77,6 +81,7 @@ public class MaintenanceDataService {
         deleteById(mno);
     }
 
+    @Transactional
     public void toDelete(Long mno, DeleteDataSaveDto dto) {
         log.info("IN MaintenanceDataService: toDelete() called...");
         log.info("DTO" + dto);
@@ -84,5 +89,23 @@ public class MaintenanceDataService {
         dataExchangeService.maintenanceToDelete(dto);
         deleteById(mno);
 
+    }
+
+    public void addModifyKey(Long mno) {
+        modifyOnceVO.addModifyKey(mno);
+    }
+
+    @Transactional
+    public List<MaintenanceDataDto> modifyList() {
+        List<MaintenanceData> result = repository.findAllByIdInQuery(modifyOnceVO.getModifyList());
+        List<MaintenanceDataDto> resultOfDto = new ArrayList<>();
+        result.forEach(
+                maintenanceData -> resultOfDto.add(new MaintenanceDataDto(maintenanceData))
+        );
+
+        log.info("IN MaintenanceDataService: modifyList() called...");
+        log.info("" + resultOfDto);
+
+        return resultOfDto;
     }
 }
