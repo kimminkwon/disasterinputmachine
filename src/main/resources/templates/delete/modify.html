@@ -3,8 +3,8 @@
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
-    <div class="panel panel-primary">
-        <div class="panel-heading">Modify Page In Maintenance</div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Modify Page In Delete</div>
     </div>
     <div class="panel-body">
 
@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <label>분류번호</label>
-                <input class="form-control" name="mno" th:value="${dto.mno}" readonly="readonly" />
+                <input class="form-control" name="dno" th:value="${dto.dno}" readonly="readonly" />
             </div>
 
             <div class="form-group" style="width: 49%; float: left;" >
@@ -171,8 +171,8 @@
 
         <div class="pull-left" style="float: left;">
 
-            <a href="#" class="btn btn-warning toreservationbtn" style="float: left; margin-right: 10px;">To Reservation</a>
-            <a href="#" class="btn btn-danger todeletebtn" style="float: right;">To Delete</a>
+            <a href="#" class="btn btn-primary tomaintenancebtn" style="float: left; margin-right: 10px;">To Maintenance</a>
+            <a href="#" class="btn btn-warning toreservationbtn" style="float: right;">To Reservation</a>
 
         </div>
 
@@ -181,7 +181,7 @@
             <a href="#" class="btn btn-warning modbtn">Modify</a>
             <a href="#" class="btn btn-danger delbtn">Delete</a>
 
-            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${dto.mno}) }"
+            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, dno=${dto.dno}) }"
                class="btn btn-primary">Cancel</a>
 
         </div> <div style="clear:both;"></div>

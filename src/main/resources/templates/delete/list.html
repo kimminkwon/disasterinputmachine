@@ -3,12 +3,12 @@
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
-    <div class="panel panel-primary">
-        <div class="panel-heading">List of Maintenance</div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Delete</div>
     </div>
     <div class="panel-body pull-left" style="float: left;">
-        <h4 style="float: left; margin-right: 10px;"><a class="label label-warning" th:href="@{../reservation/list}">RESERVATION LIST</a></h4>
-        <h4 style="float: right;"><a class="label label-danger" th:href="@{../delete/list}">DELETE LIST</a></h4>
+        <h4 style="float: left; margin-right: 10px;"><a class="label label-primary" th:href="@{../maintenance/list}">MAINTENANCE LIST</a></h4>
+        <h4 style="float: right;"><a class="label label-warning" th:href="@{../reservation/list}">RESERVATION LIST</a></h4>
     </div>
 
     <div class="panel-body pull-right" style="float: right;">
@@ -40,7 +40,7 @@
                 <tbody>
                 <tr class="odd gradeX" th:each="boardDto:${listOfDto.content}">
                     <td>
-                        <a th:href='${boardDto.mno}' class='boardLink'>[[${boardDto.mno}]]</a>
+                        <a th:href='${boardDto.dno}' class='boardLink'>[[${boardDto.dno}]]</a>
                     </td>
                     <td> [[${boardDto.lclasKR}]] </td>
                     <td> [[${boardDto.mclasKR}]] </td>
@@ -165,8 +165,8 @@
             $(".boardLink").click(function (e){
                 e.preventDefault();
                 var boardNo = $(this).attr("href");
-                formObj.attr("action", [[@{'/maintenance/view'}]]);
-                formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
+                formObj.attr("action", [[@{'/delete/view'}]]);
+                formObj.append("<input type='hidden' name='dno' value='" + boardNo + "'>");
                 formObj.submit();
             });
         });
