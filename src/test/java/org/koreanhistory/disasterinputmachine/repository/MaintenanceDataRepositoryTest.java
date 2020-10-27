@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -105,5 +106,25 @@ public class MaintenanceDataRepositoryTest {
         result.getContent().forEach(
                 maintenanceData -> log.info("" + maintenanceData)
         );
+    }
+
+    @Test
+    @Transactional
+    public void 일괄삭제_테스트() {
+        // when
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "mno");
+        Page<MaintenanceData> result = repository.findAll(repository.makePrdicate("index", "1"), pageable);
+        Long startedNum = result.getContent().get(0).getMno();
+        List<Long> deleteNums = new ArrayList<>();
+        // 6개의 숫자 지정
+        deleteNums.add(startedNum); deleteNums.add(startedNum - 1); deleteNums.add(startedNum - 2); deleteNums.add(startedNum - 3); deleteNums.add(startedNum - 4); deleteNums.add(startedNum - 5);
+        int listSize = deleteNums.size();
+        Long repositorySize = repository.count();
+
+        // given
+        repository.deleteAllByIdInQuery(deleteNums);
+
+        // then
+        assertThat(repository.count()).isEqualTo(repositorySize - listSize);
     }
 }

@@ -5,10 +5,21 @@ import com.querydsl.core.types.Predicate;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.domain.QMaintenanceData;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface MaintenanceDataRepository extends CrudRepository<MaintenanceData, Long>, QuerydslPredicateExecutor<MaintenanceData> {
+
+    @Transactional
+    @Modifying
+    @Query("delete from MaintenanceData m where m.mno in :ids")
+    public void deleteAllByIdInQuery(@Param("ids") List<Long> ids);
 
     public default Predicate makePrdicate(String type, String keyword) {
         BooleanBuilder builder = new BooleanBuilder();
