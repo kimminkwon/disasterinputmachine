@@ -3,10 +3,7 @@ package org.koreanhistory.disasterinputmachine.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
-import org.koreanhistory.disasterinputmachine.dto.ReservationDataSaveDto;
+import org.koreanhistory.disasterinputmachine.dto.*;
 import org.koreanhistory.disasterinputmachine.service.MaintenanceDataService;
 import org.koreanhistory.disasterinputmachine.vo.PageMaker;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
@@ -118,7 +115,32 @@ public class MaintenanceDataController {
         service.toReservation(mno, dto);
 
         rttr.addFlashAttribute("msg", "success");
-        // 페이징 유지 불필요
-        return "redirect:/reservation/list";
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/maintenance/list";
+    }
+
+    @PostMapping("/todelete")
+    public String toDelete(Long mno, @ModelAttribute("dto") DeleteDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: toDelete() called...");
+        log.info("DELETE MNO: " + mno);
+        log.info("MOVING DTO: " + dto);
+
+        service.toDelete(mno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/maintenance/list";
     }
 }

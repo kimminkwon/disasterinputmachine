@@ -69,4 +69,21 @@ public class DeleteDataService {
         entity.update(dto);
     }
 
+    @Transactional
+    public void toMaintenance(Long dno, MaintenanceDataSaveDto dto) {
+        log.info("IN DeleteDataService: toMaintenance() called...");
+        log.info("DTO" + dto);
+
+        dataExchangeService.deleteToMaintanance(dto);
+        deleteById(dno);
+    }
+
+    @Transactional
+    public void toReservation(Long dno, ReservationDataSaveDto dto) {
+        log.info("IN DeleteDataService: toReservation() called...");
+        log.info("DTO" + dto);
+
+        dataExchangeService.deleteToReservation(dto);
+        deleteById(dno);
+    }
 }

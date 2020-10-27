@@ -78,4 +78,13 @@ public class ReservationDataService {
         dataExchangeService.reservationToMaintanance(dto);
         deleteById(rno);
     }
+
+    @Transactional
+    public void toDelete(Long rno, DeleteDataSaveDto dto) {
+        log.info("IN MaintenanceDataService: toDelete() called...");
+        log.info("DTO" + dto);
+
+        dataExchangeService.reservationToDelete(dto);
+        deleteById(rno);
+    }
 }

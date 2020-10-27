@@ -2,9 +2,7 @@ package org.koreanhistory.disasterinputmachine.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.koreanhistory.disasterinputmachine.dto.DeleteDataDto;
-import org.koreanhistory.disasterinputmachine.dto.DeleteDataModifyDto;
-import org.koreanhistory.disasterinputmachine.dto.DeleteDataSaveDto;
+import org.koreanhistory.disasterinputmachine.dto.*;
 import org.koreanhistory.disasterinputmachine.service.DeleteDataService;
 import org.koreanhistory.disasterinputmachine.vo.PageMaker;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
@@ -109,4 +107,41 @@ public class DeleteDataController {
         return "redirect:/delete/list";
     }
 
+    @PostMapping("/tomaintenance")
+    public String toMaintenance(Long dno, @ModelAttribute("dto") MaintenanceDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN DELETE DATA CONTROLLER: toMaintenance() called...");
+        log.info("DELETE MNO: " + dno);
+        log.info("MOVING DTO: " + dto);
+
+        service.toMaintenance(dno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/delete/list";
+    }
+
+    @PostMapping("/toreservation")
+    public String toReservation(Long dno, @ModelAttribute("dto") ReservationDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN DELETE DATA CONTROLLER: toReservation() called...");
+        log.info("DELETE MNO: " + dno);
+        log.info("MOVING DTO: " + dto);
+
+        service.toReservation(dno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/delete/list";
+    }
 }

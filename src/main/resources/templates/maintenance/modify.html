@@ -198,6 +198,12 @@
 
             var formObj = $("#f1");
 
+            $(".todeletebtn").click(function () {
+                formObj.attr("action", "todelete");
+                formObj.attr("method", "post");
+                formObj.submit();
+            });
+
             $(".toreservationbtn").click(function () {
                 formObj.attr("action", "toreservation");
                 formObj.attr("method", "post");

@@ -204,6 +204,12 @@
                 formObj.submit();
             });
 
+            $(".todeletebtn").click(function () {
+                formObj.attr("action", "todelete");
+                formObj.attr("method", "post");
+                formObj.submit();
+            });
+
             $(".delbtn").click(function () {
                 formObj.attr("action", "delete");
                 formObj.attr("method", "post");

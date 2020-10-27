@@ -117,7 +117,32 @@ public class ReservationDataController {
         service.toMaintenance(rno, dto);
 
         rttr.addFlashAttribute("msg", "success");
-        // 페이징 유지 불필요
-        return "redirect:/maintenance/list";
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/reservation/list";
+    }
+
+    @PostMapping("/todelete")
+    public String toDelete(Long rno, @ModelAttribute("dto") DeleteDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: toDelete() called...");
+        log.info("DELETE RNO: " + rno);
+        log.info("MOVING DTO: " + dto);
+
+        service.toDelete(rno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/reservation/list";
     }
 }

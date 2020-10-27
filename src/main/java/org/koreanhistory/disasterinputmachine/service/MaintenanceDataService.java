@@ -3,10 +3,7 @@ package org.koreanhistory.disasterinputmachine.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataSaveDto;
-import org.koreanhistory.disasterinputmachine.dto.ReservationDataSaveDto;
+import org.koreanhistory.disasterinputmachine.dto.*;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.koreanhistory.disasterinputmachine.vo.PageVO;
 import org.springframework.data.domain.Page;
@@ -78,5 +75,14 @@ public class MaintenanceDataService {
 
         dataExchangeService.maintenanceToReservation(dto);
         deleteById(mno);
+    }
+
+    public void toDelete(Long mno, DeleteDataSaveDto dto) {
+        log.info("IN MaintenanceDataService: toDelete() called...");
+        log.info("DTO" + dto);
+
+        dataExchangeService.maintenanceToDelete(dto);
+        deleteById(mno);
+
     }
 }
