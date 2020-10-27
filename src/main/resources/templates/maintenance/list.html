@@ -62,6 +62,8 @@
                 <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1, type2, ...">
                 <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1, keyword2, ...">
                 <button id='searchBtn'>Search</button>
+
+                <button id='detailSearchBtn' class="pull-right">Detail Search</button>
             </div>
 
 
@@ -162,6 +164,13 @@
                 var boardNo = $(this).attr("href");
                 formObj.attr("action", [[@{'/maintenance/view'}]]);
                 formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
+                formObj.submit();
+            });
+
+            // detailSearchBtn을 클릭했을 시, 검색 페이지로 넘어가도록 하는 메서드
+            $("#detailSearchBtn").click(function (e){
+                e.preventDefault();
+                formObj.attr("action", [[@{'/maintenance/search'}]]);
                 formObj.submit();
             });
         });

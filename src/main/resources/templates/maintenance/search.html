@@ -1,10 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout1}">
 
-</body>
-</html>
+<div layout:fragment="content">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Search Page In Maintenance</div>
+    </div>
+    <div class="panel-body">
+        <form th:action="@{search}" method="post">
+
+            <div class="form-group" >
+                <label>색인어(한글)</label>
+                <input class="form-control" name="indexKR" th:value="${dto.indexKR}"  />
+            </div>
+
+            <div class="form-group" >
+                <label>대분류(한글)</label>
+                <input class="form-control" name="lclasKR" th:value="${dto.lclasKR}" />
+            </div>
+
+            <div class="form-group" >
+                <label>중분류(한글)</label>
+                <input class="form-control" name="mclasKR" th:value="${dto.mclasKR}" />
+            </div>
+
+            <div class="form-group" >
+                <label>소분류(한글)</label>
+                <input class="form-control" name="sclasKR" th:value="${dto.sclasKR}"  />
+            </div>
+
+            <div class="form-group">
+                <label>기사 개요</label>
+                <textarea class="form-control" rows="3" name="articlSumry" th:text="${dto.articlSumry}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 원문</label>
+                <textarea class="form-control" rows="10" name="articlOrginl" th:text="${dto.articlOrginl}" ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 문헌 명칭</label>
+                <input class="form-control" name="ltrtreNM" th:value="${dto.ltrtreNM}" />
+            </div>
+
+            <div class="form-group" >
+                <label>출전(한글)</label>
+                <input class="form-control" name="sourceKR" th:value="${dto.sourceKR}"  />
+            </div>
+
+            <div class="form-group" style="width: 30%; float: left;">
+                <label>연도(모호년)</label>
+                <input class="form-control" name="yearNameOfTomb" th:value="${dto.yearNameOfTomb}"  />
+            </div>
+
+            <div class="form-group" style="width: 30%; float: right;">
+                <label>월</label>
+                <input class="form-control" name="month" th:value="${dto.month}" />
+            </div>
+
+            <div class="form-group" style="width: 30%; margin: 0 auto; ">
+                <label>연도(서기)</label>
+                <input class="form-control" name="yearAD" th:value="${dto.yearAD}" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" >
+                <label>국가(한글)</label>
+                <input class="form-control" name="nationKR" th:value="${dto.nationKR}" />
+            </div>
+
+            <div class="form-group" >
+                <label>왕조(한글)</label>
+                <input class="form-control" name="dynastyKR" th:value="${dto.dynastyKR}" />
+            </div>
+            <div class="form-group" >
+                <label>지역 1(한글)</label>
+                <input class="form-control" name="area1KR" th:value="${dto.area1KR}" />
+            </div>
+
+            <div class="form-group" >
+                <label>지역 2(한글)</label>
+                <input class="form-control" name="area2KR" th:value="${dto.area2KR}" />
+            </div>
+
+            <div class="form-group" >
+                <label>지역 3(한글)</label>
+                <input class="form-control" name="area3KR" th:value="${dto.area3KR}" />
+            </div>
+
+            <div class="form-group">
+                <label>참고 색인어</label>
+                <input class="form-control" name="referIndex" th:value="${dto.referIndex}" />
+            </div>
+
+            <div class="form-group">
+                <label>비고</label>
+                <input class="form-control" name="remark" th:value="${dto.remark}"  />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Button</button>
+            <button type="reset" class="btn btn-default">Reset Button</button>
+
+            <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}) }"
+               class="btn btn-warning pull-right">Cancel</a>
+        </form>
+
+
+
+    </div>
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    </script>
+</th:block>

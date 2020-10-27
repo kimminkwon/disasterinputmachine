@@ -38,7 +38,7 @@ public class MaintenanceDataController {
     @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN MAINTENANCE DATA CONTROLLER: view() called...");
-        log.info("RNO: " + mno);
+        log.info("MNO: " + mno);
         MaintenanceDataDto dto = service.findById(mno);
         log.info("DTO: " + dto);
         model.addAttribute("dto", dto);
@@ -64,20 +64,22 @@ public class MaintenanceDataController {
 
     // 복합 검색하는 페이지로 이동한다.
     @GetMapping("/search")
-    public void searchGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
+    public void searchGET(@ModelAttribute("pageVO") PageVO vo, @ModelAttribute("dto") SearchDto dto) {
         log.info("IN MAINTENANCE DATA CONTROLLER: searchGET() called...");
+        log.info("PAGE_VO의 TYPE" + vo.getType());
+        log.info("PAGE_VO의 KEYWORD" + vo.getKeyword());
     }
 
     // registerGet()에서 데이터를 입력 후 submit했을 경우
     @PostMapping("/search")
-    public String searchPOST(@ModelAttribute("dto") MaintenanceDataSaveDto dto, RedirectAttributes rttr) {
+    public String searchPOST(@ModelAttribute("dto") SearchDto dto, Model model) {
         log.info("IN MAINTENANCE DATA CONTROLLER: searchPOST() called...");
         log.info("Search DTO: " + dto);
+        log.info("TYPE: " + dto.getType());
+        log.info("KEYWORD: " + dto.getKeyword());
 
-        service.save(dto);
-        rttr.addFlashAttribute("msg", "success");
-
-        return "redirect:/maintenance/list";
+        String urlData = "?page=1&type=" + dto.getType() + "&keyword=" + dto.getKeyword();
+        return "redirect:/maintenance/list" + urlData;
     }
 
     @GetMapping("/modify")
