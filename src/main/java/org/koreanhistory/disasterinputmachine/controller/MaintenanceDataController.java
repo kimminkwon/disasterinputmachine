@@ -35,6 +35,18 @@ public class MaintenanceDataController {
         model.addAttribute("listOfDto", new PageMaker(listOfDto));
     }
 
+    @GetMapping("/listforonce")
+    public void listForOnce(@ModelAttribute("pageVO") PageVO vo, Model model) {
+        Pageable pageable = vo.makePageable(0, "mno");
+        Page<MaintenanceDataDto> listOfDto = service.list(vo);
+        log.info("IN MAINTENANCE DATA CONTROLLER: calling list()...");
+        log.info("" + pageable);
+        log.info("" + listOfDto);
+        log.info("TOTAL PAGE NUMBER: " + listOfDto.getTotalPages());
+
+        model.addAttribute("listOfDto", new PageMaker(listOfDto));
+    }
+
     @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN MAINTENANCE DATA CONTROLLER: view() called...");
