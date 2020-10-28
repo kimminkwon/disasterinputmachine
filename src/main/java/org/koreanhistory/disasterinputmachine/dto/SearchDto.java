@@ -130,7 +130,7 @@ public class SearchDto {
         if(type.equals(""))
             type = type.concat(col);
         else
-            type = type.concat(", " + col);
+            type = type.concat("-" + col);
         return type;
     }
 

@@ -38,6 +38,8 @@ public class MaintenanceDataController {
     @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN MAINTENANCE DATA CONTROLLER: view() called...");
+        log.info("PAGE_VO의 TYPE" + vo.getType());
+        log.info("PAGE_VO의 KEYWORD" + vo.getKeyword());
         log.info("MNO: " + mno);
         MaintenanceDataDto dto = service.findById(mno);
         log.info("DTO: " + dto);
@@ -70,16 +72,25 @@ public class MaintenanceDataController {
         log.info("PAGE_VO의 KEYWORD" + vo.getKeyword());
     }
 
-    // registerGet()에서 데이터를 입력 후 submit했을 경우
+    // searchGET()에서 서치할 데이터를 입력 후 submit했을 경우
     @PostMapping("/search")
-    public String searchPOST(@ModelAttribute("dto") SearchDto dto, Model model) {
+    public String searchPOST(@ModelAttribute("pageVO") PageVO vo, @ModelAttribute("dto") SearchDto dto, Model model, RedirectAttributes rttr) {
         log.info("IN MAINTENANCE DATA CONTROLLER: searchPOST() called...");
         log.info("Search DTO: " + dto);
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
         log.info("TYPE: " + dto.getType());
         log.info("KEYWORD: " + dto.getKeyword());
 
-        String urlData = "?page=1&type=" + dto.getType() + "&keyword=" + dto.getKeyword();
-        return "redirect:/maintenance/list" + urlData;
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", dto.getType());
+        rttr.addAttribute("keyword", dto.getKeyword());
+
+        // String urlData = "?page=1&type=" + dto.getType() + "&keyword=" + dto.getKeyword();
+        return "redirect:/maintenance/list";
     }
 
     @GetMapping("/modify")

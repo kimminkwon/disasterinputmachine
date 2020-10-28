@@ -55,7 +55,7 @@ public class MaintenanceDataService {
     }
 
     private List<String> splitTypesAndKeywords(String str) {
-        StringTokenizer tokenizer = new StringTokenizer(str, ", ");
+        StringTokenizer tokenizer = new StringTokenizer(str, "-");
         List<String> strList = new ArrayList<>();
 
         while(tokenizer.hasMoreTokens())
