@@ -16,7 +16,9 @@
                        id="dataTables-example">
                     <thead>
                     <tr>
-                        <th>선택</th>
+                        <th>
+                            <input type="checkbox" class="chk" id="checkedAll" />
+                        </th>
                         <th>분류번호</th>
                         <th>대분류</th>
                         <th>중분류</th>
@@ -34,7 +36,7 @@
                     <tbody>
                     <tr class="odd gradeX" th:each="boardDto:${listOfDto.content}">
                         <td>
-                            <input type="checkbox" id="checkedList" />
+                            <input type="checkbox" name="chk" class="chk" id="checkedList"/>
                         </td>
                         <td>
                             <a th:href='${boardDto.mno}' class='boardLink'>[[${boardDto.mno}]]</a>
@@ -54,7 +56,6 @@
                     </tbody>
                 </table>
             </form>
-
 
             <!-- Search Space -->
 
@@ -77,8 +78,6 @@
                 <input type="number" id="pageSize" min="10" max="50" step="5" placeholder="size" required >
                 <button id='pageBtn'>Submit</button>
             </div>
-
-
 
         </div>
 
@@ -179,6 +178,23 @@
                 e.preventDefault();
                 formObj.attr("action", [[@{'/maintenance/search'}]]);
                 formObj.submit();
+            });
+
+            $("#checkedAll").click(function () {
+               if($("#checkedAll").is(":checked")) {
+                   $(".chk").prop("checked", true);
+               } else {
+                   $(".chk").prop("checked", false);
+               }
+            });
+
+            $(".chk").click(function () {
+                var size = formObj.find("[name='size']").val();
+               if($("input[name='chk']:checked").length == parseInt(size)) {
+                   $("#checkedAll").prop("checked", true);
+               } else {
+                   $("#checkedAll").prop("checked", false);
+               }
             });
         });
 
