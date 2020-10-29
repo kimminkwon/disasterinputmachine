@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.function.Function;
 
 @Service
@@ -24,7 +27,17 @@ public class DeleteDataService {
     @Transactional
     public Page<DeleteDataDto> list(PageVO vo) {
         Pageable pageable = vo.makePageable(0, "dno");
-        Page<DeleteData> result = repository.findAll(repository.makePrdicate(vo.getType(), vo.getKeyword()), pageable);
+        String type = vo.getType(); String keyword = vo.getKeyword();
+
+        log.info("TYPE" + type);
+        log.info("KEYWORD" + keyword);
+
+        List<String> types = type == null? null : splitTypesAndKeywords(type);
+        List<String> keywords = keyword == null? null : splitTypesAndKeywords(keyword);
+
+        log.info("TYPES" + types);
+        log.info("KEYWORDS" + keywords);
+        Page<DeleteData> result = repository.findAll(repository.makePrdicates(types, keywords), pageable);
         Page<DeleteDataDto> resultOfDto = result.map(new Function<DeleteData, DeleteDataDto>() {
             @Override
             public DeleteDataDto apply(DeleteData DeleteData) {
@@ -85,5 +98,15 @@ public class DeleteDataService {
 
         dataExchangeService.deleteToReservation(dto);
         deleteById(dno);
+    }
+
+    private List<String> splitTypesAndKeywords(String str) {
+        StringTokenizer tokenizer = new StringTokenizer(str, "-");
+        List<String> strList = new ArrayList<>();
+
+        while(tokenizer.hasMoreTokens())
+            strList.add(tokenizer.nextToken());
+
+        return strList;
     }
 }

@@ -62,6 +62,33 @@ public class DeleteDataController {
         return "redirect:/delete/list";
     }
 
+    // 복합 검색하는 페이지로 이동한다.
+    @GetMapping("/search")
+    public void searchGET(@ModelAttribute("pageVO") PageVO vo, @ModelAttribute("dto") SearchDto dto) {
+        log.info("IN DELETE DATA CONTROLLER: searchGET() called...");
+        log.info("PAGE_VO의 TYPE" + vo.getType());
+        log.info("PAGE_VO의 KEYWORD" + vo.getKeyword());
+    }
+
+    // searchGET()에서 서치할 데이터를 입력 후 submit했을 경우
+    @PostMapping("/search")
+    public String searchPOST(@ModelAttribute("pageVO") PageVO vo, @ModelAttribute("dto") SearchDto dto, Model model, RedirectAttributes rttr) {
+        log.info("IN DELETE DATA CONTROLLER: searchPOST() called...");
+        log.info("Search DTO: " + dto);
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
+        log.info("TYPE: " + dto.getType());
+        log.info("KEYWORD: " + dto.getKeyword());
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", dto.getType());
+        rttr.addAttribute("keyword", dto.getKeyword());
+
+        return "redirect:/delete/list";
+    }
+
     @GetMapping("/modify")
     public void modifyGET(Long dno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN DELETE DATA CONTROLLER: modifyGET() called...");
