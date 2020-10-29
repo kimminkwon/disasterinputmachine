@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
+
 @Controller
 @Log
 @RequiredArgsConstructor
@@ -217,5 +219,25 @@ public class MaintenanceDataController {
 
         rttr.addAttribute("selectedNums", "");
         model.addAttribute("listOfDto", new PageMaker(listOfDto));
+    }
+
+    @PostMapping("/toreservationonce")
+    public String toReservationOnce(@ModelAttribute("mnoList") Long[] mnoList, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: calling toReservationOnce()...");
+        log.info("MNOLIST" + Arrays.toString(mnoList));
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
+        log.info("TYPE: " + vo.getType());
+        log.info("KEYWORD: " + vo.getKeyword());
+
+        service.toReservationOnce(mnoList);
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/maintenance/list";
     }
 }
