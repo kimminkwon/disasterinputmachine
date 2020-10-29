@@ -113,4 +113,38 @@ public class DeleteData {
         this.area1KR = dto.getArea1KR(); this.area1CN = dto.getArea1CN(); this.area2KR = dto.getArea2KR(); this.area2CN = dto.getArea2CN(); this.area3KR = dto.getArea3KR(); this.area3CN = dto.getArea3CN();
         this.referIndex = dto.getReferIndex(); this.remark = dto.getRemark();
     }
+
+    public ReservationData toReservationData() {
+        return ReservationData.builder()
+                .indexKR(this.indexKR).indexCN(this.indexCN)
+                .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
+                .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
+                .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
+                .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
+                .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
+                .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
+                .nationKR(this.nationKR).nationCN(this.nationCN).dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
+                .area1KR(this.area1KR).area1CN(this.area1CN)
+                .area2KR(this.area2KR).area2CN(this.area2CN)
+                .area3KR(this.area3KR).area3CN(this.area3CN)
+                .referIndex(this.referIndex).remark(this.remark)
+                .build();
+    }
+
+    public MaintenanceData toMaintenanceData() {
+        return MaintenanceData.builder()
+                .indexKR(this.indexKR).indexCN(this.indexCN)
+                .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
+                .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
+                .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
+                .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
+                .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
+                .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
+                .nationKR(this.nationKR).nationCN(this.nationCN).dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
+                .area1KR(this.area1KR).area1CN(this.area1CN)
+                .area2KR(this.area2KR).area2CN(this.area2CN)
+                .area3KR(this.area3KR).area3CN(this.area3CN)
+                .referIndex(this.referIndex).remark(this.remark)
+                .build();
+    }
 }

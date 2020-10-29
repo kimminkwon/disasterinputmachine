@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.function.Function;
@@ -100,6 +101,21 @@ public class DeleteDataService {
         deleteById(dno);
     }
 
+    @Transactional
+    public void toReservationOnce(Long[] dnoList) {
+        log.info("IN DeleteDataService: toReservationOnce() called...");
+        log.info("DNOLIST" + Arrays.toString(dnoList));
+        dataExchangeService.deleteToReservation(dnoList);
+    }
+
+    @Transactional
+    public void toMaintenanceOnce(Long[] dnoList) {
+        log.info("IN DeleteDataService: toMaintenanceOnce() called...");
+        log.info("DNOLIST" + Arrays.toString(dnoList));
+        dataExchangeService.deleteToMaintanance(dnoList);
+    }
+
+
     private List<String> splitTypesAndKeywords(String str) {
         StringTokenizer tokenizer = new StringTokenizer(str, "-");
         List<String> strList = new ArrayList<>();
@@ -109,4 +125,5 @@ public class DeleteDataService {
 
         return strList;
     }
+
 }
