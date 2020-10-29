@@ -38,9 +38,7 @@
                         <td>
                             <input type="checkbox" name="chk" class="chk" id="checkedList"/>
                         </td>
-                        <td>
-                            <a th:href='${boardDto.mno}' class='boardLink'>[[${boardDto.mno}]]</a>
-                        </td>
+                        <td> [[${boardDto.mno}]] </td>
                         <td> [[${boardDto.lclasKR}]] </td>
                         <td> [[${boardDto.mclasKR}]] </td>
                         <td> [[${boardDto.sclasKR}]] </td>
@@ -59,8 +57,8 @@
 
             <!-- Search Space -->
             <div>
-                <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1, type2, ...">
-                <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1, keyword2, ...">
+                <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1-type2-...">
+                <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1-keyword2-...">
                 <button id='searchBtn'>Search</button>
                 <button id='backToList' class="btn btn-default pull-right" >BACK TO LIST</button>
                 <button id='toDelete' style="margin-right: 10px" class="btn btn-danger pull-right">TO DELETE</button>
@@ -157,15 +155,6 @@
                     alert("정상적으로 처리되었습니다.");
                     var stateObj = { msg:"" };
                 }
-            });
-
-            // bno를 클릭했을 시, 수정 페이지로 넘어가도록 하는 메서드
-            $(".boardLink").click(function (e){
-                e.preventDefault();
-                var boardNo = $(this).attr("href");
-                formObj.attr("action", [[@{'/maintenance/view'}]]);
-                formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
-                formObj.submit();
             });
 
             // 체크박스 처리
