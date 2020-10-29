@@ -66,6 +66,19 @@ public class DataExchangeService {
     }
 
     @Transactional
+    public void reservationToMaintanance(Long[] rnoArray) {
+        log.info("IN DataExchangeService: reservationToMaintanance() called...");
+        List<Long> rnoList = arrayToList(rnoArray);
+        log.info("rno List" + rnoList);
+        List<MaintenanceData> mdataList = new ArrayList<>();
+        reservationDataRepository.findAllByIdInQuery(rnoList).forEach(
+                reservationData -> mdataList.add(reservationData.toMaintenanceData())
+        );
+        maintenanceDataRepository.saveAll(mdataList);
+        reservationDataRepository.deleteAllByIdInQuery(rnoList);
+    }
+
+    @Transactional
     public void reservationToDelete(DeleteDataSaveDto dto) {
         log.info("IN DataExchangeService: reservationToDelete() called...");
         log.info("DTO" + dto);
@@ -90,4 +103,6 @@ public class DataExchangeService {
     private List<Long> arrayToList(Long[] array) {
         return new ArrayList<Long>(Arrays.asList(array));
     }
+
+
 }

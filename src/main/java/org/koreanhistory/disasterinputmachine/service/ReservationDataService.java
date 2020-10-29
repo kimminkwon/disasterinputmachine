@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.function.Function;
@@ -83,7 +84,7 @@ public class ReservationDataService {
 
     @Transactional
     public void toMaintenance(Long rno, MaintenanceDataSaveDto dto) {
-        log.info("IN MaintenanceDataService: toReservation() called...");
+        log.info("IN ReservationDataService: toReservation() called...");
         log.info("DTO" + dto);
 
         dataExchangeService.reservationToMaintanance(dto);
@@ -92,11 +93,18 @@ public class ReservationDataService {
 
     @Transactional
     public void toDelete(Long rno, DeleteDataSaveDto dto) {
-        log.info("IN MaintenanceDataService: toDelete() called...");
+        log.info("IN ReservationDataService: toDelete() called...");
         log.info("DTO" + dto);
 
         dataExchangeService.reservationToDelete(dto);
         deleteById(rno);
+    }
+
+    @Transactional
+    public void toMaintenanceOnce(Long[] rnoList) {
+        log.info("IN ReservationDataService: toMaintenanceOnce() called...");
+        log.info("RNOLIST" + Arrays.toString(rnoList));
+        dataExchangeService.reservationToMaintanance(rnoList);
     }
 
     private List<String> splitTypesAndKeywords(String str) {

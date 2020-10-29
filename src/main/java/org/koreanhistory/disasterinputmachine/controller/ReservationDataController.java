@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
+
 @Controller
 @Log
 @RequiredArgsConstructor
@@ -157,11 +159,45 @@ public class ReservationDataController {
 
     @PostMapping("/todelete")
     public String toDelete(Long rno, @ModelAttribute("dto") DeleteDataSaveDto dto, PageVO vo, RedirectAttributes rttr) {
-        log.info("IN MAINTENANCE DATA CONTROLLER: toDelete() called...");
+        log.info("IN RESERVATION DATA CONTROLLER: toDelete() called...");
         log.info("DELETE RNO: " + rno);
         log.info("MOVING DTO: " + dto);
 
         service.toDelete(rno, dto);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/reservation/list";
+    }
+
+    @GetMapping("/listforonce")
+    public void listForOnce(@ModelAttribute("pageVO") PageVO vo, Model model, RedirectAttributes rttr) {
+        Pageable pageable = vo.makePageable(0, "rno");
+        Page<ReservationDataDto> listOfDto = service.list(vo);
+        log.info("IN RESERVATION DATA CONTROLLER: calling listForOnce()...");
+        log.info("" + pageable);
+        log.info("" + listOfDto);
+        log.info("TOTAL PAGE NUMBER: " + listOfDto.getTotalPages());
+
+        model.addAttribute("listOfDto", new PageMaker(listOfDto));
+    }
+
+    @PostMapping("/tomaintenanceonce")
+    public String toMaintenanceOnce(@ModelAttribute("rnoList") Long[] rnoList, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN RESERVATION DATA CONTROLLER: calling toMaintenanceOnce()...");
+        log.info("RNOLIST" + Arrays.toString(rnoList));
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
+        log.info("TYPE: " + vo.getType());
+        log.info("KEYWORD: " + vo.getKeyword());
+
+        service.toMaintenanceOnce(rnoList);
 
         rttr.addFlashAttribute("msg", "success");
 
