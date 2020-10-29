@@ -195,6 +195,20 @@
                 formSelected.submit();
             });
 
+            // TO DELETE을 클릭시 일괄로 데이터가 옮겨짐
+            $("#toDelete").click(function (e){
+                var noArray = new Array();
+                var checkedList = $("input[id='checkedList']:checked");
+                checkedList.each(function (i) {
+                    var tr = checkedList.parent().parent().eq(i);
+                    var td = tr.children();
+                    noArray.push(td.eq(1).text());
+                });
+                formSelected.attr("action", [[@{'/reservation/todeleteonce'}]]);
+                formSelected.append("<input type='hidden' name='rnoList' value='" + noArray + "'>");
+                formSelected.submit();
+            });
+
         });
 
     </script>

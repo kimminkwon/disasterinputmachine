@@ -107,6 +107,13 @@ public class ReservationDataService {
         dataExchangeService.reservationToMaintanance(rnoList);
     }
 
+    @Transactional
+    public void toDeleteOnce(Long[] rnoList) {
+        log.info("IN ReservationDataService: toMaintenanceOnce() called...");
+        log.info("RNOLIST" + Arrays.toString(rnoList));
+        dataExchangeService.reservationToDelete(rnoList);
+    }
+
     private List<String> splitTypesAndKeywords(String str) {
         StringTokenizer tokenizer = new StringTokenizer(str, "-");
         List<String> strList = new ArrayList<>();

@@ -109,6 +109,13 @@ public class MaintenanceDataService {
         dataExchangeService.maintenanceToReservation(mnoList);
     }
 
+    @Transactional
+    public void toDeleteOnce(Long[] mnoList) {
+        log.info("IN MaintenanceDataService: toDelete() called...");
+        log.info("MNOLIST" + Arrays.toString(mnoList));
+        dataExchangeService.maintenanceToDelete(mnoList);
+    }
+
     private List<String> splitTypesAndKeywords(String str) {
         StringTokenizer tokenizer = new StringTokenizer(str, "-");
         List<String> strList = new ArrayList<>();
