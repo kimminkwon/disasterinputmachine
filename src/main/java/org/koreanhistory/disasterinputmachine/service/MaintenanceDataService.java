@@ -55,16 +55,6 @@ public class MaintenanceDataService {
         return resultOfDto;
     }
 
-    private List<String> splitTypesAndKeywords(String str) {
-        StringTokenizer tokenizer = new StringTokenizer(str, "-");
-        List<String> strList = new ArrayList<>();
-
-        while(tokenizer.hasMoreTokens())
-            strList.add(tokenizer.nextToken());
-
-        return strList;
-    }
-
     @Transactional
     public MaintenanceDataDto findById(Long mno) {
         log.info("IN MaintenanceDataService: findById() called...");
@@ -131,9 +121,21 @@ public class MaintenanceDataService {
         return resultOfDto;
     }
 
+    @Transactional
     public void toReservationOnce(Long[] mnoList) {
         log.info("IN MaintenanceDataService: toReservationOnce() called...");
         log.info("MNOLIST" + Arrays.toString(mnoList));
         dataExchangeService.maintenanceToReservation(mnoList);
     }
+
+    private List<String> splitTypesAndKeywords(String str) {
+        StringTokenizer tokenizer = new StringTokenizer(str, "-");
+        List<String> strList = new ArrayList<>();
+
+        while(tokenizer.hasMoreTokens())
+            strList.add(tokenizer.nextToken());
+
+        return strList;
+    }
+
 }

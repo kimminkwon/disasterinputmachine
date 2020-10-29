@@ -51,6 +51,26 @@ public class ReservationDataController {
         log.info("IN RESERVATION DATA CONTROLLER: registerGET() called...");
     }
 
+    // searchGET()에서 서치할 데이터를 입력 후 submit했을 경우
+    @PostMapping("/search")
+    public String searchPOST(@ModelAttribute("pageVO") PageVO vo, @ModelAttribute("dto") SearchDto dto, RedirectAttributes rttr) {
+        log.info("IN MAINTENANCE DATA CONTROLLER: searchPOST() called...");
+        log.info("Search DTO: " + dto);
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
+        log.info("TYPE: " + dto.getType());
+        log.info("KEYWORD: " + dto.getKeyword());
+
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", dto.getType());
+        rttr.addAttribute("keyword", dto.getKeyword());
+
+        return "redirect:/reservation/list";
+    }
+
     // registerGet()에서 데이터를 입력 후 submit했을 경우
     @PostMapping("/register")
     public String registerPOST(@ModelAttribute("dto") ReservationDataSaveDto dto, RedirectAttributes rttr) {
@@ -61,6 +81,14 @@ public class ReservationDataController {
         rttr.addFlashAttribute("msg", "success");
 
         return "redirect:/reservation/list";
+    }
+
+    // 복합 검색하는 페이지로 이동한다.
+    @GetMapping("/search")
+    public void searchGET(@ModelAttribute("pageVO") PageVO vo, @ModelAttribute("dto") SearchDto dto) {
+        log.info("IN RESERVATION DATA CONTROLLER: searchGET() called...");
+        log.info("PAGE_VO의 TYPE" + vo.getType());
+        log.info("PAGE_VO의 KEYWORD" + vo.getKeyword());
     }
 
     @GetMapping("/modify")
