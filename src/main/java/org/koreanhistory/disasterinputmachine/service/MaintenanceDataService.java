@@ -24,7 +24,6 @@ import java.util.function.Function;
 public class MaintenanceDataService {
     private final MaintenanceDataRepository repository;
     private final DataExchangeService dataExchangeService;
-    private final MaintenanceModifyOnceVO modifyOnceVO;
 
     @Transactional
     public Page<MaintenanceDataDto> list(PageVO vo) {
@@ -101,24 +100,6 @@ public class MaintenanceDataService {
         dataExchangeService.maintenanceToDelete(dto);
         deleteById(mno);
 
-    }
-
-    public void addModifyKey(Long mno) {
-        modifyOnceVO.addModifyKey(mno);
-    }
-
-    @Transactional
-    public List<MaintenanceDataDto> modifyList() {
-        List<MaintenanceData> result = repository.findAllByIdInQuery(modifyOnceVO.getModifyList());
-        List<MaintenanceDataDto> resultOfDto = new ArrayList<>();
-        result.forEach(
-                maintenanceData -> resultOfDto.add(new MaintenanceDataDto(maintenanceData))
-        );
-
-        log.info("IN MaintenanceDataService: modifyList() called...");
-        log.info("" + resultOfDto);
-
-        return resultOfDto;
     }
 
     @Transactional

@@ -37,18 +37,6 @@ public class MaintenanceDataController {
         model.addAttribute("listOfDto", new PageMaker(listOfDto));
     }
 
-    @GetMapping("/listforonce")
-    public void listForOnce(@ModelAttribute("pageVO") PageVO vo, Model model) {
-        Pageable pageable = vo.makePageable(0, "mno");
-        Page<MaintenanceDataDto> listOfDto = service.list(vo);
-        log.info("IN MAINTENANCE DATA CONTROLLER: calling list()...");
-        log.info("" + pageable);
-        log.info("" + listOfDto);
-        log.info("TOTAL PAGE NUMBER: " + listOfDto.getTotalPages());
-
-        model.addAttribute("listOfDto", new PageMaker(listOfDto));
-    }
-
     @GetMapping("/view")
     public void view(Long mno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("IN MAINTENANCE DATA CONTROLLER: view() called...");
@@ -190,34 +178,15 @@ public class MaintenanceDataController {
         return "redirect:/maintenance/list";
     }
 
-    @PostMapping("/addmodify")
-    public String addModifyKey(@ModelAttribute("dto") MaintenanceDataModifyDto dto, PageVO vo, RedirectAttributes rttr) {
-        log.info("IN MAINTENANCE DATA CONTROLLER: addModifyKey() called...");
-        log.info("MODIFY DTO: " + dto);
-        service.addModifyKey(dto.getMno());
-
-        rttr.addFlashAttribute("msg", "success");
-        rttr.addAttribute("mno", dto.getMno());
-
-        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
-        rttr.addAttribute("page", vo.getPage());
-        rttr.addAttribute("size", vo.getSize());
-        rttr.addAttribute("type", vo.getType());
-        rttr.addAttribute("keyword", vo.getKeyword());
-
-        return "redirect:/maintenance/view";
-    }
-
-    @GetMapping("/listofonce")
-    public void listOfOnce(@ModelAttribute("pageVO") PageVO vo, Model model, RedirectAttributes rttr) {
+    @GetMapping("/listforonce")
+    public void listForOnce(@ModelAttribute("pageVO") PageVO vo, Model model, RedirectAttributes rttr) {
         Pageable pageable = vo.makePageable(0, "mno");
         Page<MaintenanceDataDto> listOfDto = service.list(vo);
-        log.info("IN MAINTENANCE DATA CONTROLLER: calling listofonce()...");
+        log.info("IN MAINTENANCE DATA CONTROLLER: calling listForOnce()...");
         log.info("" + pageable);
         log.info("" + listOfDto);
         log.info("TOTAL PAGE NUMBER: " + listOfDto.getTotalPages());
 
-        rttr.addAttribute("selectedNums", "");
         model.addAttribute("listOfDto", new PageMaker(listOfDto));
     }
 
@@ -231,6 +200,8 @@ public class MaintenanceDataController {
         log.info("KEYWORD: " + vo.getKeyword());
 
         service.toReservationOnce(mnoList);
+
+        rttr.addFlashAttribute("msg", "success");
 
         // Paging과 검색 결과를 유지하기 위한 데이터 보내기
         rttr.addAttribute("page", vo.getPage());
