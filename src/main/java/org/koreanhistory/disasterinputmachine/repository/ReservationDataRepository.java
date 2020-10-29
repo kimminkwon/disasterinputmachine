@@ -6,10 +6,27 @@ import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.domain.QMaintenanceData;
 import org.koreanhistory.disasterinputmachine.domain.QReservationData;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface ReservationDataRepository extends CrudRepository<ReservationData, Long>, QuerydslPredicateExecutor<ReservationData> {
+
+    @Transactional
+    @Modifying
+    @Query("delete from ReservationData r where r.rno in :ids")
+    public void deleteAllByIdInQuery(@Param("ids") List<Long> ids);
+
+    @Transactional
+    @Modifying
+    @Query("select r from ReservationData r where r.rno in :ids")
+    public List<ReservationData> findAllByIdInQuery(@Param("ids") List<Long> ids);
+
     public default Predicate makePrdicate(String type, String keyword) {
         BooleanBuilder builder = new BooleanBuilder();
         QReservationData rdata = QReservationData.reservationData;
