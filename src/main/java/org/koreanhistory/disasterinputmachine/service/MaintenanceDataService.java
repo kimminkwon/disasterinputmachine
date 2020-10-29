@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.function.Function;
@@ -128,5 +129,11 @@ public class MaintenanceDataService {
         log.info("" + resultOfDto);
 
         return resultOfDto;
+    }
+
+    public void toReservationOnce(Long[] mnoList) {
+        log.info("IN MaintenanceDataService: toReservationOnce() called...");
+        log.info("MNOLIST" + Arrays.toString(mnoList));
+        dataExchangeService.maintenanceToReservation(mnoList);
     }
 }
