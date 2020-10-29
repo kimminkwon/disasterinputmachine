@@ -12,7 +12,13 @@
     </div>
 
     <div class="panel-body pull-right" style="float: right;">
-        <h4><a class="label label-default" th:href="@{register}">RESISTER</a></h4>
+        <h4 style="float: right;"><a class="label label-default" th:href="@{register}">RESISTER</a></h4>
+        <h4 style="float: right; margin-right: 10px">
+            <a class="label label-default"
+               th:href="@{listforonce(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword})}">
+                LIST FOR SELECTION
+            </a>
+        </h4>
     </div> <div style="clear:both;"></div>
 
     <div class="panel-body">
@@ -59,15 +65,10 @@
 
             <!-- Search Space -->
             <div>
-                <select id='searchType'>
-                    <option>--</option>
-                    <option value='index' th:selected="${pageVO.type} == 'index'">색인어</option>
-                    <option value='large' th:selected="${pageVO.type} == 'large'">대분류</option>
-                    <option value='middle' th:selected="${pageVO.type} == 'middle'">중분류</option>
-                    <option value='small' th:selected="${pageVO.type} == 'small'">소분류</option>
-                </select>
-                <input type='text' id='searchKeyword' th:value="${pageVO.keyword}">
+                <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1-type2-...">
+                <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1-keyword2-...">
                 <button id='searchBtn'>Search</button>
+                <button id='detailSearchBtn' class="pull-right">Detail Search</button>
             </div>
 
 
@@ -167,6 +168,13 @@
                 var boardNo = $(this).attr("href");
                 formObj.attr("action", [[@{'/delete/view'}]]);
                 formObj.append("<input type='hidden' name='dno' value='" + boardNo + "'>");
+                formObj.submit();
+            });
+
+            // detailSearchBtn을 클릭했을 시, 검색 페이지로 넘어가도록 하는 메서드
+            $("#detailSearchBtn").click(function (e){
+                e.preventDefault();
+                formObj.attr("action", [[@{'/delete/search'}]]);
                 formObj.submit();
             });
         });
