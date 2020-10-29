@@ -10,7 +10,7 @@
     <div class="panel-body">
 
         <div th:with="listOfDto=${listOfDto.result}">
-            <form id = 'fSelectTable'>
+            <form id = 'fSelectTable' method="post">
                 <!-- Table -->
                 <table class="table table-striped table-bordered table-hover"
                        id="dataTables-example">
@@ -58,27 +58,21 @@
             </form>
 
             <!-- Search Space -->
-
-            <div class="panel-body pull-left" style="float: left;">
-                <h4 style="float: left; margin-right: 10px;"><a class="label label-warning" th:href="@{../reservation/list}">TO RESERVATION</a></h4>
-                <h4 style="float: right;"><a class="label label-danger" th:href="@{../delete/list}">TO DELETE</a></h4>
-            </div>
-
             <div>
                 <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1, type2, ...">
                 <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1, keyword2, ...">
                 <button id='searchBtn'>Search</button>
+                <button id='backToList' class="btn btn-default pull-right" th:href="@{register}">BACK TO LIST</button>
+                <button id='toDelete' style="margin-right: 10px" class="btn btn-danger pull-right">TO DELETE</button>
+                <button id='toReservation' style="margin-right: 10px" class="btn btn-warning pull-right">TO RESERVATION</button>
 
-                <button id='detailSearchBtn' class="pull-right">Detail Search</button>
             </div>
-
 
             <!-- Paging size -->
             <div>
                 <input type="number" id="pageSize" min="10" max="50" step="5" placeholder="size" required >
                 <button id='pageBtn'>Submit</button>
             </div>
-
         </div>
 
         <!-- Paging -->
@@ -124,6 +118,7 @@
 
         $(document).ready(function () {
             var formObj = $("#f1");
+            var formSelected = $("#fSelectTable");
 
             // Paging 버튼이 클릭되었을 때 (pagination = Page 관련 ui)
             $(".pagination a").click(function(e) {
@@ -173,13 +168,7 @@
                 formObj.submit();
             });
 
-            // detailSearchBtn을 클릭했을 시, 검색 페이지로 넘어가도록 하는 메서드
-            $("#detailSearchBtn").click(function (e){
-                e.preventDefault();
-                formObj.attr("action", [[@{'/maintenance/search'}]]);
-                formObj.submit();
-            });
-
+            // 체크박스 처리
             $("#checkedAll").click(function () {
                if($("#checkedAll").is(":checked")) {
                    $(".chk").prop("checked", true);
@@ -189,13 +178,34 @@
             });
 
             $(".chk").click(function () {
-                var size = formObj.find("[name='size']").val();
-               if($("input[name='chk']:checked").length == parseInt(size)) {
+               if($("input[name='chk']:checked").length == $("input[name='chk']").length) {
                    $("#checkedAll").prop("checked", true);
                } else {
                    $("#checkedAll").prop("checked", false);
                }
             });
+
+            // back To List를 클릭시 리스트 페이지로 넘어가도록 하는 메서드
+            $("#backToList").click(function (e){
+                e.preventDefault();
+                formObj.attr("action", [[@{'/maintenance/list'}]]);
+                formObj.submit();
+            });
+
+            // TO RESERVATION을 클릭시 일괄로 데이터가 옮겨짐
+            $("#toReservation").click(function (e){
+                var noArray = new Array();
+                var checkedList = $("input[id='checkedList']:checked");
+                checkedList.each(function (i) {
+                   var tr = checkedList.parent().parent().eq(i);
+                   var td = tr.children();
+                   noArray.push(td.eq(1).text());
+                });
+                formSelected.attr("action", [[@{'/maintenance/toreservationonce'}]]);
+                formSelected.append("<input type='hidden' name='mnoList' value='" + noArray + "'>");
+                formSelected.submit();
+            });
+
         });
 
     </script>

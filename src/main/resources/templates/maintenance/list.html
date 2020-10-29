@@ -12,7 +12,13 @@
     </div>
 
     <div class="panel-body pull-right" style="float: right;">
-        <h4><a class="label label-default" th:href="@{register}">RESISTER</a></h4>
+        <h4 style="float: right;"><a class="label label-default" th:href="@{register}">RESISTER</a></h4>
+        <h4 style="float: right; margin-right: 10px">
+            <a class="label label-default"
+               th:href="@{listforonce(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword})}">
+                LIST FOR SELECTION
+            </a>
+        </h4>
     </div> <div style="clear:both;"></div>
 
     <div class="panel-body">
@@ -62,7 +68,6 @@
                 <input type='text' id='searchType' th:value="${pageVO.type}" placeholder="type1, type2, ...">
                 <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1, keyword2, ...">
                 <button id='searchBtn'>Search</button>
-
                 <button id='detailSearchBtn' class="pull-right">Detail Search</button>
             </div>
 
