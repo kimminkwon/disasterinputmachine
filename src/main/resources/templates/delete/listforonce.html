@@ -3,7 +3,7 @@
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
-    <div class="panel panel-primary">
+    <div class="panel panel-danger">
         <div class="panel-heading">List for once of Delete</div>
     </div>
 
@@ -181,20 +181,6 @@
                 formObj.submit();
             });
 
-            // TO RESERVATION을 클릭시 일괄로 데이터가 옮겨짐
-            $("#toReservation").click(function (e){
-                var noArray = new Array();
-                var checkedList = $("input[id='checkedList']:checked");
-                checkedList.each(function (i) {
-                    var tr = checkedList.parent().parent().eq(i);
-                    var td = tr.children();
-                    noArray.push(td.eq(1).text());
-                });
-                formSelected.attr("action", [[@{'/delete/toreservationonce'}]]);
-                formSelected.append("<input type='hidden' name='dnoList' value='" + noArray + "'>");
-                formSelected.submit();
-            });
-
             // TO MAINTENANCE를 클릭시 일괄로 데이터가 옮겨짐
             $("#toMaintenance").click(function (e){
                 var noArray = new Array();
@@ -209,6 +195,19 @@
                 formSelected.submit();
             });
 
+            // TO RESERVATION을 클릭시 일괄로 데이터가 옮겨짐
+            $("#toReservation").click(function (e){
+                var noArray = new Array();
+                var checkedList = $("input[id='checkedList']:checked");
+                checkedList.each(function (i) {
+                    var tr = checkedList.parent().parent().eq(i);
+                    var td = tr.children();
+                    noArray.push(td.eq(1).text());
+                });
+                formSelected.attr("action", [[@{'/delete/toreservationonce'}]]);
+                formSelected.append("<input type='hidden' name='dnoList' value='" + noArray + "'>");
+                formSelected.submit();
+            });
         });
 
     </script>
