@@ -2,10 +2,12 @@ package org.koreanhistory.disasterinputmachine.repository;
 
 import lombok.extern.java.Log;
 import org.assertj.core.util.Lists;
+import org.hibernate.sql.Delete;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.koreanhistory.disasterinputmachine.domain.DeleteData;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
+import org.koreanhistory.disasterinputmachine.domain.ReservationData;
 import org.koreanhistory.disasterinputmachine.for_test.MakeEntityDelete;
 import org.koreanhistory.disasterinputmachine.for_test.MakeEntityMaintenance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -107,5 +110,65 @@ public class DeleteDataRepositoryTest {
         result.getContent().forEach(
                 deleteData -> log.info("" + deleteData)
         );
+    }
+
+
+    @Test
+    @Transactional
+    public void 일괄삭제_테스트() {
+        // when
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "dno");
+        Page<DeleteData> result = repository.findAll(repository.makePrdicate("index", "1"), pageable);
+        Long startedNum = result.getContent().get(0).getDno();
+        List<Long> deleteNums = new ArrayList<>();
+        // 6개의 숫자 지정
+        deleteNums.add(startedNum); deleteNums.add(startedNum - 1); deleteNums.add(startedNum - 2); deleteNums.add(startedNum - 3); deleteNums.add(startedNum - 4); deleteNums.add(startedNum - 5);
+        int listSize = deleteNums.size();
+        Long repositorySize = repository.count();
+
+        // given
+        repository.deleteAllByIdInQuery(deleteNums);
+
+        // then
+        assertThat(repository.count()).isEqualTo(repositorySize - listSize);
+    }
+
+    @Test
+    @Transactional
+    public void 일괄검색_테스트() {
+        // when
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "dno");
+        Page<DeleteData> result = repository.findAll(repository.makePrdicate("index", "1"), pageable);
+        Long startedNum = result.getContent().get(0).getDno();
+        List<Long> selectNums = new ArrayList<>();
+        // 6개의 숫자 지정
+        selectNums.add(startedNum); selectNums.add(startedNum - 1); selectNums.add(startedNum - 2); selectNums.add(startedNum - 3); selectNums.add(startedNum - 4); selectNums.add(startedNum - 5);
+        int listSize = selectNums.size();
+
+        // given
+        List<DeleteData> selecteList = repository.findAllByIdInQuery(selectNums);
+
+        // then
+        assertThat(selecteList.size()).isEqualTo(listSize);
+    }
+
+    @Test
+    @Transactional
+    public void 복합검색_테스트() {
+        // when
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "dno");
+        List<String> types = new ArrayList<>();
+        List<String> keywords = new ArrayList<>();
+        types.add("index"); types.add("large");
+        keywords.add("9"); keywords.add("1");
+
+        Page<DeleteData> result = repository.findAll(repository.makePrdicates(types, keywords), pageable);
+        result.getContent().forEach(
+                deleteData -> assertThat(deleteData.getIndexKR()).contains("9")
+        );
+        result.getContent().forEach(
+                deleteData -> assertThat(deleteData.getLclasKR()).contains("1")
+        );
+        log.info("SIZE : " + result.getContent().size());
     }
 }
