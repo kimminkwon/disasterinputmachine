@@ -31,6 +31,11 @@ public class ReservationDataRepositoryTest {
     private ReservationDataRepository repository;
 
     @Test
+    public void cleanUp() {
+        repository.deleteAll();
+    }
+
+    @Test
     @Transactional
     public void 데이터정상적인저장_확인() {
 
@@ -66,7 +71,14 @@ public class ReservationDataRepositoryTest {
 
         // when: 예제 데이터 입력
         for (int i = 0; i < 100; i++) {
-            repository.save(makeEntityReservation.getEntity(String.valueOf(i)));
+            ReservationData entity = makeEntityReservation.getEntity(String.valueOf(i));
+
+            if(10 <= i && i <= 30)
+                entity.setIndexKR("r_indexKR(SearchData)_" + i);
+            if(140 <= i && i <= 170)
+                entity.setIndexKR("r_indexKR(SearchData)_" + i);
+
+            repository.save(entity);
         }
 
         // then

@@ -73,7 +73,14 @@ public class DeleteDataRepositoryTest {
 
         // when: 예제 데이터 입력
         for (int i = 0; i < 100; i++) {
-            repository.save(MakeEntityDelete.getEntity(String.valueOf(i)));
+            DeleteData entity = MakeEntityDelete.getEntity(String.valueOf(i));
+
+            if(10 <= i && i <= 30)
+                entity.setIndexKR("d_indexKR(SearchData)_" + i);
+            if(140 <= i && i <= 170)
+                entity.setIndexKR("d_indexKR(SearchData)_" + i);
+
+            repository.save(entity);
         }
 
         // then

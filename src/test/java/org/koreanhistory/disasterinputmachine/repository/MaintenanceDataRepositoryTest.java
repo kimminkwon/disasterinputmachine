@@ -40,8 +40,11 @@ public class MaintenanceDataRepositoryTest {
         MakeEntityMaintenance makeEntityMaintenance = new MakeEntityMaintenance();
 
         // when: 예제 데이터 입력
-        for (int i = 0; i < 100; i++) {
-            repository.save(makeEntityMaintenance.getEntity(String.valueOf(i)));
+        for (int i = 0; i < 200; i++) {
+            MaintenanceData entity = makeEntityMaintenance.getEntity(String.valueOf(i));
+            if(i % 9 == 0)
+                entity.setIndexKR("m_indexKR(SearchData)_" + i);
+            repository.save(entity);
         }
 
         // then
@@ -51,7 +54,7 @@ public class MaintenanceDataRepositoryTest {
         );
 
         // List의 길이 확인
-        assertThat(mdataList.size()).isEqualTo(100);
+        assertThat(mdataList.size()).isEqualTo(200);
         // List의 데이터 한개 확인 1
         mdataList.forEach(
                 maintenanceData -> assertThat(maintenanceData.getIndexKR()).contains("indexKR")
@@ -68,8 +71,15 @@ public class MaintenanceDataRepositoryTest {
         MakeEntityMaintenance makeEntityMaintenance = new MakeEntityMaintenance();
 
         // when: 예제 데이터 입력
-        for (int i = 0; i < 100; i++) {
-            repository.save(makeEntityMaintenance.getEntity(String.valueOf(i)));
+        for (int i = 0; i < 200; i++) {
+            MaintenanceData entity = makeEntityMaintenance.getEntity(String.valueOf(i));
+
+            if(10 <= i && i <= 30)
+                entity.setIndexKR("m_indexKR(SearchData)_" + i);
+            if(140 <= i && i <= 170)
+                entity.setIndexKR("m_indexKR(SearchData)_" + i);
+
+            repository.save(entity);
         }
 
         // then
@@ -79,7 +89,7 @@ public class MaintenanceDataRepositoryTest {
         );
 
         // List의 길이 확인
-        assertThat(mdataList.size()).isEqualTo(100);
+        assertThat(mdataList.size()).isEqualTo(200);
 
         // List의 데이터 한개 확인 1
         mdataList.forEach(
