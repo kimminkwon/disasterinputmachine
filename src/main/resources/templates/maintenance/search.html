@@ -64,15 +64,16 @@
                 <input class="form-control" name="yearAD" th:value="${dto.yearAD}" />
             </div> <div style="clear:both;"></div>
 
-            <div class="form-group" >
-                <label>국가(한글)</label>
-                <input class="form-control" name="nationKR" th:value="${dto.nationKR}" />
-            </div>
-
-            <div class="form-group" >
-                <label>왕조(한글)</label>
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>왕조(한국)</label>
                 <input class="form-control" name="dynastyKR" th:value="${dto.dynastyKR}" />
             </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>왕조(중국)</label>
+                <input class="form-control" name="dynastyCN" th:value="${dto.dynastyCN}" />
+            </div> <div style="clear:both;"></div>
+
             <div class="form-group" >
                 <label>지역 1(한글)</label>
                 <input class="form-control" name="area1KR" th:value="${dto.area1KR}" />
