@@ -7,6 +7,7 @@ import org.koreanhistory.disasterinputmachine.domain.Member;
 import org.koreanhistory.disasterinputmachine.domain.MemberRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
@@ -18,6 +19,14 @@ public class MemberRepositoryTest {
 
     @Autowired
     private MemberRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Test
+    public void 데이터비우기() {
+        repository.deleteAll();
+    }
 
     @Test
     public void 예제데이터삽입() {
@@ -47,6 +56,17 @@ public class MemberRepositoryTest {
         roleBasic.setRoleName("BASIC");
         basic.setRoles(Arrays.asList(roleBasic));
         repository.save(basic);
+    }
+
+    @Test
+    public void 데이터암호화() {
+        Iterable<Member> all = repository.findAll();
+        all.forEach(
+                member ->  {
+                    member.setUpw(passwordEncoder.encode(member.getUpw()));
+                    repository.save(member);
+                }
+        );
     }
 
 }
