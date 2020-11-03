@@ -52,10 +52,8 @@ public class DeleteDataSaveDto {
     // 연도 (월)
     private int month;
 
-    // 국가, 왕조 (한글, 한자)
-    private String nationKR;
+    // 국가, 왕조 (한국, 중국)
     private String dynastyKR;
-    private String nationCN;
     private String dynastyCN;
 
     // 지역 1, 2, 3 (한글, 한자)
@@ -77,7 +75,7 @@ public class DeleteDataSaveDto {
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
         this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
         this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
-        this.nationKR = entity.getNationKR(); this.dynastyKR = entity.getDynastyKR(); this.nationCN = entity.getNationCN(); this.dynastyCN = entity.getDynastyCN();
+        this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
         this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
     }
@@ -91,7 +89,7 @@ public class DeleteDataSaveDto {
                 .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
                 .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
-                .nationKR(this.nationKR).nationCN(this.nationCN).dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
+                .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
                 .area1KR(this.area1KR).area1CN(this.area1CN)
                 .area2KR(this.area2KR).area2CN(this.area2CN)
                 .area3KR(this.area3KR).area3CN(this.area3CN)

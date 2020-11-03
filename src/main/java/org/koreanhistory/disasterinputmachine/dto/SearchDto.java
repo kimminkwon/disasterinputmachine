@@ -51,10 +51,8 @@ public class SearchDto {
     // 연도 (월)
     private int month;
 
-    // 국가, 왕조 (한글, 한자)
-    private String nationKR;
+    // 국가, 왕조 (한국, 중국)
     private String dynastyKR;
-    private String nationCN;
     private String dynastyCN;
 
     // 지역 1, 2, 3 (한글, 한자)
@@ -76,7 +74,7 @@ public class SearchDto {
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
         this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
         this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
-        this.nationKR = entity.getNationKR(); this.dynastyKR = entity.getDynastyKR(); this.nationCN = entity.getNationCN(); this.dynastyCN = entity.getDynastyCN();
+        this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
         this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
     }
@@ -93,7 +91,6 @@ public class SearchDto {
         if(this.yearNameOfTomb != "" && this.yearNameOfTomb != null) type = strConcat(type, "yearTomb");
         if(this.yearAD != 0) type = strConcat(type, "yearAD");
         if(this.month != 0) type = strConcat(type, "month");
-        if(this.nationKR != "" && this.nationKR != null) type = strConcat(type, "nation");
         if(this.dynastyKR != "" && this.dynastyKR != null) type = strConcat(type, "dynasty");
         if(this.area1KR != "" && this.area1KR != null) type = strConcat(type, "area1");
         if(this.area2KR != "" && this.area2KR != null) type = strConcat(type, "area2");
@@ -115,7 +112,6 @@ public class SearchDto {
         if(this.yearNameOfTomb != "" && this.yearNameOfTomb != null) strConcat(keyword, yearNameOfTomb);
         if(this.yearAD != 0) keyword = strConcat(keyword, String.valueOf(yearAD));
         if(this.month != 0) keyword = strConcat(keyword, String.valueOf(month));
-        if(this.nationKR != "" && this.nationKR != null) keyword = strConcat(keyword, nationKR);
         if(this.dynastyKR != "" && this.dynastyKR != null) keyword = strConcat(keyword, dynastyKR);
         if(this.area1KR != "" && this.area1KR != null) keyword = strConcat(keyword, area1KR);
         if(this.area2KR != "" && this.area2KR != null) keyword = strConcat(keyword, area2KR);
