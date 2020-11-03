@@ -89,9 +89,6 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
             case "month":
                 builder.and(mdata.month.eq(Integer.parseInt(type)));
                 break;
-            case "nation":
-                builder.and(mdata.nationKR.like("%" + type + "%"));
-                break;
             case "dynasty":
                 builder.and(mdata.dynastyKR.like("%" + type + "%"));
                 break;

@@ -92,9 +92,6 @@ public interface ReservationDataRepository extends CrudRepository<ReservationDat
             case "month":
                 builder.and(data.month.eq(Integer.parseInt(type)));
                 break;
-            case "nation":
-                builder.and(data.nationKR.like("%" + type + "%"));
-                break;
             case "dynasty":
                 builder.and(data.dynastyKR.like("%" + type + "%"));
                 break;
