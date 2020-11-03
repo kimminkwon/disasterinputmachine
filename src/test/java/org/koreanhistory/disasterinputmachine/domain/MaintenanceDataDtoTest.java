@@ -40,9 +40,7 @@ public class MaintenanceDataDtoTest {
         String yearNameOfTomb = "서기년도";
         int yearAD = 10;
         int month = 8;
-        String nationKR = "nationKR";
         String dynastyKR = "dynastyKR";
-        String nationCN = "nationCN";
         String dynastyCN = "dynastyCN";
         String area1KR = "area1KR";
         String area1CN = "area1CN";
@@ -60,7 +58,7 @@ public class MaintenanceDataDtoTest {
                 articlSumry, articlOrginl, ltrtreNM,
                 sourceKR, sourceCN,
                 yearNameOfTomb, yearAD, month,
-                nationKR, dynastyKR, nationCN, dynastyCN,
+                dynastyKR, dynastyCN,
                 area1KR, area1CN,
                 area2KR, area2CN,
                 area3KR, area3CN,
@@ -111,7 +109,7 @@ public class MaintenanceDataDtoTest {
                 articlSumry, articlOrginl, ltrtreNM,
                 sourceKR, sourceCN,
                 yearNameOfTomb, yearAD, month,
-                nationKR, dynastyKR, nationCN, dynastyCN,
+                dynastyKR, dynastyCN,
                 area1KR, area1CN,
                 area2KR, area2CN,
                 area3KR, area3CN,
