@@ -89,7 +89,7 @@ public class MaintenanceData {
                            String lclasKR, String lclasCN, String mclasKR, String mclasCN, String sclasKR, String sclasCN,
                            String articlSumry, String articlOrginl, String ltrtreNM, String sourceKR, String sourceCN,
                            String yearNameOfTomb, int yearAD, int month,
-                           String nationKR, String dynastyKR, String nationCN, String dynastyCN,
+                           String dynastyKR, String dynastyCN,
                            String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                            String referIndex, String remark) {
         this.indexKR = indexKR; this.indexCN = indexCN;
