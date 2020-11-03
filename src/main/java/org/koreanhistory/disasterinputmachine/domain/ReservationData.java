@@ -66,10 +66,8 @@ public class ReservationData {
     // 연도 (월)
     private int month;
 
-    // 국가, 왕조 (한글, 한자)
-    private String nationKR;
+    // 국가, 왕조 (한국, 중국)
     private String dynastyKR;
-    private String nationCN;
     private String dynastyCN;
 
     // 지역 1, 2, 3 (한글, 한자)
@@ -98,7 +96,7 @@ public class ReservationData {
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclasCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
         this.yearNameOfTomb = yearNameOfTomb; this.yearAD = yearAD; this.month = month;
-        this.nationKR = nationKR; this.dynastyKR = dynastyKR; this.nationCN = nationCN; this.dynastyCN = dynastyCN;
+        this.dynastyKR = dynastyKR; this.dynastyCN = dynastyCN;
         this.area1KR = area1KR; this.area1CN = area1CN; this.area2KR = area2KR; this.area2CN = area2CN; this.area3KR = area3KR; this.area3CN = area3CN;
         this.referIndex = referIndex; this.remark = remark;
     }
@@ -108,7 +106,7 @@ public class ReservationData {
         this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
         this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
         this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();
-        this.nationKR = dto.getNationKR(); this.dynastyKR = dto.getDynastyKR(); this.nationCN = dto.getNationCN(); this.dynastyCN = dto.getDynastyCN();
+        this.dynastyKR = dto.getDynastyKR(); this.dynastyCN = dto.getDynastyCN();
         this.area1KR = dto.getArea1KR(); this.area1CN = dto.getArea1CN(); this.area2KR = dto.getArea2KR(); this.area2CN = dto.getArea2CN(); this.area3KR = dto.getArea3KR(); this.area3CN = dto.getArea3CN();
         this.referIndex = dto.getReferIndex(); this.remark = dto.getRemark();
     }
@@ -122,7 +120,7 @@ public class ReservationData {
                 .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
                 .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
-                .nationKR(this.nationKR).nationCN(this.nationCN).dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
+                .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
                 .area1KR(this.area1KR).area1CN(this.area1CN)
                 .area2KR(this.area2KR).area2CN(this.area2CN)
                 .area3KR(this.area3KR).area3CN(this.area3CN)
@@ -139,7 +137,7 @@ public class ReservationData {
                 .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
                 .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
-                .nationKR(this.nationKR).nationCN(this.nationCN).dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
+                .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
                 .area1KR(this.area1KR).area1CN(this.area1CN)
                 .area2KR(this.area2KR).area2CN(this.area2CN)
                 .area3KR(this.area3KR).area3CN(this.area3CN)
