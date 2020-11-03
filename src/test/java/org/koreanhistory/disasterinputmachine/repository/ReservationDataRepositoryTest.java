@@ -70,7 +70,7 @@ public class ReservationDataRepositoryTest {
         MakeEntityReservation makeEntityReservation = new MakeEntityReservation();
 
         // when: 예제 데이터 입력
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             ReservationData entity = makeEntityReservation.getEntity(String.valueOf(i));
 
             if(10 <= i && i <= 30)
@@ -88,7 +88,7 @@ public class ReservationDataRepositoryTest {
         );
 
         // List의 길이 확인
-        assertThat(rdataList.size()).isEqualTo(100);
+        assertThat(rdataList.size()).isEqualTo(200);
 
         // List의 데이터 한개 확인 1
         rdataList.forEach(

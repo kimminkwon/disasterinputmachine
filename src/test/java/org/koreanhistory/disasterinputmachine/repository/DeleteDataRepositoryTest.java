@@ -72,7 +72,7 @@ public class DeleteDataRepositoryTest {
         MakeEntityDelete MakeEntityDelete = new MakeEntityDelete();
 
         // when: 예제 데이터 입력
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             DeleteData entity = MakeEntityDelete.getEntity(String.valueOf(i));
 
             if(10 <= i && i <= 30)
@@ -90,7 +90,7 @@ public class DeleteDataRepositoryTest {
         );
 
         // List의 길이 확인
-        assertThat(ddataList.size()).isEqualTo(100);
+        assertThat(ddataList.size()).isEqualTo(200);
 
         // List의 데이터 한개 확인 1
         ddataList.forEach(
