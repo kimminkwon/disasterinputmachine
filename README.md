@@ -56,7 +56,7 @@
     <p>
         <li> Diagram for each Layer </li>
         <div>
-            <img width="500" height="300" src="https://user-images.githubusercontent.com/51231789/98075220-5343e280-1eaf-11eb-820a-608f89c7a41c.png" />
+            <img src="https://user-images.githubusercontent.com/51231789/98075220-5343e280-1eaf-11eb-820a-608f89c7a41c.png" />
         </div>
     </p>
     <p>
