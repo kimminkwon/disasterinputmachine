@@ -3,13 +3,13 @@
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading">LOGIN PAGE</div>
     </div>
 
     <div class="panel-body">
 
-        <div class="container">
+        <div class="container" style="float: left">
             <form method="post">
                 <p>
                     <label for="username">Username</label>
@@ -33,10 +33,6 @@
             <div th:if="${param.error != null}">
                 <h6 style="color: red">Invalid Username or Password!</h6>
                 <h6 th:value="${param.error}"></h6>
-            </div>
-
-            <div th:if="${param.logout != null}">
-                <h6 style="color: blue">You have been logged out!</h6>
             </div>
 
         </div>
