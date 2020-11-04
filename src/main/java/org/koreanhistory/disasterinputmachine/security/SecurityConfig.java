@@ -43,9 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 접근 거부되었을 때 이동할 페이지
         http.exceptionHandling().accessDeniedPage("/accessDenied");
         // 세선 무효화
-        http.logout().logoutUrl("/logout").invalidateHttpSession(true);
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/maintenance/list")
+                .invalidateHttpSession(true);
         // user정의 사용자정보 & 권한 묶음을 받음 + rememberMe 기능 추가
-        http.rememberMe().key("zerock")
+        http.rememberMe().key("history")
                 .userDetailsService(historyUserService)
                 .tokenRepository(getJDBCRepository())
                 .tokenValiditySeconds(60 * 60 * 24);
