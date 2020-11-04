@@ -30,8 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         log.info("security config.......................");
-        http.authorizeRequests().antMatchers("/boards/list").permitAll();
-        http.authorizeRequests().antMatchers("/boards/register").hasAnyRole("BASIC", "MANAGER", "ADMIN");
+        http.authorizeRequests()
+                .antMatchers("/**/list").permitAll()
+                .antMatchers("/**/search").permitAll()
+                .antMatchers("/**/view").permitAll()
+                .antMatchers("/**/register").hasAnyRole("BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/listforonce").hasAnyRole("BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN");
 
         // 로그인 페이지 & 핸들러 등록
         http.formLogin().loginPage("/login");
