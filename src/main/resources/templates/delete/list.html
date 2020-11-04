@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
@@ -69,12 +70,20 @@
                 <button id='detailSearchBtn' class="pull-right">Detail Search</button>
             </div>
 
+            <!-- Paging size & Login or out-->
+            <div style="margin-top: 5px">
+                <input style="float: left" type="number" id="pageSize" min="10" max="100" step="10" placeholder="size" required >
+                <button id='pageBtn' style="float: left">Submit</button>
 
-            <!-- Paging size -->
-            <div>
-                <input type="number" id="pageSize" min="10" max="100" step="10" placeholder="size" required >
-                <button id='pageBtn'>Submit</button>
-            </div>
+                <form method="get" action="/login" sec:authorize="isAnonymous()">
+                    <button type="submit" id="loginBtn" style="float: right">Login</button>
+                </form>
+
+                <form method="post" action="/logout" sec:authorize="isAuthenticated()">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" id="logoutBtn" style="float: right">Logout</button>
+                </form>
+            </div> <div style="clear:both;"></div>
 
         </div>
 
@@ -175,6 +184,7 @@
                 formObj.attr("action", [[@{'/delete/search'}]]);
                 formObj.submit();
             });
+
         });
 
     </script>

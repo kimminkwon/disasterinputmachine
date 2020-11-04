@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
@@ -51,6 +52,10 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <!-- Security를 위한 히든 데이터 -->
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
             </form>
 
             <!-- Search Space -->
