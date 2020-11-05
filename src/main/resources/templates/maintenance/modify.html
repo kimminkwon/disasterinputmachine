@@ -136,6 +136,16 @@
                 <input class="form-control" name="area3CN" th:value="${dto.area3CN}" />
             </div> <div style="clear:both;"></div>
 
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>최초 생성 계정</label>
+                <input class="form-control" name="createBy" th:value="${dto.createBy}" readonly="readonly" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>마지막 수정 계정</label>
+                <input class="form-control" name="modifyBy" th:value="${#authentication.principal.member.uid}" readonly="readonly" />
+            </div> <div style="clear:both;"></div>
+
             <div class="form-group">
                 <label>참고 색인어</label>
                 <input class="form-control" name="referIndex" th:value="${dto.referIndex}" />
