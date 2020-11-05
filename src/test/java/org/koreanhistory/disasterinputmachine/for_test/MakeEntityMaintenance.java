@@ -27,6 +27,7 @@ public class MakeEntityMaintenance {
     }
     public MaintenanceData getEntity(String subString) {
         String frontString = "m_";
+        String createBy = frontString + "ADMIN"; String modifyBy = frontString + "ADMIN_MODIFY";
         String indexKR = frontString + "indexKR_" + subString;
         String indexCN = frontString + "indexCN_" + subString;
         String lclasKR = frontString + "lclasKR_" + subString;
@@ -58,6 +59,7 @@ public class MakeEntityMaintenance {
         String remark = frontString + "remark_" + subString;
 
         MaintenanceData entity = new MaintenanceData(
+                createBy, modifyBy,
                 indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,

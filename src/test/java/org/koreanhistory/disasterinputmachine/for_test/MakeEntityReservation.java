@@ -7,6 +7,7 @@ public class MakeEntityReservation {
 
     public ReservationData getEntity(String subString) {
         String frontString = "r_";
+        String createBy = frontString + "ADMIN"; String modifyBy = frontString + "ADMIN_MODIFY";
         String indexKR = frontString + "indexKR_" + subString;
         String indexCN = frontString + "indexCN_" + subString;
         String lclasKR = frontString + "lclasKR_" + subString;
@@ -38,6 +39,7 @@ public class MakeEntityReservation {
         String remark = frontString + "remark_" + subString;
 
         ReservationData entity = new ReservationData(
+                createBy, modifyBy,
                 indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,

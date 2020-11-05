@@ -25,6 +25,7 @@ public class MakeEntityDelete {
 
     public DeleteData getEntity(String subString) {
         String frontString = "d_";
+        String createBy = frontString + "ADMIN"; String modifyBy = frontString + "ADMIN_MODIFY";
         String indexKR = frontString + "indexKR_" + subString;
         String indexCN = frontString + "indexCN_" + subString;
         String lclasKR = frontString + "lclasKR_" + subString;
@@ -56,6 +57,7 @@ public class MakeEntityDelete {
         String remark = frontString + "remark_" + subString;
 
         DeleteData entity = new DeleteData(
+                createBy, modifyBy,
                 indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,
