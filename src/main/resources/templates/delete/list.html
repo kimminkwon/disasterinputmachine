@@ -20,6 +20,9 @@
                 LIST FOR SELECTION
             </a>
         </h4>
+        <h4 style="float: right; margin-right: 10px" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="label label-default" th:href="@{/member/members}">MEMBERS</a>
+        </h4>
     </div> <div style="clear:both;"></div>
 
     <div class="panel-body">
@@ -73,7 +76,7 @@
             <!-- Paging size & Login or out-->
             <div style="margin-top: 5px">
                 <input style="float: left" type="number" id="pageSize" min="10" max="100" step="10" placeholder="size" required >
-                <button id='pageBtn' style="float: left">Submit</button>
+                <button id='pageBtn' style="margin-left: 5px; float: left;">Submit</button>
 
                 <form method="get" action="/login" sec:authorize="isAnonymous()">
                     <button type="submit" id="loginBtn" style="float: right">Login</button>
