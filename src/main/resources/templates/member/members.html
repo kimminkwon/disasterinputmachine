@@ -34,14 +34,15 @@
                 </thead>
                 <tbody>
                 <tr class="odd gradeX" th:each="memberDto:${listOfDto}">
-                    <td>
-                        <a th:href='${memberDto.uid}' class='boardLink'>[[${memberDto.uid}]]</a>
-                    </td>
+                    <td> [[${memberDto.uid}]] </td>
                     <td> [[${memberDto.uname}]] </td>
                     <td> [[${memberDto.createTime}]] </td>
                     <td> [[${memberDto.roles[0].roleName}]] </td>
                     <td th:if="!${memberDto.roles[0].roleName.equals('ADMIN')}">
-                        <a th:href='${memberDto.uid}' class='outHref'>탈퇴처리</a>
+                        <a th:href='${memberDto.uid}' class='outHref'>Unsubscribe</a>
+                    </td>
+                    <td th:if="${memberDto.roles[0].roleName.equals('ADMIN')}">
+                        Cannot be Unsubscribe
                     </td>
                 </tr>
                 </tbody>
@@ -49,7 +50,7 @@
         </div>
 
         <!-- Form for Data passing -->
-        <form id='f1' th:action="@{list}" method="get">
+        <form id='f1'>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         </form>
     </div>
@@ -63,23 +64,18 @@
 
         $(document).ready(function () {
             var formObj = $("#f1");
-            /*
-            // bno를 클릭했을 시, 수정 페이지로 넘어가도록 하는 메서드
-            $(".boardLink").click(function (e){
-                e.preventDefault();
-                var boardNo = $(this).attr("href");
-                formObj.attr("action", [[@{'/maintenance/view'}]]);
-                formObj.append("<input type='hidden' name='mno' value='" + boardNo + "'>");
-                formObj.submit();
-            });
 
-            // detailSearchBtn을 클릭했을 시, 검색 페이지로 넘어가도록 하는 메서드
-            $("#detailSearchBtn").click(function (e){
+            // 탈퇴 버튼을 클릭 시, 탈퇴 페이지로 포스트 하는 메서드
+            $(".outHref").click(function (e){
                 e.preventDefault();
-                formObj.attr("action", [[@{'/maintenance/search'}]]);
-                formObj.submit();
+                if(confirm("Are you sure you want unsubscribe this account?")) {
+                    var uid = $(this).attr("href");
+                    formObj.attr("method", "post");
+                    formObj.attr("action", [[@{'/member/delete'}]]);
+                    formObj.append("<input type='text' name='uid' value='" + uid + "'>");
+                    formObj.submit();
+                }
             });
-             */
         });
 
     </script>

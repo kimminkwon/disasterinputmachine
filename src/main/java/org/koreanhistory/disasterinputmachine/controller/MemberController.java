@@ -27,10 +27,6 @@ import java.util.List;
 public class MemberController {
     @Autowired
     MemberService service;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    MemberRepository repository;
 
     @GetMapping("/members")
     public void list(Model model) {
@@ -51,11 +47,18 @@ public class MemberController {
         log.info("IN MEMBER CONTROLLER: joinPost() running...");
         log.info("MEMBER: " + member);
 
-        String encrptPw = passwordEncoder.encode(member.getUpw());
-        member.setUpw(encrptPw);
-        log.info("AFTER ENCODING MEMBER: " + member);
+        service.save(member);
 
-        repository.save(member);
-        return "/member/joinResult";
+        return "redirect:/member/members";
+    }
+
+    @PostMapping("/delete")
+    public String deletePost(@ModelAttribute("uid") String uid) {
+        log.info("IN MEMBER CONTROLLER: deletePost() running...");
+        log.info("UID: " + uid);
+
+        service.delete(uid);
+
+        return "redirect:/member/members";
     }
 }

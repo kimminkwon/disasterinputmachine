@@ -26,10 +26,24 @@ public class MemberService {
 
     @Transactional
     public List<MemberDto> list() {
+        log.info("IN MEMBER SERVICE: list() calling...");
         List<MemberDto> dtoList = new ArrayList<>();
         repository.findAll().forEach(
                 member -> dtoList.add(new MemberDto(member))
         );
         return dtoList;
+    }
+
+    @Transactional
+    public void save(Member member) {
+        log.info("IN MEMBER SERVICE: save() calling...");
+
+        String encrptPw = passwordEncoder.encode(member.getUpw());
+        member.setUpw(encrptPw);
+        repository.save(member);
+    }
+
+    public void delete(String uid) {
+        repository.deleteById(uid);
     }
 }
