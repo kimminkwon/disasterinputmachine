@@ -4,7 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.koreanhistory.disasterinputmachine.dto.DeleteDataModifyDto;
-import org.koreanhistory.disasterinputmachine.dto.MaintenanceDataModifyDto;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,6 +23,9 @@ public class DeleteData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Primary Key (Maintenace Number)
     private Long dno;
+
+    private String createBy;
+    private String modifyBy;
 
     @CreationTimestamp
     // Created time for debug
@@ -86,13 +91,15 @@ public class DeleteData {
     private String remark;
 
     @Builder
-    public DeleteData(String indexKR, String indexCN,
+    public DeleteData(String createBy, String modifyBy,
+                      String indexKR, String indexCN,
                       String lclasKR, String lclasCN, String mclasKR, String mclasCN, String sclasKR, String sclasCN,
                       String articlSumry, String articlOrginl, String ltrtreNM, String sourceKR, String sourceCN,
                       String yearNameOfTomb, int yearAD, int month,
                       String dynastyKR, String dynastyCN,
                       String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                       String referIndex, String remark) {
+        this.createBy = createBy; this.modifyBy = modifyBy;
         this.indexKR = indexKR; this.indexCN = indexCN;
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclasCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
@@ -103,6 +110,7 @@ public class DeleteData {
     }
 
     public void update(DeleteDataModifyDto dto) {
+        this.modifyBy = dto.getModifyBy();
         this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
         this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
         this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
@@ -114,6 +122,7 @@ public class DeleteData {
 
     public ReservationData toReservationData() {
         return ReservationData.builder()
+                .createBy(this.createBy).modifyBy(this.modifyBy)
                 .indexKR(this.indexKR).indexCN(this.indexCN)
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
@@ -131,6 +140,7 @@ public class DeleteData {
 
     public MaintenanceData toMaintenanceData() {
         return MaintenanceData.builder()
+                .createBy(this.createBy).modifyBy(this.modifyBy)
                 .indexKR(this.indexKR).indexCN(this.indexCN)
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
