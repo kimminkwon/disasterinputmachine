@@ -15,7 +15,7 @@ public class LoginController {
     public void login() {
         log.info("IN LOGIN CONTROLLER: calling login()...");
     }
-    @GetMapping("/accessDenied")
+    @GetMapping("/accessdenied")
     public void accessDenied() {
         log.info("IN LOGIN CONTROLLER: calling accessDenied()...");
     }

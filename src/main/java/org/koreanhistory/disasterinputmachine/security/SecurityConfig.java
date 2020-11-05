@@ -36,12 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/view").permitAll()
                 .antMatchers("/**/register").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/listforonce").hasAnyRole("BASIC", "MANAGER", "ADMIN")
-                .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN");
+                .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/member/**").hasRole("ADMIN");
 
         // 로그인 페이지 & 핸들러 등록
         http.formLogin().loginPage("/login");
         // 접근 거부되었을 때 이동할 페이지
-        http.exceptionHandling().accessDeniedPage("/accessDenied");
+        http.exceptionHandling().accessDeniedPage("/accessdenied");
         // 세선 무효화
         http.logout()
                 .logoutUrl("/logout")
