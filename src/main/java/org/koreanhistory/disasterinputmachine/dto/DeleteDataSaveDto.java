@@ -15,6 +15,9 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class DeleteDataSaveDto {
 
+    private String createBy;
+    private String modifyBy;
+
     // 색인어 Index (한글, 한자)
     private String indexKR;
     private String indexCN;
@@ -71,6 +74,7 @@ public class DeleteDataSaveDto {
     private String remark;
 
     public DeleteDataSaveDto(DeleteData entity) {
+        this.createBy = entity.getCreateBy(); this.modifyBy = entity.getModifyBy();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
         this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
@@ -82,6 +86,7 @@ public class DeleteDataSaveDto {
 
     public DeleteData toEntity() {
         return DeleteData.builder()
+                .createBy(this.createBy).modifyBy(this.modifyBy)
                 .indexKR(this.indexKR).indexCN(this.indexCN)
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)

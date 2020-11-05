@@ -14,6 +14,9 @@ public class DeleteDataDto {
 
     private Long dno;
 
+    private String createBy;
+    private String modifyBy;
+
     // Created time for debug
     private Timestamp createTime;
 
@@ -77,6 +80,7 @@ public class DeleteDataDto {
 
     public DeleteDataDto(DeleteData entity) {
         this.dno = entity.getDno();
+        this.createBy = entity.getCreateBy(); this.modifyBy = entity.getModifyBy();
         this.createTime = entity.getCreateTime(); this.modifyTime = entity.getModifyTime();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();

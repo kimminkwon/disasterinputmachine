@@ -18,6 +18,9 @@ public class MaintenanceDataDto {
 
     private Long mno;
 
+    private String createBy;
+    private String modifyBy;
+
     // Created time for debug
     private Timestamp createTime;
 
@@ -81,6 +84,7 @@ public class MaintenanceDataDto {
 
     public MaintenanceDataDto(MaintenanceData entity) {
         this.mno = entity.getMno();
+        this.createBy = entity.getCreateBy(); this.modifyBy = entity.getModifyBy();
         this.createTime = entity.getCreateTime(); this.modifyTime = entity.getModifyTime();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();

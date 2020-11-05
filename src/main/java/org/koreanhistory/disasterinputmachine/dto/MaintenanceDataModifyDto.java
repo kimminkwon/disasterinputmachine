@@ -17,6 +17,8 @@ public class MaintenanceDataModifyDto {
 
     private Long mno;
 
+    private String modifyBy;
+
     // 색인어 Index (한글, 한자)
     private String indexKR;
     private String indexCN;
@@ -73,6 +75,7 @@ public class MaintenanceDataModifyDto {
     private String remark;
 
     public MaintenanceDataModifyDto(MaintenanceData entity) {
+        this.modifyBy = entity.getModifyBy();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
         this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
@@ -81,5 +84,4 @@ public class MaintenanceDataModifyDto {
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
         this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
     }
-
 }
