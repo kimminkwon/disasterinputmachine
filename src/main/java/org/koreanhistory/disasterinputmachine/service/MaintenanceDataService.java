@@ -27,7 +27,10 @@ public class MaintenanceDataService {
 
     @Transactional
     public Page<MaintenanceDataDto> list(PageVO vo) {
-        Pageable pageable = vo.makePageable(0, "mno");
+        Pageable pageable;
+        if(vo.getOrder() == null || vo.getOrder().equals("")) pageable = vo.makePageable(0, "dno");
+        else pageable = vo.makePageable(1, vo.getOrder(), "mno");
+
         String type = vo.getType(); String keyword = vo.getKeyword();
 
         log.info("TYPE" + type);
@@ -38,6 +41,7 @@ public class MaintenanceDataService {
 
         log.info("TYPES" + types);
         log.info("KEYWORDS" + keywords);
+
         Page<MaintenanceData> result = repository.findAll(repository.makePrdicates(types, keywords), pageable);
         Page<MaintenanceDataDto> resultOfDto = result.map(new Function<MaintenanceData, MaintenanceDataDto>() {
             @Override

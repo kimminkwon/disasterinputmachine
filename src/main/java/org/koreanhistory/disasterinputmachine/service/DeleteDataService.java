@@ -27,7 +27,10 @@ public class DeleteDataService {
 
     @Transactional
     public Page<DeleteDataDto> list(PageVO vo) {
-        Pageable pageable = vo.makePageable(0, "dno");
+        Pageable pageable;
+        if(vo.getOrder() == null || vo.getOrder().equals("")) pageable = vo.makePageable(0, "dno");
+        else pageable = vo.makePageable(1, vo.getOrder(), "dno");
+
         String type = vo.getType(); String keyword = vo.getKeyword();
 
         log.info("TYPE" + type);
@@ -38,6 +41,7 @@ public class DeleteDataService {
 
         log.info("TYPES" + types);
         log.info("KEYWORDS" + keywords);
+
         Page<DeleteData> result = repository.findAll(repository.makePrdicates(types, keywords), pageable);
         Page<DeleteDataDto> resultOfDto = result.map(new Function<DeleteData, DeleteDataDto>() {
             @Override
