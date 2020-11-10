@@ -55,7 +55,19 @@ public class MakeEntityMaintenance {
         String area2CN = frontString + "area2CN_" + subString;
         String area3KR = frontString + "area3KR_" + subString;
         String area3CN = frontString + "area3CN_" + subString;
-        String referIndex = frontString + "referIndex_" + subString;
+        String[] referIndex = {"referA, referB, referC, referD, referE, referF, referG, referH, referI, referJ",
+                "referD, referE, referF, referG, referH, referI, referJ",
+                "referA, referB, referC, referG, referH, referI, referJ",
+                "referA, referD, referE, referF, referJ",
+                "referA, referB, referC, referD, referE, referI, referJ",
+                "referA, referB, referC, referE, referF, referG, referH, referI, referJ",
+                "referA, referE, referF, referG, referH",
+                "referH, referI, referJ",
+                "referA, referB, referE, referF, referH, referI, referJ",
+                "referA, referD, referG, referH",
+                "referC, referD, referE, referH, referI, referJ",
+                "referB, referJ",
+                "referA, referB, referC, referG, referJ"};
         String remark = frontString + "remark_" + subString;
 
         MaintenanceData entity = new MaintenanceData(
@@ -69,7 +81,7 @@ public class MakeEntityMaintenance {
                 area1KR, area1CN,
                 area2KR, area2CN,
                 area3KR, area3CN,
-                referIndex, remark
+                referIndex[(int) (Math.random() * referIndex.length)], remark
         );
         return entity;
     }
