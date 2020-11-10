@@ -87,28 +87,28 @@ public interface ReservationDataRepository extends CrudRepository<ReservationDat
                 builder.and(data.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
             case "yearAD":
-                builder.and(data.yearAD.eq(Integer.parseInt(type)));
+                builder.and(data.yearAD.eq(Integer.parseInt(keyword)));
                 break;
             case "month":
-                builder.and(data.month.eq(Integer.parseInt(type)));
+                builder.and(data.month.eq(Integer.parseInt(keyword)));
                 break;
             case "dynasty":
-                builder.and(data.dynastyKR.like("%" + type + "%"));
+                builder.and(data.dynastyKR.like("%" + keyword + "%"));
                 break;
             case "area1":
-                builder.and(data.area1KR.like("%" + type + "%"));
+                builder.and(data.area1KR.like("%" + keyword + "%"));
                 break;
             case "area2":
-                builder.and(data.area2KR.like("%" + type + "%"));
+                builder.and(data.area2KR.like("%" + keyword + "%"));
                 break;
             case "area3":
-                builder.and(data.area3KR.like("%" + type + "%"));
+                builder.and(data.area3KR.like("%" + keyword + "%"));
                 break;
             case "refer":
-                builder.and(data.referIndex.like("%" + type + "%"));
+                builder.and(data.referIndex.like("%" + keyword + "%"));
                 break;
             case "remark":
-                builder.and(data.remark.like("%" + type + "%"));
+                builder.and(data.remark.like("%" + keyword + "%"));
                 break;
         }
     }

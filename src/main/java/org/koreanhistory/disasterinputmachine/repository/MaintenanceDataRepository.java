@@ -84,28 +84,28 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
                 builder.and(mdata.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
             case "yearAD":
-                builder.and(mdata.yearAD.eq(Integer.parseInt(type)));
+                builder.and(mdata.yearAD.eq(Integer.parseInt(keyword)));
                 break;
             case "month":
-                builder.and(mdata.month.eq(Integer.parseInt(type)));
+                builder.and(mdata.month.eq(Integer.parseInt(keyword)));
                 break;
             case "dynasty":
-                builder.and(mdata.dynastyKR.like("%" + type + "%"));
+                builder.and(mdata.dynastyKR.like("%" + keyword + "%"));
                 break;
             case "area1":
-                builder.and(mdata.area1KR.like("%" + type + "%"));
+                builder.and(mdata.area1KR.like("%" + keyword + "%"));
                 break;
             case "area2":
-                builder.and(mdata.area2KR.like("%" + type + "%"));
+                builder.and(mdata.area2KR.like("%" + keyword + "%"));
                 break;
             case "area3":
-                builder.and(mdata.area3KR.like("%" + type + "%"));
+                builder.and(mdata.area3KR.like("%" + keyword + "%"));
                 break;
             case "refer":
-                builder.and(mdata.referIndex.like("%" + type + "%"));
+                builder.and(mdata.referIndex.like("%" + keyword + "%"));
                 break;
             case "remark":
-                builder.and(mdata.remark.like("%" + type + "%"));
+                builder.and(mdata.remark.like("%" + keyword + "%"));
                 break;
         }
     }
