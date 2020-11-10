@@ -12,6 +12,7 @@ public class PageVO {
     private int page;
     private int size;
 
+    private String order;
     private String keyword;
     private String type;
 
@@ -19,6 +20,10 @@ public class PageVO {
         this.page = 1;
         this.size = DEFAULT_SIZE;
     }
+
+    public String getOrder() { return order; }
+
+    public void setOrder(String order) { this.order = order; }
 
     public String getKeyword() {
         return keyword;
