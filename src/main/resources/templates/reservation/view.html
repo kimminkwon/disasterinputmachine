@@ -154,10 +154,12 @@
             <input class="form-control" name="modifyBy" th:value="${dto.modifyBy}" readonly="readonly" />
         </div> <div style="clear:both;"></div>
 
-        <div class="form-group">
-            <label>참고 색인어</label>
-            <input class="form-control" name="referIndex" th:value="${dto.referIndex}" readonly="readonly" />
+        <div class="form-group" >
+            <label>참고 색인어</label> <div style="clear:both;"></div>
+            <input th:each="referIndex:${dto.referIndex}" style="width: 9%; float: left; margin-right: 5px" class="form-control referSearch" id="referSearch" name="referIndex" th:value="${referIndex}" readonly="readonly" />
+            <div style="clear:both;"></div>
         </div>
+
 
         <div class="form-group">
             <label>비고</label>
@@ -173,6 +175,13 @@
                class="btn btn-primary">Back</a>
 
         </div>
+
+        <!-- Form for Data passing -->
+        <form id='f1' th:action="@{list}" method="get">
+            <input type='hidden' name='type' th:value=${pageVO.type}>
+            <input type='hidden' name='keyword' th:value=${pageVO.keyword}>
+        </form>
+
     </div>
 
 </div>
@@ -190,6 +199,19 @@
             if(msg == 'success') {
                 alert("성공적으로 수정되었습니다.");
                 var stateObj = { msg:"" };
+            }
+        });
+
+        // referSearch 클릭했을 시, 검색 리스트로 넘어가도록 하는 메서드
+        $(".referSearch").click(function (e){
+            var referKeyword = $(this).val();
+
+            if(confirm("Do you want to search for a list with reference index: " + referKeyword)) {
+                var formObj = $("#f1");
+                formObj.find("[name='type']").val("refer");
+                formObj.find("[name='keyword']").val(referKeyword);
+                formObj.find("[name='page']").val("1");
+                formObj.submit();
             }
         });
 
