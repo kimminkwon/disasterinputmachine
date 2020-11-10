@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 
 @Getter
 @ToString
-public class MaintenanceDataDto {
+public class MaintenanceDataDto extends SplitReferenceIndexs {
 
     private Long mno;
 
@@ -76,8 +76,10 @@ public class MaintenanceDataDto {
     private String area3KR;
     private String area3CN;
 
-    // 참고 색인어
-    private String referIndex;
+    // 참고 색인어: 출력용 배열과 저장용 스트링
+    private String[] referIndex;
+    private String referIndexStr;
+
     // 비고
     @Column(columnDefinition = "TEXT")
     private String remark;
@@ -92,7 +94,7 @@ public class MaintenanceDataDto {
         this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
         this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
-        this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
+        this.referIndex = super.splitReferenceIndex(entity.getReferIndex()); this.referIndexStr = entity.getReferIndex(); this.remark = entity.getRemark();
     }
 
 }
