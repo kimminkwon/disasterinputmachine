@@ -78,6 +78,33 @@
                 <input style="float: left" type="number" id="pageSize" min="10" max="100" step="10" placeholder="size" required >
                 <button id='pageBtn' style="margin-left: 5px; float: left;">Submit</button>
 
+                <select id="orderFlag" style="height:26px; width:150px; margin-left: 5px; float: left;">
+                    <option></option>
+                    <option value='indexKR' th:selected="${pageVO.type} == 'indexKR'">색인어(한글)</option>
+                    <option value='indexCN' th:selected="${pageVO.type} == 'indexCN'">색인어(한자)</option>
+                    <option value='lclasKR' th:selected="${pageVO.type} == 'lclasKR'">대분류(한글)</option>
+                    <option value='lclasCN' th:selected="${pageVO.type} == 'lclasCN'">대분류(한자)</option>
+                    <option value='mclasKR' th:selected="${pageVO.type} == 'mclasKR'">중분류(한글)</option>
+                    <option value='mclasCN' th:selected="${pageVO.type} == 'mclasCN'">중분류(한자)</option>
+                    <option value='sclasKR' th:selected="${pageVO.type} == 'sclasKR'">소분류(한글)</option>
+                    <option value='sclasCN' th:selected="${pageVO.type} == 'sclasCN'">소분류(한자)</option>
+                    <option value='sourceKR' th:selected="${pageVO.type} == 'sourceKR'">출전(한글)</option>
+                    <option value='sourceCN' th:selected="${pageVO.type} == 'sourceCN'">출전(한자)</option>
+                    <option value='yearNameOfTomb' th:selected="${pageVO.type} == 'yearNameOfTomb'">연도(모호년)</option>
+                    <option value='yearAD' th:selected="${pageVO.type} == 'yearAD'">연도(서기)</option>
+                    <option value='month' th:selected="${pageVO.type} == 'month'">연도(월)</option>
+                    <option value='dynastyKR' th:selected="${pageVO.type} == 'dynastyKR'">왕조(한국)</option>
+                    <option value='dynastyCN' th:selected="${pageVO.type} == 'dynastyCN'">왕조(중국)</option>
+                    <option value='area1KR' th:selected="${pageVO.type} == 'area1KR'">지역1(한글)</option>
+                    <option value='area2KR' th:selected="${pageVO.type} == 'area2KR'">지역2(한글)</option>
+                    <option value='area3KR' th:selected="${pageVO.type} == 'area3KR'">지역3(한글)</option>
+                    <option value='area1CN' th:selected="${pageVO.type} == 'area1CN'">지역1(한자)</option>
+                    <option value='area2CN' th:selected="${pageVO.type} == 'area2CN'">지역2(한자)</option>
+                    <option value='area3CN' th:selected="${pageVO.type} == 'area3CN'">지역3(한자)</option>
+                </select>
+
+                <button id="orderFlagBtn" style="margin-left: 5px; float: left;">Order</button
+
                 <form method="get" action="/login" sec:authorize="isAnonymous()">
                     <button type="submit" id="loginBtn" style="float: right">Login</button>
                 </form>
@@ -121,6 +148,7 @@
             <input type='hidden' name='size' th:value=${listOfDto.currentPage.pageSize}>
             <input type='hidden' name='type' th:value=${pageVO.type}>
             <input type='hidden' name='keyword' th:value=${pageVO.keyword}>
+            <input type='hidden' name='order' th:value=${pageVO.order}>
         </form>
     </div>
     <!-- end panel -->
@@ -151,6 +179,14 @@
                 formObj.find("[name='type']").val(typeStr);
                 formObj.find("[name='keyword']").val(keywordStr);
                 formObj.find("[name='page']").val("1");
+                formObj.submit();
+            });
+
+            // Order 버튼이 클릭되었을 때
+            $("#orderFlagBtn").click(function(e) {
+                var orderFlag = $("#orderFlag").val();
+
+                formObj.find("[name='order']").val(orderFlag);
                 formObj.submit();
             });
 
