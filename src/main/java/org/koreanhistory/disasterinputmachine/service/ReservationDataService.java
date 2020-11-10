@@ -29,7 +29,7 @@ public class ReservationDataService {
     @Transactional
     public Page<ReservationDataDto> list(PageVO vo) {
         Pageable pageable;
-        if(vo.getOrder() == null || vo.getOrder().equals("")) pageable = vo.makePageable(0, "dno");
+        if(vo.getOrder() == null || vo.getOrder().equals("")) pageable = vo.makePageable(0, "rno");
         else pageable = vo.makePageable(1, vo.getOrder(), "rno");
 
         String type = vo.getType();

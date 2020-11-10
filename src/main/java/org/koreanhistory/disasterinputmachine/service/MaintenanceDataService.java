@@ -28,7 +28,7 @@ public class MaintenanceDataService {
     @Transactional
     public Page<MaintenanceDataDto> list(PageVO vo) {
         Pageable pageable;
-        if(vo.getOrder() == null || vo.getOrder().equals("")) pageable = vo.makePageable(0, "dno");
+        if(vo.getOrder() == null || vo.getOrder().equals("")) pageable = vo.makePageable(0, "mno");
         else pageable = vo.makePageable(1, vo.getOrder(), "mno");
 
         String type = vo.getType(); String keyword = vo.getKeyword();
