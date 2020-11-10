@@ -62,7 +62,7 @@ public class DeleteDataRepositoryTest {
         );
         // List의 데이터 한개 확인 2
         ddataList.forEach(
-                deleteData -> assertThat(deleteData.getReferIndex()).contains("referIndex")
+                deleteData -> assertThat(deleteData.getReferIndex()).contains("refer")
         );
     }
 
@@ -99,7 +99,7 @@ public class DeleteDataRepositoryTest {
 
         // List의 데이터 한개 확인 2
         ddataList.forEach(
-                deleteData -> assertThat(deleteData.getReferIndex()).contains("referIndex")
+                deleteData -> assertThat(deleteData.getReferIndex()).contains("refer")
         );
     }
 

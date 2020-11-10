@@ -60,7 +60,7 @@ public class ReservationDataRepositoryTest {
         );
         // List의 데이터 한개 확인 2
         rdataList.forEach(
-                reservationData -> assertThat(reservationData.getReferIndex()).contains("referIndex")
+                reservationData -> assertThat(reservationData.getReferIndex()).contains("refer")
         );
     }
 
@@ -97,7 +97,7 @@ public class ReservationDataRepositoryTest {
 
         // List의 데이터 한개 확인 2
         rdataList.forEach(
-                reservationData -> assertThat(reservationData.getReferIndex()).contains("referIndex")
+                reservationData -> assertThat(reservationData.getReferIndex()).contains("refer")
         );
     }
 

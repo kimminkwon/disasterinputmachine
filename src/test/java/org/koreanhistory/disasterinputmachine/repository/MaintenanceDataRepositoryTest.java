@@ -61,7 +61,7 @@ public class MaintenanceDataRepositoryTest {
         );
         // List의 데이터 한개 확인 2
         mdataList.forEach(
-                maintenanceData -> assertThat(maintenanceData.getReferIndex()).contains("referIndex")
+                maintenanceData -> assertThat(maintenanceData.getReferIndex()).contains("refer")
         );
     }
 
@@ -98,19 +98,19 @@ public class MaintenanceDataRepositoryTest {
 
         // List의 데이터 한개 확인 2
         mdataList.forEach(
-                maintenanceData -> assertThat(maintenanceData.getReferIndex()).contains("referIndex")
+                maintenanceData -> assertThat(maintenanceData.getReferIndex()).contains("refer")
         );
     }
 
     @Test
     public void 검색조건_테스트_Querydsl() {
         Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "mno");
-        Page<MaintenanceData> result = repository.findAll(repository.makePrdicate("index", "1"), pageable);
+        Page<MaintenanceData> result = repository.findAll(repository.makePrdicate("refer", "referA"), pageable);
 
         log.info("PAGE: " + result.getPageable());
         log.info("============================================================");
         result.getContent().forEach(
-                maintenanceData -> assertThat(maintenanceData.getIndexKR()).contains("1")
+                maintenanceData -> assertThat(maintenanceData.getReferIndex()).contains("referA")
         );
 
         result.getContent().forEach(
