@@ -36,6 +36,7 @@ public class MaintenanceDataDtoTest {
         String articlOrginl =
                 "유엔 재난위험경감사무국(UNDRR)이 최근 20년 동안 발생한 재해가 이전보다 2배 늘었다고 12일(현지시간) 발표했다. 기후변화로 인한 자연재해가 급격히 늘어난 것을 주요 원인으로 꼽았다." +
                         "\n" + "홍수가 과거 1389건에서 3254건으로 약 2배 많이 발생했고, 태풍의 발생 빈도는 과거 1457건에서 2034건으로 늘었다.";
+        String lterreClas = "기사 문헌의 분류: UNUNUNU";
         String ltrtreNM = "기사 문헌의 명칭: UNUNUNUN";
 
         String sourceKR = "sourceKR";
@@ -59,7 +60,7 @@ public class MaintenanceDataDtoTest {
                 createBy, modifyBy,
                 clasNo, indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
-                articlSumry, articlOrginl, ltrtreNM,
+                articlSumry, articlOrginl, lterreClas, ltrtreNM,
                 sourceKR, sourceCN,
                 yearNameOfTomb, yearAD, month,
                 dynastyKR, dynastyCN,
@@ -90,6 +91,7 @@ public class MaintenanceDataDtoTest {
         String articlOrginl =
                 "업데이트 유엔 재난위험경감사무국(UNDRR)이 최근 20년 동안 발생한 재해가 이전보다 2배 늘었다고 12일(현지시간) 발표했다. 기후변화로 인한 자연재해가 급격히 늘어난 것을 주요 원인으로 꼽았다." +
                         "\n" + "홍수가 과거 1389건에서 3254건으로 약 2배 많이 발생했고, 태풍의 발생 빈도는 과거 1457건에서 2034건으로 늘었다.";
+        String lterreClas = "업데이트 기사 문헌의 분류: UNUNUNU";
         String ltrtreNM = "업데이트 기사 문헌의 명칭: UNUNUNUN";
 
         String sourceKR = "업데이트 sourceKR";
@@ -111,7 +113,7 @@ public class MaintenanceDataDtoTest {
         MaintenanceDataModifyDto dto = new MaintenanceDataModifyDto(
                 entity.getMno(), modifyBy, clasNo, indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
-                articlSumry, articlOrginl, ltrtreNM,
+                articlSumry, articlOrginl, lterreClas, ltrtreNM,
                 sourceKR, sourceCN,
                 yearNameOfTomb, yearAD, month,
                 dynastyKR, dynastyCN,

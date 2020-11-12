@@ -67,22 +67,43 @@ public interface DeleteDataRepository extends CrudRepository<DeleteData, Long>, 
             case "clasNo":
                 builder.and(data.clasNo.like("%" + keyword + "%"));
                 break;
-            case "index":
+            case "indexKR":
                 builder.and(data.indexKR.like("%" + keyword + "%"));
                 break;
-            case "large":
+            case "indexCN":
+                builder.and(data.indexCN.like("%" + keyword + "%"));
+                break;
+            case "lclasKR":
                 builder.and(data.lclasKR.like("%" + keyword + "%"));
                 break;
-            case "middle":
+            case "lclasCN":
+                builder.and(data.lclasCN.like("%" + keyword + "%"));
+                break;
+            case "mclasKR":
                 builder.and(data.mclasKR.like("%" + keyword + "%"));
                 break;
-            case "small":
+            case "mclasCN":
+                builder.and(data.mclasCN.like("%" + keyword + "%"));
+                break;
+            case "sclasKR":
                 builder.and(data.sclasKR.like("%" + keyword + "%"));
                 break;
-            case "source":
+            case "sclasCN":
+                builder.and(data.sclasCN.like("%" + keyword + "%"));
+                break;
+            case "ltrtreClas":
+                builder.and(data.ltrtreClas.like("%" + keyword + "%"));
+                break;
+            case "ltrtreNM":
+                builder.and(data.ltrtreNM.like("%" + keyword + "%"));
+                break;
+            case "sourceKR":
                 builder.and(data.sourceKR.like("%" + keyword + "%"));
                 break;
-            case "yearTomb":
+            case "sourceCN":
+                builder.and(data.sourceCN.like("%" + keyword + "%"));
+                break;
+            case "yearNameOfTomb":
                 builder.and(data.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
             case "yearAD":
@@ -91,19 +112,31 @@ public interface DeleteDataRepository extends CrudRepository<DeleteData, Long>, 
             case "month":
                 builder.and(data.month.like("%" + keyword + "%"));
                 break;
-            case "dynasty":
+            case "dynastyKR":
                 builder.and(data.dynastyKR.like("%" + keyword + "%"));
                 break;
-            case "area1":
+            case "dynastyCN":
+                builder.and(data.dynastyCN.like("%" + keyword + "%"));
+                break;
+            case "area1KR":
                 builder.and(data.area1KR.like("%" + keyword + "%"));
                 break;
-            case "area2":
+            case "area2KR":
                 builder.and(data.area2KR.like("%" + keyword + "%"));
                 break;
-            case "area3":
+            case "area3KR":
                 builder.and(data.area3KR.like("%" + keyword + "%"));
                 break;
-            case "refer":
+            case "area1CN":
+                builder.and(data.area1CN.like("%" + keyword + "%"));
+                break;
+            case "area2CN":
+                builder.and(data.area2CN.like("%" + keyword + "%"));
+                break;
+            case "area3CN":
+                builder.and(data.area3CN.like("%" + keyword + "%"));
+                break;
+            case "referIndex":
                 builder.and(data.referIndex.like("%" + keyword + "%"));
                 break;
             case "remark":

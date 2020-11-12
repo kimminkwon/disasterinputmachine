@@ -3,6 +3,7 @@ package org.koreanhistory.disasterinputmachine.repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
+import org.koreanhistory.disasterinputmachine.domain.QDeleteData;
 import org.koreanhistory.disasterinputmachine.domain.QMaintenanceData;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -63,52 +64,85 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
         return builder;
     }
 
-    private void typeSetForBuilder(QMaintenanceData mdata, BooleanBuilder builder, String type, String keyword) {
+    private void typeSetForBuilder(QMaintenanceData data, BooleanBuilder builder, String type, String keyword) {
         switch (type) {
             case "clasNo":
-                builder.and(mdata.clasNo.like("%" + keyword + "%"));
+                builder.and(data.clasNo.like("%" + keyword + "%"));
                 break;
-            case "index":
-                builder.and(mdata.indexKR.like("%" + keyword + "%"));
+            case "indexKR":
+                builder.and(data.indexKR.like("%" + keyword + "%"));
                 break;
-            case "large":
-                builder.and(mdata.lclasKR.like("%" + keyword + "%"));
+            case "indexCN":
+                builder.and(data.indexCN.like("%" + keyword + "%"));
                 break;
-            case "middle":
-                builder.and(mdata.mclasKR.like("%" + keyword + "%"));
+            case "lclasKR":
+                builder.and(data.lclasKR.like("%" + keyword + "%"));
                 break;
-            case "small":
-                builder.and(mdata.sclasKR.like("%" + keyword + "%"));
+            case "lclasCN":
+                builder.and(data.lclasCN.like("%" + keyword + "%"));
                 break;
-            case "source":
-                builder.and(mdata.sourceKR.like("%" + keyword + "%"));
+            case "mclasKR":
+                builder.and(data.mclasKR.like("%" + keyword + "%"));
                 break;
-            case "yearTomb":
-                builder.and(mdata.yearNameOfTomb.like("%" + keyword + "%"));
+            case "mclasCN":
+                builder.and(data.mclasCN.like("%" + keyword + "%"));
+                break;
+            case "sclasKR":
+                builder.and(data.sclasKR.like("%" + keyword + "%"));
+                break;
+            case "sclasCN":
+                builder.and(data.sclasCN.like("%" + keyword + "%"));
+                break;
+            case "ltrtreClas":
+                builder.and(data.ltrtreClas.like("%" + keyword + "%"));
+                break;
+            case "ltrtreNM":
+                builder.and(data.ltrtreNM.like("%" + keyword + "%"));
+                break;
+            case "sourceKR":
+                builder.and(data.sourceKR.like("%" + keyword + "%"));
+                break;
+            case "sourceCN":
+                builder.and(data.sourceCN.like("%" + keyword + "%"));
+                break;
+            case "yearNameOfTomb":
+                builder.and(data.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
             case "yearAD":
-                builder.and(mdata.yearAD.like("%" + keyword + "%"));
+                builder.and(data.yearAD.like("%" + keyword + "%"));
                 break;
             case "month":
-                builder.and(mdata.month.like("%" + keyword + "%"));
+                builder.and(data.month.like("%" + keyword + "%"));
                 break;
-            case "dynasty":
-                builder.and(mdata.dynastyKR.like("%" + keyword + "%"));
+            case "dynastyKR":
+                builder.and(data.dynastyKR.like("%" + keyword + "%"));
                 break;
-            case "area1":
-                builder.and(mdata.area1KR.like("%" + keyword + "%"));
+            case "dynastyCN":
+                builder.and(data.dynastyCN.like("%" + keyword + "%"));
                 break;
-            case "area2":
-                builder.and(mdata.area2KR.like("%" + keyword + "%"));
+            case "area1KR":
+                builder.and(data.area1KR.like("%" + keyword + "%"));
                 break;
-            case "area3":
-                builder.and(mdata.area3KR.like("%" + keyword + "%"));
+            case "area2KR":
+                builder.and(data.area2KR.like("%" + keyword + "%"));
                 break;
-            case "refer":
-                builder.and(mdata.referIndex.like("%" + keyword + "%"));
+            case "area3KR":
+                builder.and(data.area3KR.like("%" + keyword + "%"));
+                break;
+            case "area1CN":
+                builder.and(data.area1CN.like("%" + keyword + "%"));
+                break;
+            case "area2CN":
+                builder.and(data.area2CN.like("%" + keyword + "%"));
+                break;
+            case "area3CN":
+                builder.and(data.area3CN.like("%" + keyword + "%"));
+                break;
+            case "referIndex":
+                builder.and(data.referIndex.like("%" + keyword + "%"));
                 break;
             case "remark":
-                builder.and(mdata.remark.like("%" + keyword + "%"));
+                builder.and(data.remark.like("%" + keyword + "%"));
                 break;
         }
     }
