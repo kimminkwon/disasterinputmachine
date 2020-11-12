@@ -43,7 +43,9 @@ public class DeleteDataModifyDto {
     // 2) 기사의 원문
     @Column(columnDefinition = "LONGTEXT")
     private String articlOrginl;
-    // 3) 기사 문헌의 명칭
+    // 3) 기사 문헌의 분류
+    private String ltrtreClas;
+    // 4) 기사 문헌의 명칭
     private String ltrtreNM;
 
     // 출전 (한글, 한자)
@@ -79,7 +81,7 @@ public class DeleteDataModifyDto {
         this.modifyBy = entity.getModifyBy();
         this.clasNo = entity.getClasNo(); this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
-        this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
+        this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreClas = entity.getLtrtreClas(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
         this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
         this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
