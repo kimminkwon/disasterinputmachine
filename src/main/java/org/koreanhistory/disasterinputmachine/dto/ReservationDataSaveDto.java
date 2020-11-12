@@ -18,6 +18,9 @@ public class ReservationDataSaveDto {
     private String createBy;
     private String modifyBy;
 
+    // 분류번호
+    private String clasNo;
+
     // 색인어 Index (한글, 한자)
     private String indexKR;
     private String indexCN;
@@ -51,9 +54,9 @@ public class ReservationDataSaveDto {
     // 연도 (모호년)
     private String yearNameOfTomb;
     // 연도 (서기)
-    private int yearAD;
+    private String yearAD;
     // 연도 (월)
-    private int month;
+    private String month;
 
     // 국가, 왕조 (한국, 중국)
     private String dynastyKR;
@@ -75,7 +78,7 @@ public class ReservationDataSaveDto {
 
     public ReservationDataSaveDto(ReservationData entity) {
         this.createBy = entity.getCreateBy(); this.modifyBy = entity.getModifyBy();
-        this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
+        this.clasNo = entity.getClasNo(); this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
         this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
         this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
@@ -87,7 +90,7 @@ public class ReservationDataSaveDto {
     public ReservationData toEntity() {
         return ReservationData.builder()
                 .createBy(this.createBy).modifyBy(this.modifyBy)
-                .indexKR(this.indexKR).indexCN(this.indexCN)
+                .clasNo(this.clasNo).indexKR(this.indexKR).indexCN(this.indexCN)
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)

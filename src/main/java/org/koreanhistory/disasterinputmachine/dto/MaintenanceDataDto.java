@@ -27,6 +27,9 @@ public class MaintenanceDataDto extends SplitReferenceIndexs {
     // Modified time for debug
     private Timestamp modifyTime;
 
+    // 분류번호
+    private String clasNo;
+
     // 색인어 Index (한글, 한자)
     private String indexKR;
     private String indexCN;
@@ -60,9 +63,9 @@ public class MaintenanceDataDto extends SplitReferenceIndexs {
     // 연도 (모호년)
     private String yearNameOfTomb;
     // 연도 (서기)
-    private int yearAD;
+    private String yearAD;
     // 연도 (월)
-    private int month;
+    private String month;
 
     // 국가, 왕조 (한국, 중국)
     private String dynastyKR;
@@ -86,7 +89,7 @@ public class MaintenanceDataDto extends SplitReferenceIndexs {
 
     public MaintenanceDataDto(MaintenanceData entity) {
         this.mno = entity.getMno();
-        this.createBy = entity.getCreateBy(); this.modifyBy = entity.getModifyBy();
+        this.clasNo = entity.getClasNo(); this.createBy = entity.getCreateBy(); this.modifyBy = entity.getModifyBy();
         this.createTime = entity.getCreateTime(); this.modifyTime = entity.getModifyTime();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();

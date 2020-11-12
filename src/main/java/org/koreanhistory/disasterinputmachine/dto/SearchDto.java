@@ -14,6 +14,9 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class SearchDto {
 
+    // 분류번호
+    private String clasNo;
+
     // 색인어 Index (한글, 한자)
     private String indexKR;
     private String indexCN;
@@ -69,20 +72,11 @@ public class SearchDto {
     @Column(columnDefinition = "TEXT")
     private String remark;
 
-    public SearchDto(DeleteData entity) {
-        this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
-        this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
-        this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
-        this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
-        this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
-        this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
-        this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
-    }
-
     public String getType() {
 
         String type = "";
 
+        if(this.clasNo != "" && this.clasNo != null) type = strConcat(type, "clasNo");
         if(this.indexKR != "" && this.indexKR != null) type = strConcat(type, "index");
         if(this.lclasKR != "" && this.lclasKR != null) type = strConcat(type, "large");
         if(this.mclasKR != "" && this.mclasKR != null) type = strConcat(type, "middle");
@@ -104,6 +98,7 @@ public class SearchDto {
     public String getKeyword() {
         String keyword = "";
 
+        if(this.clasNo != "" && this.clasNo != null) keyword = strConcat(keyword, clasNo);
         if(this.indexKR != "" && this.indexKR != null) keyword = strConcat(keyword, indexKR);
         if(this.lclasKR != "" && this.lclasKR != null) keyword = strConcat(keyword, lclasKR);
         if(this.mclasKR != "" && this.mclasKR != null) keyword = strConcat(keyword, mclasKR);
@@ -129,6 +124,4 @@ public class SearchDto {
             type = type.concat("-" + col);
         return type;
     }
-
-
 }
