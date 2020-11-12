@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <label>데이터번호</label>
-                <input class="form-control" name="mno" th:value="${dto.mno}" readonly="readonly"/>
+                <input class="form-control" name="rno" th:value="${dto.rno}" readonly="readonly"/>
             </div>
 
             <div class="form-group">
@@ -69,6 +69,11 @@
             <div class="form-group">
                 <label>기사 원문</label>
                 <textarea class="form-control" rows="10" name="articlOrginl" th:text="${dto.articlOrginl}" ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 문헌 분류</label>
+                <input class="form-control" name="ltrtreClas" th:value="${dto.ltrtreClas}" />
             </div>
 
             <div class="form-group">
