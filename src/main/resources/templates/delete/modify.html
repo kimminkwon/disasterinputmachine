@@ -12,6 +12,11 @@
         <form id = 'f1'>
 
             <div class="form-group">
+                <label>데이터번호</label>
+                <input class="form-control" name="dno" th:value="${dto.dno}" readonly="readonly"/>
+            </div>
+
+            <div class="form-group">
                 <label>분류번호</label>
                 <input class="form-control" name="clasNo" th:value="${dto.clasNo}" />
             </div>
