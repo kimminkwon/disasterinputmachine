@@ -20,6 +20,8 @@
             <li> MySQL </li>
             <li> Bootstrap </li>
             <li> Gradle </li>
+            <li> Poi, Poi-ooxml </li>
+            <li> commons-io </li>
         </ul>
     </p>
     <p>
