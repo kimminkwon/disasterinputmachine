@@ -34,6 +34,9 @@ public class ReservationData {
     // Modified time for debug
     private Timestamp modifyTime;
 
+    // 분류번호
+    private String clasNo;
+
     // 색인어 Index (한글, 한자)
     private String indexKR;
     private String indexCN;
@@ -67,9 +70,9 @@ public class ReservationData {
     // 연도 (모호년)
     private String yearNameOfTomb;
     // 연도 (서기)
-    private int yearAD;
+    private String yearAD;
     // 연도 (월)
-    private int month;
+    private String month;
 
     // 국가, 왕조 (한국, 중국)
     private String dynastyKR;
@@ -90,16 +93,16 @@ public class ReservationData {
     private String remark;
 
     @Builder
-    public ReservationData(String createBy, String modifyBy,
+    public ReservationData(String createBy, String modifyBy, String clasNo,
                            String indexKR, String indexCN,
                            String lclasKR, String lclasCN, String mclasKR, String mclasCN, String sclasKR, String sclasCN,
                            String articlSumry, String articlOrginl, String ltrtreNM, String sourceKR, String sourceCN,
-                           String yearNameOfTomb, int yearAD, int month,
+                           String yearNameOfTomb, String yearAD, String month,
                            String dynastyKR, String dynastyCN,
                            String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                            String referIndex, String remark) {
         this.createBy = createBy; this.modifyBy = modifyBy;
-        this.indexKR = indexKR; this.indexCN = indexCN;
+        this.clasNo = clasNo; this.indexKR = indexKR; this.indexCN = indexCN;
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclasCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
         this.yearNameOfTomb = yearNameOfTomb; this.yearAD = yearAD; this.month = month;
@@ -110,7 +113,7 @@ public class ReservationData {
 
     public void update(ReservationDataModifyDto dto) {
         this.modifyBy = dto.getModifyBy();
-        this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
+        this.clasNo = dto.getClasNo(); this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
         this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
         this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
         this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();
@@ -122,7 +125,7 @@ public class ReservationData {
     public MaintenanceData toMaintenanceData() {
         return MaintenanceData.builder()
                 .createBy(this.createBy).modifyBy(this.modifyBy)
-                .indexKR(this.indexKR).indexCN(this.indexCN)
+                .clasNo(this.clasNo).indexKR(this.indexKR).indexCN(this.indexCN)
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
@@ -140,7 +143,7 @@ public class ReservationData {
     public DeleteData toDeleteData() {
         return DeleteData.builder()
                 .createBy(this.createBy).modifyBy(this.modifyBy)
-                .indexKR(this.indexKR).indexCN(this.indexCN)
+                .clasNo(this.clasNo).indexKR(this.indexKR).indexCN(this.indexCN)
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
