@@ -23,6 +23,7 @@ public class MaintenanceDataDtoTest {
         // given: 예제 데이터 작성
         String createBy = "ADMIN";
         String modifyBy = "ADMIN";
+        String clasNo = "clasNo";
         String indexKR = "indexKR";
         String indexCN = "indexCN";
         String lclasKR = "lclasKR";
@@ -40,8 +41,8 @@ public class MaintenanceDataDtoTest {
         String sourceKR = "sourceKR";
         String sourceCN = "sourceCN";
         String yearNameOfTomb = "서기년도";
-        int yearAD = 10;
-        int month = 8;
+        String yearAD = "yearAD";
+        String month = "month";
         String dynastyKR = "dynastyKR";
         String dynastyCN = "dynastyCN";
         String area1KR = "area1KR";
@@ -56,7 +57,7 @@ public class MaintenanceDataDtoTest {
         // when: 예제 데이터 입력
         this.entity = new MaintenanceData(
                 createBy, modifyBy,
-                indexKR, indexCN,
+                clasNo, indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,
                 sourceKR, sourceCN,
@@ -76,6 +77,7 @@ public class MaintenanceDataDtoTest {
         // given: 예제 데이터 작성
 
         String modifyBy = "업데이트 ADMIN";
+        String clasNo = "업데이트 clasNo";
         String indexKR = "업데이트 indexKR";
         String indexCN = "업데이트 indexCN";
         String lclasKR = "업데이트 lclasKR";
@@ -93,11 +95,9 @@ public class MaintenanceDataDtoTest {
         String sourceKR = "업데이트 sourceKR";
         String sourceCN = "업데이트 sourceCN";
         String yearNameOfTomb = "업데이트 서기년도";
-        int yearAD = 10;
-        int month = 8;
-        String nationKR = "업데이트 nationKR";
+        String yearAD = "업데이트 yearAD";
+        String month = "업데이트 month";
         String dynastyKR = "업데이트 dynastyKR";
-        String nationCN = "업데이트 nationCN";
         String dynastyCN = "업데이트 dynastyCN";
         String area1KR = "업데이트 area1KR";
         String area1CN = "업데이트 area1CN";
@@ -109,7 +109,7 @@ public class MaintenanceDataDtoTest {
         String remark = "업데이트 remark";
 
         MaintenanceDataModifyDto dto = new MaintenanceDataModifyDto(
-                entity.getMno(), modifyBy, indexKR, indexCN,
+                entity.getMno(), modifyBy, clasNo, indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,
                 sourceKR, sourceCN,

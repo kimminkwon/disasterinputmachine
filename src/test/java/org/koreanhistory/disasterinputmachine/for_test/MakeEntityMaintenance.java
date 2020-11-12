@@ -28,6 +28,7 @@ public class MakeEntityMaintenance {
     public MaintenanceData getEntity(String subString) {
         String frontString = "m_";
         String createBy = frontString + "ADMIN"; String modifyBy = frontString + "ADMIN_MODIFY";
+        String clasNo = frontString + "clasNo_" + subString;
         String indexKR = frontString + "indexKR_" + subString;
         String indexCN = frontString + "indexCN_" + subString;
         String lclasKR = frontString + "lclasKR_" + subString;
@@ -45,8 +46,8 @@ public class MakeEntityMaintenance {
         String sourceKR = frontString + "sourceKR_" + subString;
         String sourceCN = frontString + "sourceCN_" + subString;
         String yearNameOfTomb = frontString + "서기년도_" + subString;
-        int yearAD = 10;
-        int month = 8;
+        String yearAD = frontString + "yearAD_" + subString;
+        String month = frontString + "month" + subString;
         String dynastyKR = frontString + "dynastyKR_" + subString;
         String dynastyCN = frontString + "dynastyCN_" + subString;
         String area1KR = frontString + "area1KR_" + subString;
@@ -72,7 +73,7 @@ public class MakeEntityMaintenance {
 
         MaintenanceData entity = new MaintenanceData(
                 createBy, modifyBy,
-                indexKR, indexCN,
+                clasNo, indexKR, indexCN,
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreNM,
                 sourceKR, sourceCN,
