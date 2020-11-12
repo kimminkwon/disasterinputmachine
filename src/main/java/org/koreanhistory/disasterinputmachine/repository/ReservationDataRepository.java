@@ -68,6 +68,9 @@ public interface ReservationDataRepository extends CrudRepository<ReservationDat
 
     private void typeSetForBuilder(QReservationData data, BooleanBuilder builder, String type, String keyword) {
         switch (type) {
+            case "clasNo":
+                builder.and(data.clasNo.like("%" + keyword + "%"));
+                break;
             case "index":
                 builder.and(data.indexKR.like("%" + keyword + "%"));
                 break;
@@ -87,10 +90,10 @@ public interface ReservationDataRepository extends CrudRepository<ReservationDat
                 builder.and(data.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
             case "yearAD":
-                builder.and(data.yearAD.eq(Integer.parseInt(keyword)));
+                builder.and(data.yearAD.like("%" + keyword + "%"));
                 break;
             case "month":
-                builder.and(data.month.eq(Integer.parseInt(keyword)));
+                builder.and(data.month.like("%" + keyword + "%"));
                 break;
             case "dynasty":
                 builder.and(data.dynastyKR.like("%" + keyword + "%"));

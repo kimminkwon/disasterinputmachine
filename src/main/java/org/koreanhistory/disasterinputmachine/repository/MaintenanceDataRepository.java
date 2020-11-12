@@ -65,6 +65,9 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
 
     private void typeSetForBuilder(QMaintenanceData mdata, BooleanBuilder builder, String type, String keyword) {
         switch (type) {
+            case "clasNo":
+                builder.and(mdata.clasNo.like("%" + keyword + "%"));
+                break;
             case "index":
                 builder.and(mdata.indexKR.like("%" + keyword + "%"));
                 break;
@@ -84,10 +87,10 @@ public interface MaintenanceDataRepository extends CrudRepository<MaintenanceDat
                 builder.and(mdata.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
             case "yearAD":
-                builder.and(mdata.yearAD.eq(Integer.parseInt(keyword)));
+                builder.and(mdata.yearAD.like("%" + keyword + "%"));
                 break;
             case "month":
-                builder.and(mdata.month.eq(Integer.parseInt(keyword)));
+                builder.and(mdata.month.like("%" + keyword + "%"));
                 break;
             case "dynasty":
                 builder.and(mdata.dynastyKR.like("%" + keyword + "%"));
