@@ -4,9 +4,6 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.koreanhistory.disasterinputmachine.dto.DeleteDataModifyDto;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,7 +18,7 @@ public class DeleteData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Primary Key (Maintenace Number)
+    // Primary Key (Delete Number)
     private Long dno;
 
     private String createBy;
@@ -61,7 +58,9 @@ public class DeleteData {
     // 2) 기사의 원문
     @Column(columnDefinition = "LONGTEXT")
     private String articlOrginl;
-    // 3) 기사 문헌의 명칭
+    // 3) 기사 문헌의 분류
+    private String ltrtreClas;
+    // 4) 기사 문헌의 명칭
     private String ltrtreNM;
 
     // 출전 (한글, 한자)
@@ -97,7 +96,7 @@ public class DeleteData {
     public DeleteData(String createBy, String modifyBy,
                       String clasNo, String indexKR, String indexCN,
                       String lclasKR, String lclasCN, String mclasKR, String mclasCN, String sclasKR, String sclasCN,
-                      String articlSumry, String articlOrginl, String ltrtreNM, String sourceKR, String sourceCN,
+                      String articlSumry, String articlOrginl, String ltrtreClas, String ltrtreNM, String sourceKR, String sourceCN,
                       String yearNameOfTomb, String yearAD, String month,
                       String dynastyKR, String dynastyCN,
                       String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
@@ -105,7 +104,7 @@ public class DeleteData {
         this.createBy = createBy; this.modifyBy = modifyBy;
         this.clasNo = clasNo; this.indexKR = indexKR; this.indexCN = indexCN;
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclasCN;
-        this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
+        this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreClas = ltrtreClas; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
         this.yearNameOfTomb = yearNameOfTomb; this.yearAD = yearAD; this.month = month;
         this.dynastyKR = dynastyKR; this.dynastyCN = dynastyCN;
         this.area1KR = area1KR; this.area1CN = area1CN; this.area2KR = area2KR; this.area2CN = area2CN; this.area3KR = area3KR; this.area3CN = area3CN;
@@ -116,7 +115,7 @@ public class DeleteData {
         this.modifyBy = dto.getModifyBy();
         this.clasNo = dto.getClasNo(); this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
         this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
-        this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
+        this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreClas = dto.getLtrtreClas(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
         this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();
         this.dynastyKR = dto.getDynastyKR(); this.dynastyCN = dto.getDynastyCN();
         this.area1KR = dto.getArea1KR(); this.area1CN = dto.getArea1CN(); this.area2KR = dto.getArea2KR(); this.area2CN = dto.getArea2CN(); this.area3KR = dto.getArea3KR(); this.area3CN = dto.getArea3CN();
@@ -130,7 +129,7 @@ public class DeleteData {
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
-                .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
+                .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreClas(this.ltrtreClas).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
                 .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
                 .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
@@ -148,7 +147,7 @@ public class DeleteData {
                 .lclasKR(this.lclasKR).lclasCN(this.lclasCN)
                 .mclasKR(this.mclasKR).mclasCN(this.mclasCN)
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
-                .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreNM(this.ltrtreNM)
+                .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreClas(this.ltrtreClas).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
                 .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
                 .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
