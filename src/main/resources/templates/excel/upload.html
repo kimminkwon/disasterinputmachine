@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout1}">
+
+<div layout:fragment="content">
+    <div class="panel panel-default">
+        <div class="panel-heading">EXCEL UPLOAD PAGE</div>
+    </div>
+
+    <div class="panel-body">
+        <div class="container" style="float: left">
+            <form th:action="@{save}" method="POST" enctype="multipart/form-data">
+                <p>
+                    <label>Choose your excel file for upload</label><div style="clear:both;"></div>
+                    <input type="file" th:name="file" style="float: left" /> <div style="clear:both;"></div>
+                </p>
+
+                <button type="submit" class="btn">Submit</button>
+            </form>
+
+            <h6 style="color: red">This data is stored within Reservation Table.</h6>
+        </div>
+    </div>
+
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    </script>
+</th:block>
