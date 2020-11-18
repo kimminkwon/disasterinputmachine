@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/register").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/listforonce").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN")
-                .antMatchers("/member/**").hasRole("ADMIN");
+                .antMatchers("/member/**").hasRole("ADMIN")
+                .antMatchers("/excel/**").hasRole("ADMIN");
 
         // 로그인 페이지 & 핸들러 등록
         http.formLogin().loginPage("/login");
