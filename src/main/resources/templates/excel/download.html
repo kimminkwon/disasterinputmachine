@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout1}">
+
+<div layout:fragment="content">
+    <div class="panel panel-default">
+        <div class="panel-heading">EXCEL DOWNLOAD PAGE</div>
+    </div>
+
+    <div class="panel-body">
+        <div class="container" style="float: left">
+            <form th:action="@{filedownload}" method="POST" enctype="multipart/form-data">
+                <p>
+                    <label>Choose repositories for download</label><div style="clear:both;"></div>
+                    <input type="checkbox" th:name="repositories" value="maintenance" style="float: left" /> &nbsp; Maintenance <br>
+                    <input type="checkbox" th:name="repositories" value="reservation" style="float: left" /> &nbsp; Reservation <br>
+                    <input type="checkbox" th:name="repositories" value="delete" style="float: left" /> &nbsp; Delete <br> <div style="clear:both;"></div>
+                </p>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel-body pull-right">
+        <h4 style="float: right; margin-right: 10px;"><a class="label label-default" th:href="@{select}">BACK TO SELECT</a></h4>
+    </div>
+
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    </script>
+</th:block>
