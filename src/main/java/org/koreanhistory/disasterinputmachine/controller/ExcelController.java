@@ -6,6 +6,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.koreanhistory.disasterinputmachine.service.ExcelService;
 import org.springframework.core.io.Resource;
@@ -58,14 +59,7 @@ public class ExcelController {
         log.info("IN EXCEL CONTROLLER: calling makeFile()...");
         log.info("REPOSITORIES: " + Arrays.toString(repositories));
 
-        // 저장할 파일 경로
-        String filePath = "src/main/resources/example.xlsx";
-        FileOutputStream fos = new FileOutputStream(filePath);
-
-        Workbook workbook = service.makeFile(repositories);
-        workbook.write(fos);
-        fos.close();
-
+        SXSSFWorkbook workbook = service.makeFile(repositories);
         service.excelFileDownload(response, workbook);
     }
 
