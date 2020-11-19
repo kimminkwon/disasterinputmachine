@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
 import org.koreanhistory.disasterinputmachine.dto.ExcelDto;
@@ -63,11 +65,11 @@ public class ExcelService {
     }
 
     @Transactional
-    public Workbook makeFile(String[] repositories) {
+    public SXSSFWorkbook makeFile(String[] repositories) {
         rowNum = 2;
 
         // 워크북 생성
-        Workbook workbook = new XSSFWorkbook();
+        SXSSFWorkbook workbook = new SXSSFWorkbook();
         Sheet sheet = workbook.createSheet();
 
         // Header와 Body의 CellStyle 생성
@@ -109,19 +111,37 @@ public class ExcelService {
 
     private void makeFileForMaintenance(Sheet sheet, CellStyle bodyStyle) {
         maintenanceDataRepository.findAll().forEach(
-                maintenanceData -> makeRow(sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle)
+                maintenanceData -> {
+                    if(rowNum % 1000 == 0) {
+                        try { ((SXSSFSheet)sheet).flushRows(1000); }
+                        catch (IOException e) { e.printStackTrace(); }
+                    }
+                    makeRow(sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle);
+                }
         );
     }
 
     private void makeFileForReservation(Sheet sheet, CellStyle bodyStyle) {
         reservationDataRepository.findAll().forEach(
-                maintenanceData -> makeRow(sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle)
+                reservationData ->  {
+                    if(rowNum % 100 == 0) {
+                        try { ((SXSSFSheet)sheet).flushRows(100); }
+                        catch (IOException e) { e.printStackTrace(); }
+                    }
+                    makeRow(sheet.createRow(rowNum++), new ExcelDto(reservationData), bodyStyle);
+                }
         );
     }
 
     private void makeFileForDelete(Sheet sheet, CellStyle bodyStyle) {
         deleteDataRepository.findAll().forEach(
-                maintenanceData -> makeRow(sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle)
+                deleteData -> {
+                    if(rowNum % 100 == 0) {
+                        try { ((SXSSFSheet)sheet).flushRows(100); }
+                        catch (IOException e) { e.printStackTrace(); }
+                    }
+                    makeRow(sheet.createRow(rowNum++), new ExcelDto(deleteData), bodyStyle);
+                }
         );
     }
 
