@@ -68,27 +68,24 @@ public class ReservationDataRepositoryTest {
     public void 예제데이터_삽입() {
         // given: 예제 데이터 작성
         MakeEntityReservation makeEntityReservation = new MakeEntityReservation();
+        List<ReservationData> rdataList = new ArrayList<>();
+        int size = 200000;
+        ReservationData entity = makeEntityReservation.getEntity("example");
 
         // when: 예제 데이터 입력
-        for (int i = 0; i < 200; i++) {
-            ReservationData entity = makeEntityReservation.getEntity(String.valueOf(i));
-
-            if(10 <= i && i <= 30)
-                entity.setIndexKR("r_indexKR(SearchData)_" + i);
-            if(140 <= i && i <= 170)
-                entity.setIndexKR("r_indexKR(SearchData)_" + i);
-
-            repository.save(entity);
+        for (int i = 0; i < size; i++) {
+            rdataList.add(makeEntityReservation.getEntity("example"));
         }
+        repository.saveAll(rdataList);
 
         // then
-        List<ReservationData> rdataList = Lists.newArrayList(repository.findAll());
+        rdataList = Lists.newArrayList(repository.findAll());
         rdataList.forEach(
                 reservationData -> log.info("IN TABLE DATA: " + reservationData)
         );
 
         // List의 길이 확인
-        assertThat(rdataList.size()).isEqualTo(200);
+        assertThat(rdataList.size()).isEqualTo(size);
 
         // List의 데이터 한개 확인 1
         rdataList.forEach(
