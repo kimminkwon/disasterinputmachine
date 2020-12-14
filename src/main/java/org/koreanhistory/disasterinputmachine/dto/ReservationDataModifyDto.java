@@ -3,6 +3,8 @@ package org.koreanhistory.disasterinputmachine.dto;
 import lombok.*;
 import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
+import org.koreanhistory.disasterinputmachine.mapping.AreaMapping;
+import org.koreanhistory.disasterinputmachine.mapping.ClasMapping;
 
 import javax.persistence.Column;
 
@@ -86,5 +88,17 @@ public class ReservationDataModifyDto {
         this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
         this.referIndex = entity.getReferIndex(); this.remark = entity.getRemark();
+
+        setClasAndDynDatas();
+    }
+
+    public void setClasAndDynDatas() {
+        String[] clasDatas = ClasMapping.getInstance().getClasDatas(clasNo);
+        this.lclasKR = clasDatas[0]; this.lclasCN = clasDatas[1]; this.mclasKR = clasDatas[2]; this.mclasCN = clasDatas[3]; this.sclasKR = clasDatas[4]; this.sclasCN = clasDatas[5];
+
+        if(dynastyKR.equals("조선")) {
+            this.area1CN = area1KR.equals("") || area1KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area1KR);
+            this.area2CN = area2KR.equals("") || area2KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area2KR);
+        }
     }
 }
