@@ -1,6 +1,5 @@
 package org.koreanhistory.disasterinputmachine.mapping;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -20,10 +19,13 @@ public class AreaMapping {
     }
 
     public String getAreaOfChina(String korean) {
-        return areaMap.get(korean);
+        korean = korean.trim();
+        return areaMap.containsKey(korean)? areaMap.get(korean) : "";
     }
+
     private AreaMapping(){
         areaMap = new HashMap<>();
+
         try {
             makeAreaMap();
         } catch (Exception e) {

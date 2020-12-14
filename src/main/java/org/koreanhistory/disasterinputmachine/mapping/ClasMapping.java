@@ -22,9 +22,13 @@ public class ClasMapping {
         return clasMapping;
     }
 
-    public String[] getAreaDatas(String clasNum) {
-        return clasMap.get(clasNum);
+    public String[] getClasDatas(String clasNum) {;
+        clasNum = clasNum.trim();
+        clasNum = clasNum.replace("<", "");
+        clasNum = clasNum.replace(">", "");
+        return clasMap.containsKey(clasNum) ? clasMap.get(clasNum) : new String[] {"", "", "", "", "", ""};
     }
+
 
     private ClasMapping(){
         clasMap = new HashMap<>();
