@@ -56,6 +56,7 @@ public class ExcelService {
                         makeRdata(j, data, cell.getStringCellValue());
                     }
                 }
+                data.setClasAndDynDatas();
                 rdtoList.add(data);
                 log.info("===================================" + i + "-th rdata===================================");
                 log.info("" + data);
