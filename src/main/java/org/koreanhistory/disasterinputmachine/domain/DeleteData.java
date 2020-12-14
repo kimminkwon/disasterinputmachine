@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.koreanhistory.disasterinputmachine.dto.DeleteDataModifyDto;
+import org.koreanhistory.disasterinputmachine.mapping.AreaMapping;
+import org.koreanhistory.disasterinputmachine.mapping.ClasMapping;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -109,6 +111,8 @@ public class DeleteData {
         this.dynastyKR = dynastyKR; this.dynastyCN = dynastyCN;
         this.area1KR = area1KR; this.area1CN = area1CN; this.area2KR = area2KR; this.area2CN = area2CN; this.area3KR = area3KR; this.area3CN = area3CN;
         this.referIndex = referIndex; this.remark = remark;
+
+        setClasAndDynDatas();
     }
 
     public void update(DeleteDataModifyDto dto) {
@@ -120,6 +124,8 @@ public class DeleteData {
         this.dynastyKR = dto.getDynastyKR(); this.dynastyCN = dto.getDynastyCN();
         this.area1KR = dto.getArea1KR(); this.area1CN = dto.getArea1CN(); this.area2KR = dto.getArea2KR(); this.area2CN = dto.getArea2CN(); this.area3KR = dto.getArea3KR(); this.area3CN = dto.getArea3CN();
         this.referIndex = dto.getReferIndex(); this.remark = dto.getRemark();
+
+        setClasAndDynDatas();
     }
 
     public ReservationData toReservationData() {
@@ -156,5 +162,15 @@ public class DeleteData {
                 .area3KR(this.area3KR).area3CN(this.area3CN)
                 .referIndex(this.referIndex).remark(this.remark)
                 .build();
+    }
+
+    public void setClasAndDynDatas() {
+        String[] clasDatas = ClasMapping.getInstance().getClasDatas(clasNo);
+        this.lclasKR = clasDatas[0]; this.lclasCN = clasDatas[1]; this.mclasKR = clasDatas[2]; this.mclasCN = clasDatas[3]; this.sclasKR = clasDatas[4]; this.sclasCN = clasDatas[5];
+
+        if(dynastyKR.equals("조선")) {
+            this.area1CN = area1KR.equals("") || area1KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area1KR);
+            this.area2CN = area2KR.equals("") || area2KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area2KR);
+        }
     }
 }
