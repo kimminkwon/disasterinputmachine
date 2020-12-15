@@ -6,7 +6,6 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
 import org.koreanhistory.disasterinputmachine.dto.ExcelDto;
 import org.koreanhistory.disasterinputmachine.repository.DeleteDataRepository;
@@ -66,7 +65,7 @@ public class ExcelService {
     }
 
     @Transactional
-    public SXSSFWorkbook makeFile(String[] repositories) {
+    public SXSSFWorkbook makeFile(String[] repositories, String caption) {
         rowNum = 2;
 
         // 워크북 생성
@@ -81,7 +80,7 @@ public class ExcelService {
         // 헤더, 목차, 바디 생성
         makeHeader(sheet, headerStyle);
         makeTable(sheet, tableStyle);
-        Arrays.stream(repositories).forEach(repositoryName -> makeFileForRepository(repositoryName, sheet, bodyStyle));
+        Arrays.stream(repositories).forEach(repositoryName -> makeFileForRepository(repositoryName, caption, sheet, bodyStyle));
 
         return workbook;
     }
@@ -104,59 +103,63 @@ public class ExcelService {
         }
     }
 
-    private void makeFileForRepository(String repositoryName, Sheet sheet, CellStyle bodyStyle) {
-        if(repositoryName.equals("maintenance")) makeFileForMaintenance(sheet, bodyStyle);
-        else if(repositoryName.equals("reservation")) makeFileForReservation(sheet, bodyStyle);
-        else if(repositoryName.equals("delete")) makeFileForDelete(sheet, bodyStyle);
+    private void makeFileForRepository(String repositoryName, String caption, Sheet sheet, CellStyle bodyStyle) {
+        if(repositoryName.equals("maintenance")) makeFileForMaintenance(sheet, bodyStyle, caption);
+        else if(repositoryName.equals("reservation")) makeFileForReservation(sheet, bodyStyle, caption);
+        else if(repositoryName.equals("delete")) makeFileForDelete(sheet, bodyStyle, caption);
     }
 
-    private void makeFileForMaintenance(Sheet sheet, CellStyle bodyStyle) {
+    private void makeFileForMaintenance(Sheet sheet, CellStyle bodyStyle, String caption) {
         maintenanceDataRepository.findAll().forEach(
                 maintenanceData -> {
                     if(rowNum % 1000 == 0) {
                         try { ((SXSSFSheet)sheet).flushRows(1000); }
                         catch (IOException e) { e.printStackTrace(); }
                     }
-                    makeRow(sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle);
+                    makeRow(caption, sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle);
                 }
         );
     }
 
-    private void makeFileForReservation(Sheet sheet, CellStyle bodyStyle) {
+    private void makeFileForReservation(Sheet sheet, CellStyle bodyStyle, String caption) {
         reservationDataRepository.findAll().forEach(
                 reservationData ->  {
                     if(rowNum % 100 == 0) {
                         try { ((SXSSFSheet)sheet).flushRows(100); }
                         catch (IOException e) { e.printStackTrace(); }
                     }
-                    makeRow(sheet.createRow(rowNum++), new ExcelDto(reservationData), bodyStyle);
+                    makeRow(caption, sheet.createRow(rowNum++), new ExcelDto(reservationData), bodyStyle);
                 }
         );
     }
 
-    private void makeFileForDelete(Sheet sheet, CellStyle bodyStyle) {
+    private void makeFileForDelete(Sheet sheet, CellStyle bodyStyle, String caption) {
         deleteDataRepository.findAll().forEach(
                 deleteData -> {
                     if(rowNum % 100 == 0) {
                         try { ((SXSSFSheet)sheet).flushRows(100); }
                         catch (IOException e) { e.printStackTrace(); }
                     }
-                    makeRow(sheet.createRow(rowNum++), new ExcelDto(deleteData), bodyStyle);
+                    makeRow(caption, sheet.createRow(rowNum++), new ExcelDto(deleteData), bodyStyle);
                 }
         );
     }
 
-    private void makeRow(Row row, ExcelDto excelDto, CellStyle bodyStyle) {
+    private void makeRow(String caption, Row row, ExcelDto excelDto, CellStyle bodyStyle) {
         Cell cell; String data;
+        cell = row.createCell(0);
+        cell.setCellStyle(bodyStyle);
+        cell.setCellValue(caption + " " + (rowNum - 2));
         for(int i = 0; i < 28; i++) {
-            cell = row.createCell(i);
-            data = makeCell(i, excelDto);
+            cell = row.createCell(i + 1);
+            data = makeCell(i + 1, excelDto);
             cell.setCellStyle(bodyStyle);
             cell.setCellValue(data);
         }
     }
 
     private String makeCell(int columnNum, ExcelDto excelDto) {
+        columnNum = columnNum - 1;
         String data = "";
         switch (columnNum) {
             case 0:
@@ -249,6 +252,7 @@ public class ExcelService {
     }
 
     public ReservationData makeRdata(int columnNum, ReservationData data, String value) {
+        columnNum = columnNum - 1;
         switch (columnNum) {
             case 0:
                 data.setClasNo(value);
@@ -339,7 +343,7 @@ public class ExcelService {
     }
 
     private void makeHeader(Sheet sheet, CellStyle headerStyle) {
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 27));
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 28));
         Row headerRow = sheet.createRow(0);
         headerRow.setHeight((short)1100);
         Cell cell = headerRow.createCell(0);
@@ -395,13 +399,13 @@ public class ExcelService {
     }
 
     private String[] getColumnList() {
-        String[] columnArr = {"아이디(분류번호)", "색인어(한글)", "색인어(한자)", "대분류(한글)", "대분류(한자)", "중분류(한글)", "중분류(한자)", "소분류(한글)", "소분류(한자)", "기사 개요", "기사 원문", "문헌분류", "문헌명칭", "출전(한글)", "출전(한자)", "연도(묘호년)", "연도(서기)", "월", "왕조(한국)", "왕조(중국)", "지역1(한글)", "지역1(한자)", "지역2(한글)", "지역2(한자)", "지역3(한글)", "지역3(한자)", "참고색인어", "비고"};
+        String[] columnArr = {"출처", "아이디(분류번호)", "색인어(한글)", "색인어(한자)", "대분류(한글)", "대분류(한자)", "중분류(한글)", "중분류(한자)", "소분류(한글)", "소분류(한자)", "기사 개요", "기사 원문", "문헌분류", "문헌명칭", "출전(한글)", "출전(한자)", "연도(묘호년)", "연도(서기)", "월", "왕조(한국)", "왕조(중국)", "지역1(한글)", "지역1(한자)", "지역2(한글)", "지역2(한자)", "지역3(한글)", "지역3(한자)", "참고색인어", "비고"};
         return columnArr;
     }
 
     private int[] getSizeList() {
         int sizeValue = 275;
-        int[] sizeList = {sizeValue * 16, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 30, sizeValue * 50, sizeValue * 20, sizeValue * 20, sizeValue * 40, sizeValue * 40, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 40, sizeValue * 20};
+        int[] sizeList = {sizeValue * 16, sizeValue * 16, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 30, sizeValue * 50, sizeValue * 20, sizeValue * 20, sizeValue * 40, sizeValue * 40, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 40, sizeValue * 20};
         return sizeList;
     }
 }
