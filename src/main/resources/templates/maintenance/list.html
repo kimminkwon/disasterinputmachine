@@ -23,7 +23,7 @@
         <h4 style="float: right; margin-right: 10px" sec:authorize="hasRole('ROLE_ADMIN')">
             <a class="label label-default" th:href="@{/member/members}">MEMBERS</a>
         </h4>
-        <h4 style="float: right; margin-right: 10px" sec:authorize="hasRole('ROLE_ADMIN')">
+        <h4 style="float: right; margin-right: 10px" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
             <a class="label label-default" th:href="@{/excel/select}">EXCEL</a>
         </h4>
     </div> <div style="clear:both;"></div>
