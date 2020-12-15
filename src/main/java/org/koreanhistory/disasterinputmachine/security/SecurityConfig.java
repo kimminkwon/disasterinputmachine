@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,15 +31,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         log.info("security config.......................");
+
+        String[] staticResources  =  {
+                "/css/**",
+                "/doc/**",
+                "/img/**",
+                "/js/**",
+        };
+
         http.authorizeRequests()
-                .antMatchers("/**/list").permitAll()
-                .antMatchers("/**/search").permitAll()
-                .antMatchers("/**/view").permitAll()
+                .antMatchers(staticResources).permitAll()
+                .antMatchers("/**/list").hasAnyRole("BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/search").hasAnyRole("BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/view").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/register").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/listforonce").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/member/**").hasRole("ADMIN")
-                .antMatchers("/excel/**").hasRole("ADMIN");
+                .antMatchers("/excel/download").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers("/excel/filedownload").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers("/excel/upload").hasAnyRole("ADMIN");
 
         // 로그인 페이지 & 핸들러 등록
         http.formLogin().loginPage("/login");
