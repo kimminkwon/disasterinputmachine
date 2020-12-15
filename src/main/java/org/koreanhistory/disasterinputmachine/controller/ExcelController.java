@@ -55,11 +55,12 @@ public class ExcelController {
     }
 
     @PostMapping("/filedownload")
-    public void fileDownload(@RequestParam("repositories") String[] repositories, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void fileDownload(@RequestParam("repositories") String[] repositories, @RequestParam("caption") String caption, HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("IN EXCEL CONTROLLER: calling makeFile()...");
         log.info("REPOSITORIES: " + Arrays.toString(repositories));
+        log.info("CAPTION: " + caption);
 
-        SXSSFWorkbook workbook = service.makeFile(repositories);
+        SXSSFWorkbook workbook = service.makeFile(repositories, caption);
         service.excelFileDownload(response, workbook);
     }
 
