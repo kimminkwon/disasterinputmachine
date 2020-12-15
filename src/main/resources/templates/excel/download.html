@@ -10,12 +10,18 @@
     <div class="panel-body">
         <div class="container" style="float: left">
             <form th:action="@{filedownload}" method="POST" enctype="multipart/form-data">
-                <p>
+                <div>
+                    <label>Enter the sentence in Caption</label><div style="clear:both;"></div>
+                    <input type="text" th:name="caption" style="float: left" /> <br>
+                </div><div style="clear:both;"></div>
+                <br>
+                <div>
                     <label>Choose repositories for download</label><div style="clear:both;"></div>
                     <input type="checkbox" th:name="repositories" value="maintenance" style="float: left" /> &nbsp; Maintenance <br>
                     <input type="checkbox" th:name="repositories" value="reservation" style="float: left" /> &nbsp; Reservation <br>
                     <input type="checkbox" th:name="repositories" value="delete" style="float: left" /> &nbsp; Delete <br> <div style="clear:both;"></div>
-                </p>
+                </div>
+                <br>
                 <button type="submit" class="btn">Submit</button>
             </form>
         </div>
