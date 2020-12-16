@@ -168,7 +168,7 @@ public class MaintenanceData {
         String[] clasDatas = ClasMapping.getInstance().getClasDatas(clasNo);
         this.lclasKR = clasDatas[0]; this.lclasCN = clasDatas[1]; this.mclasKR = clasDatas[2]; this.mclasCN = clasDatas[3]; this.sclasKR = clasDatas[4]; this.sclasCN = clasDatas[5];
 
-        if(dynastyKR.equals("조선")) {
+        if(dynastyKR != null && dynastyKR.equals("조선")) {
             this.area1CN = area1KR.equals("") || area1KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area1KR);
             this.area2CN = area2KR.equals("") || area2KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area2KR);
         }
