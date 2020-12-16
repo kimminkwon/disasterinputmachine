@@ -252,7 +252,6 @@ public class ExcelService {
     }
 
     public ReservationData makeRdata(int columnNum, ReservationData data, String value) {
-        columnNum = columnNum - 1;
         switch (columnNum) {
             case 0:
                 data.setClasNo(value);
