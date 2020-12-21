@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.koreanhistory.disasterinputmachine.dto.SearchDto;
 import org.koreanhistory.disasterinputmachine.service.ExcelService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,13 +52,29 @@ public class ExcelController {
         log.info("IN EXCEL CONTROLLER: calling download()...");
     }
 
+    @GetMapping("/detaildownload")
+    public void detailDownload() {
+        log.info("IN EXCEL CONTROLLER: calling detaildownload()...");
+    }
+
     @PostMapping("/filedownload")
     public void fileDownload(@RequestParam("repositories") String[] repositories, @RequestParam("caption") String caption, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        log.info("IN EXCEL CONTROLLER: calling makeFile()...");
+        log.info("IN EXCEL CONTROLLER: calling fileDownload()...");
         log.info("REPOSITORIES: " + Arrays.toString(repositories));
         log.info("CAPTION: " + caption);
 
         SXSSFWorkbook workbook = service.makeFile(repositories, caption);
+        service.excelFileDownload(response, workbook);
+    }
+
+    @PostMapping("/detailfiledownload")
+    public void detailFileDownload(@RequestParam("repositories") String[] repositories, @RequestParam("caption") String caption, @ModelAttribute("dto") SearchDto dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        log.info("IN EXCEL CONTROLLER: calling detailFileDownload()...");
+        log.info("REPOSITORIES: " + Arrays.toString(repositories));
+        log.info("CAPTION: " + caption);
+        log.info("DTO: " + dto);
+
+        SXSSFWorkbook workbook = service.makeDetailFile(repositories, caption, dto);
         service.excelFileDownload(response, workbook);
     }
 
