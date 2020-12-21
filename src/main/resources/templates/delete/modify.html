@@ -5,7 +5,7 @@
 
 <div layout:fragment="content">
     <div class="panel panel-danger">
-        <div class="panel-heading">Modify Page In Delete</div>
+        <div class="panel-heading">수정 페이지(삭제 테이블)</div>
     </div>
     <div class="panel-body">
 
@@ -185,18 +185,18 @@
 
         <div class="pull-left" style="float: left;">
 
-            <a href="#" class="btn btn-primary tomaintenancebtn" style="float: left; margin-right: 10px;">To Maintenance</a>
-            <a href="#" class="btn btn-warning toreservationbtn" style="float: right;">To Reservation</a>
+            <a href="#" class="btn btn-primary tomaintenancebtn" style="float: left; margin-right: 10px;">유지 테이블로 이동</a>
+            <a href="#" class="btn btn-warning toreservationbtn" style="float: right;">보류 테이블로 이동</a>
 
         </div>
 
         <div class="pull-right" style="float: right;">
 
-            <a href="#" class="btn btn-warning modbtn">Modify</a>
-            <a href="#" class="btn btn-danger delbtn" sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
+            <a href="#" class="btn btn-warning modbtn">수정</a>
+            <a href="#" class="btn btn-danger delbtn" sec:authorize="hasRole('ROLE_ADMIN')">삭제</a>
 
             <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, dno=${dto.dno}) }"
-               class="btn btn-primary">Cancel</a>
+               class="btn btn-primary">취소</a>
 
         </div> <div style="clear:both;"></div>
 

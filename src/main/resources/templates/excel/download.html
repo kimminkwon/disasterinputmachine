@@ -4,31 +4,31 @@
 
 <div layout:fragment="content">
     <div class="panel panel-default">
-        <div class="panel-heading">EXCEL DOWNLOAD PAGE</div>
+        <div class="panel-heading">엑셀 다운로드 페이지</div>
     </div>
 
     <div class="panel-body">
         <div class="container" style="float: left">
             <form th:action="@{filedownload}" method="POST" enctype="multipart/form-data">
                 <div>
-                    <label>Enter the sentence in Caption</label><div style="clear:both;"></div>
+                    <label>출처로 등록될 문장을 입력해주세요.</label><div style="clear:both;"></div>
                     <input type="text" th:name="caption" style="float: left" /> <br>
                 </div><div style="clear:both;"></div>
                 <br>
                 <div>
-                    <label>Choose repositories for download</label><div style="clear:both;"></div>
-                    <input type="checkbox" th:name="repositories" value="maintenance" style="float: left" /> &nbsp; Maintenance <br>
-                    <input type="checkbox" th:name="repositories" value="reservation" style="float: left" /> &nbsp; Reservation <br>
-                    <input type="checkbox" th:name="repositories" value="delete" style="float: left" /> &nbsp; Delete <br> <div style="clear:both;"></div>
+                    <label>다운로드 할 테이블을 선택해주세요.</label><div style="clear:both;"></div>
+                    <input type="checkbox" th:name="repositories" value="maintenance" style="float: left" /> &nbsp; 유지 테이블 <br>
+                    <input type="checkbox" th:name="repositories" value="reservation" style="float: left" /> &nbsp; 보류 테이블 <br>
+                    <input type="checkbox" th:name="repositories" value="delete" style="float: left" /> &nbsp; 삭제 테이블 <br> <div style="clear:both;"></div>
                 </div>
                 <br>
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn">등록</button>
             </form>
         </div>
     </div>
 
     <div class="panel-body pull-right">
-        <h4 style="float: right; margin-right: 10px;"><a class="label label-default" th:href="@{select}">BACK TO SELECT</a></h4>
+        <h4 style="float: right; margin-right: 10px;"><a class="label label-default" th:href="@{select}">취소</a></h4>
     </div>
 
 </div>

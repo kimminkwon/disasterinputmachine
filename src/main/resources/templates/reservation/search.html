@@ -5,7 +5,7 @@
 
 <div layout:fragment="content">
     <div class="panel panel-warning">
-        <div class="panel-heading">Search Page In Reservation</div>
+        <div class="panel-heading">상세 검색 페이지(보류 테이블)</div>
     </div>
     <div class="panel-body">
         <form th:action="@{search}" method="post">
@@ -150,11 +150,11 @@
                 <input class="form-control" name="remark" th:value="${dto.remark}"  />
             </div>
 
-            <button type="submit" class="btn btn-primary">Search</button>
-            <button type="reset" class="btn btn-default">Reset</button>
+            <button type="submit" class="btn btn-primary">검색</button>
+            <button type="reset" class="btn btn-default">재입력</button>
 
             <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}) }"
-               class="btn btn-warning pull-right">Cancel</a>
+               class="btn btn-warning pull-right">취소</a>
         </form>
 
 

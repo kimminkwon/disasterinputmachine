@@ -5,7 +5,7 @@
 
 <div layout:fragment="content">
     <div class="panel panel-danger">
-        <div class="panel-heading">View Page In Delete</div>
+        <div class="panel-heading">상세 페이지(삭제 테이블)</div>
     </div>
     <div class="panel-body">
 
@@ -179,10 +179,10 @@
         <div class="pull-right">
 
             <a th:href="@{ modify(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, dno=${dto.dno}) }"
-               class="btn btn-default">Modify or Delete</a>
+               class="btn btn-default">수정 혹은 삭제</a>
 
             <a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, dno=${dto.dno}) }"
-               class="btn btn-primary">Back</a>
+               class="btn btn-primary">취소</a>
 
         </div>
 
@@ -217,7 +217,7 @@
         $(".referSearch").click(function (e){
             var referKeyword = $(this).val();
 
-            if(confirm("Do you want to search for a list with reference index: " + referKeyword)) {
+            if(confirm("다음 참조를 통해 검색하시겠습니까?: " + referKeyword)) {
                 var formObj = $("#f1");
                 formObj.find("[name='type']").val("referIndex");
                 formObj.find("[name='keyword']").val(referKeyword);
