@@ -2,8 +2,8 @@ package org.koreanhistory.disasterinputmachine.dto;
 
 import lombok.*;
 import org.koreanhistory.disasterinputmachine.domain.DeleteData;
-import org.koreanhistory.disasterinputmachine.domain.MaintenanceData;
-import org.koreanhistory.disasterinputmachine.mapping.AreaMapping;
+import org.koreanhistory.disasterinputmachine.mapping.AreaInGoryeoMapping;
+import org.koreanhistory.disasterinputmachine.mapping.AreaInJosunMapping;
 import org.koreanhistory.disasterinputmachine.mapping.ClasMapping;
 
 import javax.persistence.Column;
@@ -95,9 +95,12 @@ public class DeleteDataModifyDto {
         String[] clasDatas = ClasMapping.getInstance().getClasDatas(clasNo);
         this.lclasKR = clasDatas[0]; this.lclasCN = clasDatas[1]; this.mclasKR = clasDatas[2]; this.mclasCN = clasDatas[3]; this.sclasKR = clasDatas[4]; this.sclasCN = clasDatas[5];
 
-        if(dynastyKR.equals("조선")) {
-            this.area1CN = area1KR.equals("") || area1KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area1KR);
-            this.area2CN = area2KR.equals("") || area2KR == null ? "" : AreaMapping.getInstance().getAreaOfChina(area2KR);
+        if(dynastyKR != null && dynastyKR.equals("조선")) {
+            this.area1CN = area1KR.equals("") || area1KR == null ? "" : AreaInJosunMapping.getInstance().getAreaOfChina(area1KR);
+            this.area2CN = area2KR.equals("") || area2KR == null ? "" : AreaInJosunMapping.getInstance().getAreaOfChina(area2KR);
+        } else if(dynastyKR != null && dynastyKR.equals("고려")) {
+            this.area1CN = area1KR.equals("") || area1KR == null ? "" : AreaInGoryeoMapping.getInstance().getAreaOfChina(area1KR);
+            this.area2CN = area2KR.equals("") || area2KR == null ? "" : AreaInGoryeoMapping.getInstance().getAreaOfChina(area2KR);
         }
     }
 }
