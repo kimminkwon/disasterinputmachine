@@ -1,21 +1,24 @@
 package org.koreanhistory.disasterinputmachine.mapping;
 
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.util.HashMap;
 
-public class AreaMapping {
+public class AreaInGoryeoMapping {
 
-    private static AreaMapping areaMapping;
+    private static AreaInGoryeoMapping areaInGoryeoMapping;
     private HashMap<String, String> areaMap;
 
-    public static synchronized AreaMapping getInstance() {
-        if(areaMapping == null)
-            areaMapping = new AreaMapping();
+    public static synchronized AreaInGoryeoMapping getInstance() {
+        if(areaInGoryeoMapping == null)
+            areaInGoryeoMapping = new AreaInGoryeoMapping();
 
-        return areaMapping;
+        return areaInGoryeoMapping;
     }
 
     public String getAreaOfChina(String korean) {
@@ -23,7 +26,7 @@ public class AreaMapping {
         return areaMap.containsKey(korean)? areaMap.get(korean) : "";
     }
 
-    private AreaMapping(){
+    private AreaInGoryeoMapping(){
         areaMap = new HashMap<>();
 
         try {
@@ -34,7 +37,7 @@ public class AreaMapping {
     }
 
     private void makeAreaMap() throws Exception {
-        String path = "src/main/resources/mappingdata/AreaMappingInJosun.xlsx";
+        String path = "src/main/resources/mappingdata/AreaMappingInGoryeo.xlsx";
         FileInputStream fis = new FileInputStream(path);
 
         Workbook workbook = new XSSFWorkbook(fis);
