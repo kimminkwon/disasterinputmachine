@@ -1,0 +1,177 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout/layout1}">
+
+<div layout:fragment="content">
+    <div class="panel panel-default">
+        <div class="panel-heading">엑셀 다운로드 페이지(상세)</div>
+    </div>
+    <div class="panel-body">
+        <form th:action="@{detailfiledownload}" method="post">
+            <div>
+                <label>출처로 등록될 문장을 입력해주세요.</label><div style="clear:both;"></div>
+                <input type="text" th:name="caption" style="float: left" /> <br>
+            </div><div style="clear:both;"></div><br>
+            
+            <div>
+                <label>다운로드 할 테이블을 선택해주세요.</label><div style="clear:both;"></div>
+                <input type="checkbox" th:name="repositories" value="maintenance" style="float: left" /> &nbsp; 유지 테이블 <br>
+                <input type="checkbox" th:name="repositories" value="reservation" style="float: left" /> &nbsp; 보류 테이블 <br>
+                <input type="checkbox" th:name="repositories" value="delete" style="float: left" /> &nbsp; 삭제 테이블 <br> <div style="clear:both;"></div>
+            </div><br>
+
+            <div class="form-group">
+                <label>분류번호</label>
+                <input class="form-control" name="clasNo"/>
+            </div>
+
+            <div class="form-group" style="width: 49%; float: left;" >
+                <label>색인어(한글)</label>
+                <input class="form-control" name="indexKR"/>
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>색인어(한자)</label>
+                <input class="form-control" name="indexCN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>대분류(한글)</label>
+                <input class="form-control" name="lclasKR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>대분류(한자)</label>
+                <input class="form-control" name="lclasCN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>중분류(한글)</label>
+                <input class="form-control" name="mclasKR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>중분류(한자)</label>
+                <input class="form-control" name="mclasCN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>소분류(한글)</label>
+                <input class="form-control" name="sclasKR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>소분류(한자)</label>
+                <input class="form-control" name="sclasCN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group">
+                <label>기사 개요</label>
+                <textarea class="form-control" rows="3" name="articlSumry"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 원문</label>
+                <textarea class="form-control" rows="10" name="articlOrginl"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>기사 문헌 분류</label>
+                <input class="form-control" name="ltrtreClas" />
+            </div>
+
+            <div class="form-group">
+                <label>기사 문헌 명칭</label>
+                <input class="form-control" name="ltrtreNM" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>출전(한글)</label>
+                <input class="form-control" name="sourceKR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>출전(한자)</label>
+                <input class="form-control" name="sourceCN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 30%; float: left;">
+                <label>연도(모호년)</label>
+                <input class="form-control" name="yearNameOfTomb" />
+            </div>
+
+            <div class="form-group" style="width: 30%; float: right;">
+                <label>월</label>
+                <input class="form-control" name="month" />
+            </div>
+
+            <div class="form-group" style="width: 30%; margin: 0 auto; ">
+                <label>연도(서기)</label>
+                <input class="form-control" name="yearAD" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>왕조(한국)</label>
+                <input class="form-control" name="dynastyKR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>왕조(중국)</label>
+                <input class="form-control" name="dynastyCN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>지역 1(한글)</label>
+                <input class="form-control" name="area1KR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>지역 1(한자)</label>
+                <input class="form-control" name="area1CN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>지역 2(한글)</label>
+                <input class="form-control" name="area2KR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>지역 2(한자)</label>
+                <input class="form-control" name="area2CN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group" style="width: 49%; float: left;">
+                <label>지역 3(한글)</label>
+                <input class="form-control" name="area3KR" />
+            </div>
+
+            <div class="form-group" style="width: 49%; float: right;">
+                <label>지역 3(한자)</label>
+                <input class="form-control" name="area3CN" />
+            </div> <div style="clear:both;"></div>
+
+            <div class="form-group">
+                <label>참고 색인어</label>
+                <input class="form-control" name="referIndex" />
+            </div>
+
+            <div class="form-group">
+                <label>비고</label>
+                <input class="form-control" name="remark" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">해당 정보로 다운로드</button>
+            <button type="reset" class="btn btn-default">재입력</button>
+
+            <a th:href="@{download}" class="btn btn-warning pull-right">취소</a>
+        </form>
+    </div>
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    </script>
+</th:block>

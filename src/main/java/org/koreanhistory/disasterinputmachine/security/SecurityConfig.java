@@ -49,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/member/**").hasRole("ADMIN")
                 .antMatchers("/excel/download").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers("/excel/detaildownload").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers("/excel/detailfiledownload").hasAnyRole("MANAGER", "ADMIN")
                 .antMatchers("/excel/filedownload").hasAnyRole("MANAGER", "ADMIN")
                 .antMatchers("/excel/upload").hasAnyRole("ADMIN");
 
