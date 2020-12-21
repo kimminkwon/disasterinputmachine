@@ -1,5 +1,6 @@
 package org.koreanhistory.disasterinputmachine.service;
 
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.apache.poi.ss.usermodel.*;
@@ -8,6 +9,7 @@ import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.koreanhistory.disasterinputmachine.domain.ReservationData;
 import org.koreanhistory.disasterinputmachine.dto.ExcelDto;
+import org.koreanhistory.disasterinputmachine.dto.SearchDto;
 import org.koreanhistory.disasterinputmachine.repository.DeleteDataRepository;
 import org.koreanhistory.disasterinputmachine.repository.MaintenanceDataRepository;
 import org.koreanhistory.disasterinputmachine.repository.ReservationDataRepository;
@@ -19,6 +21,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @Service
 @Log
@@ -86,6 +89,31 @@ public class ExcelService {
     }
 
     @Transactional
+    public SXSSFWorkbook makeDetailFile(String[] repositories, String caption, SearchDto dto) {
+        List<String> types = splitTypesAndKeywords(dto.getType());
+        List<String> keywords = splitTypesAndKeywords(dto.getKeyword());
+
+        rowNum = 2;
+
+        // 워크북 생성
+        SXSSFWorkbook workbook = new SXSSFWorkbook();
+        Sheet sheet = workbook.createSheet();
+
+        // Header와 Body의 CellStyle 생성
+        CellStyle headerStyle = makeHeaderStyleForExcel(workbook, sheet);
+        CellStyle tableStyle = makeTableStyleForExcel(workbook, sheet);
+        CellStyle bodyStyle = makeBodyStyleForExcel(workbook, sheet);
+
+        // 헤더, 목차, 바디 생성
+        makeHeader(sheet, headerStyle);
+        makeTable(sheet, tableStyle);
+        Arrays.stream(repositories).forEach(repositoryName -> makeDetailFileForRepository(repositoryName, caption, sheet, bodyStyle, types, keywords));
+
+        return workbook;
+
+    }
+
+    @Transactional
     public void excelFileDownload(HttpServletResponse response, Workbook workbook) throws IOException {
         OutputStream out = null;
         try {
@@ -101,6 +129,48 @@ public class ExcelService {
             if(out != null) out.close();
             if(workbook != null) workbook.close();
         }
+    }
+    private void makeDetailFileForRepository(String repositoryName, String caption, Sheet sheet, CellStyle bodyStyle, List<String> types, List<String> keywords) {
+        if(repositoryName.equals("maintenance")) makeDetailFileForMaintenance(sheet, bodyStyle, caption, types, keywords);
+        else if(repositoryName.equals("reservation")) makeDetailFileForReservation(sheet, bodyStyle, caption, types, keywords);
+        else if(repositoryName.equals("delete")) makeDetailFileForDelete(sheet, bodyStyle, caption, types, keywords);
+    }
+
+    private void makeDetailFileForDelete(Sheet sheet, CellStyle bodyStyle, String caption, List<String> types, List<String> keywords) {
+        deleteDataRepository.findAll(deleteDataRepository.makePrdicates(types, keywords)).forEach(
+                deleteData -> {
+                    if(rowNum % 100 == 0) {
+                        try { ((SXSSFSheet)sheet).flushRows(100); }
+                        catch (IOException e) { e.printStackTrace(); }
+                    }
+                    makeRow(caption, sheet.createRow(rowNum++), new ExcelDto(deleteData), bodyStyle);
+                }
+        );
+
+    }
+
+    private void makeDetailFileForReservation(Sheet sheet, CellStyle bodyStyle, String caption, List<String> types, List<String> keywords) {
+        reservationDataRepository.findAll(reservationDataRepository.makePrdicates(types, keywords)).forEach(
+                reservationData ->  {
+                    if(rowNum % 100 == 0) {
+                        try { ((SXSSFSheet)sheet).flushRows(100); }
+                        catch (IOException e) { e.printStackTrace(); }
+                    }
+                    makeRow(caption, sheet.createRow(rowNum++), new ExcelDto(reservationData), bodyStyle);
+                }
+        );
+    }
+
+    private void makeDetailFileForMaintenance(Sheet sheet, CellStyle bodyStyle, String caption, List<String> types, List<String> keywords) {
+        maintenanceDataRepository.findAll(maintenanceDataRepository.makePrdicates(types, keywords)).forEach(
+                maintenanceData -> {
+                    if(rowNum % 1000 == 0) {
+                        try { ((SXSSFSheet)sheet).flushRows(1000); }
+                        catch (IOException e) { e.printStackTrace(); }
+                    }
+                    makeRow(caption, sheet.createRow(rowNum++), new ExcelDto(maintenanceData), bodyStyle);
+                }
+        );
     }
 
     private void makeFileForRepository(String repositoryName, String caption, Sheet sheet, CellStyle bodyStyle) {
@@ -406,5 +476,15 @@ public class ExcelService {
         int sizeValue = 275;
         int[] sizeList = {sizeValue * 16, sizeValue * 16, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 30, sizeValue * 50, sizeValue * 20, sizeValue * 20, sizeValue * 40, sizeValue * 40, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 40, sizeValue * 20};
         return sizeList;
+    }
+
+    private List<String> splitTypesAndKeywords(String str) {
+        StringTokenizer tokenizer = new StringTokenizer(str, "-");
+        List<String> strList = new ArrayList<>();
+
+        while(tokenizer.hasMoreTokens())
+            strList.add(tokenizer.nextToken());
+
+        return strList;
     }
 }
