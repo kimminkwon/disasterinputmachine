@@ -41,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(staticResources).permitAll()
-                .antMatchers("/**/list").hasAnyRole("BASIC", "MANAGER", "ADMIN")
-                .antMatchers("/**/search").hasAnyRole("BASIC", "MANAGER", "ADMIN")
-                .antMatchers("/**/view").hasAnyRole("BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/list").hasAnyRole("GUEST", "BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/search").hasAnyRole("GUEST", "BASIC", "MANAGER", "ADMIN")
+                .antMatchers("/**/view").hasAnyRole("GUEST", "BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/register").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/listforonce").hasAnyRole("BASIC", "MANAGER", "ADMIN")
                 .antMatchers("/**/modify").hasAnyRole("BASIC", "MANAGER", "ADMIN")
