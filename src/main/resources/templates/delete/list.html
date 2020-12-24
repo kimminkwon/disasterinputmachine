@@ -13,10 +13,10 @@
     </div>
 
     <div class="panel-body pull-right" style="float: right;">
-        <h4 style="float: right;"><a class="label label-default" th:href="@{register}">등록</a></h4>
+        <h4 style="float: right;"><a class="label label-default" th:href="@{register(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, order=${pageVO.order})}">등록</a></h4>
         <h4 style="float: right; margin-right: 10px">
             <a class="label label-default"
-               th:href="@{listforonce(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword})}">
+               th:href="@{listforonce(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, order=${pageVO.order})}">
                 다중선택하기
             </a>
         </h4>
@@ -101,6 +101,7 @@
                     <option value='sourceKR' th:selected="${pageVO.type} == 'sourceKR'">출전(한글)</option>
                     <option value='sourceCN' th:selected="${pageVO.type} == 'sourceCN'">출전(한자)</option>
                     <option value='yearNameOfTomb' th:selected="${pageVO.type} == 'yearNameOfTomb'">연도(모호년)</option>
+                    <option value='yearAge' th:selected="${pageVO.type} == 'yearAge'">연도(연호)</option>
                     <option value='yearAD' th:selected="${pageVO.type} == 'yearAD'">연도(서기)</option>
                     <option value='month' th:selected="${pageVO.type} == 'month'">연도(월)</option>
                     <option value='dynastyKR' th:selected="${pageVO.type} == 'dynastyKR'">왕조(한국)</option>
