@@ -42,6 +42,7 @@ public class MaintenanceDataDtoTest {
         String sourceKR = "sourceKR";
         String sourceCN = "sourceCN";
         String yearNameOfTomb = "서기년도";
+        String yearAge = "연호";
         String yearAD = "yearAD";
         String month = "month";
         String dynastyKR = "dynastyKR";
@@ -62,7 +63,7 @@ public class MaintenanceDataDtoTest {
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, lterreClas, ltrtreNM,
                 sourceKR, sourceCN,
-                yearNameOfTomb, yearAD, month,
+                yearNameOfTomb, yearAge, yearAD, month,
                 dynastyKR, dynastyCN,
                 area1KR, area1CN,
                 area2KR, area2CN,
@@ -97,6 +98,7 @@ public class MaintenanceDataDtoTest {
         String sourceKR = "업데이트 sourceKR";
         String sourceCN = "업데이트 sourceCN";
         String yearNameOfTomb = "업데이트 서기년도";
+        String yearAge = "업데이트 yearAge";
         String yearAD = "업데이트 yearAD";
         String month = "업데이트 month";
         String dynastyKR = "업데이트 dynastyKR";
@@ -115,7 +117,7 @@ public class MaintenanceDataDtoTest {
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, lterreClas, ltrtreNM,
                 sourceKR, sourceCN,
-                yearNameOfTomb, yearAD, month,
+                yearNameOfTomb, yearAge, yearAD, month,
                 dynastyKR, dynastyCN,
                 area1KR, area1CN,
                 area2KR, area2CN,
