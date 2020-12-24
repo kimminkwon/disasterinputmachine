@@ -71,6 +71,8 @@ public class ReservationData {
 
     // 연도 (모호년)
     private String yearNameOfTomb;
+    // 연도 (연호)
+    private String yearAge;
     // 연도 (서기)
     private String yearAD;
     // 연도 (월)
@@ -99,7 +101,7 @@ public class ReservationData {
                            String indexKR, String indexCN,
                            String lclasKR, String lclasCN, String mclasKR, String mclasCN, String sclasKR, String sclasCN,
                            String articlSumry, String articlOrginl, String ltrtreClas, String ltrtreNM, String sourceKR, String sourceCN,
-                           String yearNameOfTomb, String yearAD, String month,
+                           String yearNameOfTomb, String yearAge, String yearAD, String month,
                            String dynastyKR, String dynastyCN,
                            String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                            String referIndex, String remark) {
@@ -107,12 +109,12 @@ public class ReservationData {
         this.clasNo = clasNo; this.indexKR = indexKR; this.indexCN = indexCN;
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclasCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreClas = ltrtreClas; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
-        this.yearNameOfTomb = yearNameOfTomb; this.yearAD = yearAD; this.month = month;
+        this.yearNameOfTomb = yearNameOfTomb; this.yearAge = yearAge; this.yearAD = yearAD; this.month = month;
         this.dynastyKR = dynastyKR; this.dynastyCN = dynastyCN;
         this.area1KR = area1KR; this.area1CN = area1CN; this.area2KR = area2KR; this.area2CN = area2CN; this.area3KR = area3KR; this.area3CN = area3CN;
         this.referIndex = referIndex; this.remark = remark;
 
-        setClasAndDynDatas();
+        setMappingDatas();
     }
 
     public void update(ReservationDataModifyDto dto) {
@@ -120,12 +122,12 @@ public class ReservationData {
         this.clasNo = dto.getClasNo(); this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
         this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
         this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreClas = dto.getLtrtreClas(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
-        this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();
+        this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAge = dto.getYearAge(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();
         this.dynastyKR = dto.getDynastyKR(); this.dynastyCN = dto.getDynastyCN();
         this.area1KR = dto.getArea1KR(); this.area1CN = dto.getArea1CN(); this.area2KR = dto.getArea2KR(); this.area2CN = dto.getArea2CN(); this.area3KR = dto.getArea3KR(); this.area3CN = dto.getArea3CN();
         this.referIndex = dto.getReferIndex(); this.remark = dto.getRemark();
 
-        setClasAndDynDatas();
+        setMappingDatas();
     }
 
     public MaintenanceData toMaintenanceData() {
@@ -137,7 +139,7 @@ public class ReservationData {
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
                 .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreClas(this.ltrtreClas).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
-                .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
+                .yearNameOfTomb(this.yearNameOfTomb).yearAge(this.yearAge).yearAD(this.yearAD).month(this.month)
                 .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
                 .area1KR(this.area1KR).area1CN(this.area1CN)
                 .area2KR(this.area2KR).area2CN(this.area2CN)
@@ -155,7 +157,7 @@ public class ReservationData {
                 .sclasKR(this.sclasKR).sclasCN(this.sclasCN)
                 .articlSumry(this.articlSumry).articlOrginl(this.articlOrginl).ltrtreClas(this.ltrtreClas).ltrtreNM(this.ltrtreNM)
                 .sourceKR(this.sourceKR).sourceCN(this.sourceCN)
-                .yearNameOfTomb(this.yearNameOfTomb).yearAD(this.yearAD).month(this.month)
+                .yearNameOfTomb(this.yearNameOfTomb).yearAge(this.yearAge).yearAD(this.yearAD).month(this.month)
                 .dynastyKR(this.dynastyKR).dynastyCN(this.dynastyCN)
                 .area1KR(this.area1KR).area1CN(this.area1CN)
                 .area2KR(this.area2KR).area2CN(this.area2CN)
@@ -164,7 +166,7 @@ public class ReservationData {
                 .build();
     }
 
-    public void setClasAndDynDatas() {
+    public void setMappingDatas() {
         String[] clasDatas = ClasMapping.getInstance().getClasDatas(clasNo);
         this.lclasKR = clasDatas[0]; this.lclasCN = clasDatas[1]; this.mclasKR = clasDatas[2]; this.mclasCN = clasDatas[3]; this.sclasKR = clasDatas[4]; this.sclasCN = clasDatas[5];
 

@@ -27,6 +27,7 @@ public class MakeEntityReservation {
         String sourceKR = frontString + "sourceKR_" + subString;
         String sourceCN = frontString + "sourceCN_" + subString;
         String yearNameOfTomb = frontString + "서기년도_" + subString;
+        String yearAge = frontString + "yearAge" + subString;
         String yearAD = frontString + "yearAD_" + subString;
         String month = frontString + "month_" + subString;
         String dynastyKR = frontString + "dynastyKR_" + subString;
@@ -58,7 +59,7 @@ public class MakeEntityReservation {
                 lclasKR, lclasCN, mclasKR, mclasCN, sclasKR, sclaeCN,
                 articlSumry, articlOrginl, ltrtreClas, ltrtreNM,
                 sourceKR, sourceCN,
-                yearNameOfTomb, yearAD, month,
+                yearNameOfTomb, yearAge, yearAD, month,
                 dynastyKR, dynastyCN,
                 area1KR, area1CN,
                 area2KR, area2CN,

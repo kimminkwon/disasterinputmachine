@@ -51,6 +51,8 @@ public class SearchDto {
 
     // 연도 (모호년)
     private String yearNameOfTomb;
+    // 연도 (연호)
+    private String yearAge;
     // 연도 (서기)
     private String yearAD;
     // 연도 (월)
@@ -92,6 +94,7 @@ public class SearchDto {
         if(this.sourceKR != "" && this.sourceKR != null) type = strConcat(type, "sourceKR");
         if(this.sourceCN != "" && this.sourceCN != null) type = strConcat(type, "sourceCN");
         if(this.yearNameOfTomb != "" && this.yearNameOfTomb != null) type = strConcat(type, "yearNameOfTomb");
+        if(this.yearAge != "" && this.yearAge != null) type = strConcat(type, "yearAge");
         if(this.yearAD != "" && this.yearAD != null) type = strConcat(type, "yearAD");
         if(this.month != "" && this.month != null) type = strConcat(type, "month");
         if(this.dynastyKR != "" && this.dynastyKR != null) type = strConcat(type, "dynastyKR");
@@ -126,6 +129,7 @@ public class SearchDto {
         if(this.sourceCN != "" && this.sourceCN != null) keyword = strConcat(keyword, sourceCN);
         if(this.yearNameOfTomb != "" && this.yearNameOfTomb != null) strConcat(keyword, yearNameOfTomb);
         if(this.yearAD != "" && this.yearAD != null) keyword = strConcat(keyword, yearAD);
+        if(this.yearAge != "" && this.yearAge != null) keyword = strConcat(keyword, yearAge);
         if(this.month != "" && this.month != null) keyword = strConcat(keyword, month);
         if(this.dynastyKR != "" && this.dynastyKR != null) keyword = strConcat(keyword, dynastyKR);
         if(this.dynastyCN != "" && this.dynastyCN != null) keyword = strConcat(keyword, dynastyCN);

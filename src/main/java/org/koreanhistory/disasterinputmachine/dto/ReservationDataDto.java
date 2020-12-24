@@ -60,6 +60,8 @@ public class ReservationDataDto extends SplitReferenceIndexs {
 
     // 연도 (모호년)
     private String yearNameOfTomb;
+    // 연도 (연호)
+    private String yearAge;
     // 연도 (서기)
     private String yearAD;
     // 연도 (월)
@@ -91,7 +93,7 @@ public class ReservationDataDto extends SplitReferenceIndexs {
         this.createTime = entity.getCreateTime(); this.modifyTime = entity.getModifyTime();
         this.indexKR = entity.getIndexKR(); this.indexCN = entity.getIndexCN();
         this.lclasKR = entity.getLclasKR(); this.lclasCN = entity.getLclasCN(); this.mclasKR = entity.getMclasKR(); this.mclasCN = entity.getMclasCN(); this.sclasKR = entity.getSclasKR(); this.sclasCN = entity.getSclasCN();
-        this.articlSumry = entity.getArticlSumry(); this.articlOrginl = entity.getArticlOrginl(); this.ltrtreClas = entity.getLtrtreClas(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
+        this.articlSumry = entity.getArticlSumry();this.yearAge = entity.getYearAge();  this.articlOrginl = entity.getArticlOrginl(); this.ltrtreClas = entity.getLtrtreClas(); this.ltrtreNM = entity.getLtrtreNM(); this.sourceKR = entity.getSourceKR(); this.sourceCN = entity.getSourceCN();
         this.yearNameOfTomb = entity.getYearNameOfTomb(); this.yearAD = entity.getYearAD(); this.month = entity.getMonth();
         this.dynastyKR = entity.getDynastyKR(); this.dynastyCN = entity.getDynastyCN();
         this.area1KR = entity.getArea1KR(); this.area1CN = entity.getArea1CN(); this.area2KR = entity.getArea2KR(); this.area2CN = entity.getArea2CN(); this.area3KR = entity.getArea3KR(); this.area3CN = entity.getArea3CN();
