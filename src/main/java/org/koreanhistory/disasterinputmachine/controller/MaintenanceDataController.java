@@ -50,7 +50,7 @@ public class MaintenanceDataController {
 
     // 데이터를 저장하는 페이지로 이동한다.
     @GetMapping("/register")
-    public void registerGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto) {
+    public void registerGET(@ModelAttribute("dto") MaintenanceDataSaveDto dto, @ModelAttribute("pageVO") PageVO vo) {
         log.info("IN MAINTENANCE DATA CONTROLLER: registerGET() called...");
     }
 

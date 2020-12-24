@@ -48,7 +48,7 @@ public class DeleteDataController {
 
     // 데이터를 저장하는 페이지로 이동한다.
     @GetMapping("/register")
-    public void registerGET(@ModelAttribute("dto") DeleteDataSaveDto dto) {
+    public void registerGET(@ModelAttribute("dto") DeleteDataSaveDto dto, @ModelAttribute("pageVO") PageVO vo) {
         log.info("IN DELETE DATA CONTROLLER: registerGET() called...");
     }
 

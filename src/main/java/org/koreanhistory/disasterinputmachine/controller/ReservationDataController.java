@@ -49,7 +49,7 @@ public class ReservationDataController {
 
     // 데이터를 저장하는 페이지로 이동한다.
     @GetMapping("/register")
-    public void registerGET(@ModelAttribute("dto") ReservationDataSaveDto dto) {
+    public void registerGET(@ModelAttribute("dto") ReservationDataSaveDto dto, @ModelAttribute("pageVO") PageVO vo) {
         log.info("IN RESERVATION DATA CONTROLLER: registerGET() called...");
     }
 
