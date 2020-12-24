@@ -107,6 +107,9 @@ public interface ReservationDataRepository extends CrudRepository<ReservationDat
             case "yearNameOfTomb":
                 builder.and(data.yearNameOfTomb.like("%" + keyword + "%"));
                 break;
+            case "yearAge":
+                builder.and(data.yearAge.like("%" + keyword + "%"));
+                break;
             case "yearAD":
                 builder.and(data.yearAD.like("%" + keyword + "%"));
                 break;
