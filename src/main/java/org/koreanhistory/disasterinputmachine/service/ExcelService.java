@@ -51,14 +51,14 @@ public class ExcelService {
                 data.setModifyBy(writer);
 
                 // 총 28개 컬럼이 존재한다.
-                for(int j = 0; j < 28; j++) {
+                for(int j = 0; j < 29; j++) {
                     // 예시 로그 출력
                     Cell cell = row.getCell(j);
                     if(cell != null) {
                         makeRdata(j, data, cell.getStringCellValue());
                     }
                 }
-                data.setClasAndDynDatas();
+                data.setMappingDatas();
                 rdtoList.add(data);
                 log.info("===================================" + i + "-th rdata===================================");
                 log.info("" + data);
@@ -220,7 +220,7 @@ public class ExcelService {
         cell = row.createCell(0);
         cell.setCellStyle(bodyStyle);
         cell.setCellValue(caption + " " + (rowNum - 2));
-        for(int i = 0; i < 28; i++) {
+        for(int i = 0; i < 29; i++) {
             cell = row.createCell(i + 1);
             data = makeCell(i + 1, excelDto);
             cell.setCellStyle(bodyStyle);
@@ -281,39 +281,42 @@ public class ExcelService {
                 data = excelDto.getYearNameOfTomb();
                 break;
             case 16:
-                data = excelDto.getYearAD();
+                data = excelDto.getYearAge();
                 break;
             case 17:
-                data = excelDto.getMonth();
+                data = excelDto.getYearAD();
                 break;
             case 18:
-                data = excelDto.getDynastyKR();
+                data = excelDto.getMonth();
                 break;
             case 19:
-                data = excelDto.getDynastyCN();
+                data = excelDto.getDynastyKR();
                 break;
             case 20:
-                data = excelDto.getArea1KR();
+                data = excelDto.getDynastyCN();
                 break;
             case 21:
-                data = excelDto.getArea1CN();
+                data = excelDto.getArea1KR();
                 break;
             case 22:
-                data = excelDto.getArea2KR();
+                data = excelDto.getArea1CN();
                 break;
             case 23:
-                data = excelDto.getArea2CN();
+                data = excelDto.getArea2KR();
                 break;
             case 24:
-                data = excelDto.getArea3KR();
+                data = excelDto.getArea2CN();
                 break;
             case 25:
-                data = excelDto.getArea3CN();
+                data = excelDto.getArea3KR();
                 break;
             case 26:
-                data = excelDto.getReferIndexStr();
+                data = excelDto.getArea3CN();
                 break;
             case 27:
+                data = excelDto.getReferIndexStr();
+                break;
+            case 28:
                 data = excelDto.getRemark();
                 break;
         }
@@ -372,39 +375,42 @@ public class ExcelService {
                 data.setYearNameOfTomb(value);
                 break;
             case 16:
-                data.setYearAD(value);
+                data.setYearAge(value);
                 break;
             case 17:
-                data.setMonth(value);
+                data.setYearAD(value);
                 break;
             case 18:
-                data.setDynastyKR(value);
+                data.setMonth(value);
                 break;
             case 19:
-                data.setDynastyCN(value);
+                data.setDynastyKR(value);
                 break;
             case 20:
-                data.setArea1KR(value);
+                data.setDynastyCN(value);
                 break;
             case 21:
-                data.setArea1CN(value);
+                data.setArea1KR(value);
                 break;
             case 22:
-                data.setArea2KR(value);
+                data.setArea1CN(value);
                 break;
             case 23:
-                data.setArea2CN(value);
+                data.setArea2KR(value);
                 break;
             case 24:
-                data.setArea3KR(value);
+                data.setArea2CN(value);
                 break;
             case 25:
-                data.setArea3CN(value);
+                data.setArea3KR(value);
                 break;
             case 26:
-                data.setReferIndex(value);
+                data.setArea3CN(value);
                 break;
             case 27:
+                data.setReferIndex(value);
+                break;
+            case 28:
                 data.setRemark(value);
                 break;
         }
@@ -412,7 +418,7 @@ public class ExcelService {
     }
 
     private void makeHeader(Sheet sheet, CellStyle headerStyle) {
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 28));
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 29));
         Row headerRow = sheet.createRow(0);
         headerRow.setHeight((short)1100);
         Cell cell = headerRow.createCell(0);
@@ -468,13 +474,13 @@ public class ExcelService {
     }
 
     private String[] getColumnList() {
-        String[] columnArr = {"출처", "아이디(분류번호)", "색인어(한글)", "색인어(한자)", "대분류(한글)", "대분류(한자)", "중분류(한글)", "중분류(한자)", "소분류(한글)", "소분류(한자)", "기사 개요", "기사 원문", "문헌분류", "문헌명칭", "출전(한글)", "출전(한자)", "연도(묘호년)", "연도(서기)", "월", "왕조(한국)", "왕조(중국)", "지역1(한글)", "지역1(한자)", "지역2(한글)", "지역2(한자)", "지역3(한글)", "지역3(한자)", "참고색인어", "비고"};
+        String[] columnArr = {"출처", "아이디(분류번호)", "색인어(한글)", "색인어(한자)", "대분류(한글)", "대분류(한자)", "중분류(한글)", "중분류(한자)", "소분류(한글)", "소분류(한자)", "기사 개요", "기사 원문", "문헌분류", "문헌명칭", "출전(한글)", "출전(한자)", "연도(묘호년)", "연도(연호)", "연도(서기)", "월", "왕조(한국)", "왕조(중국)", "지역1(한글)", "지역1(한자)", "지역2(한글)", "지역2(한자)", "지역3(한글)", "지역3(한자)", "참고색인어", "비고"};
         return columnArr;
     }
 
     private int[] getSizeList() {
         int sizeValue = 275;
-        int[] sizeList = {sizeValue * 16, sizeValue * 16, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 30, sizeValue * 50, sizeValue * 20, sizeValue * 20, sizeValue * 40, sizeValue * 40, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 40, sizeValue * 20};
+        int[] sizeList = {sizeValue * 16, sizeValue * 16, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 30, sizeValue * 50, sizeValue * 20, sizeValue * 20, sizeValue * 40, sizeValue * 40, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 12, sizeValue * 40, sizeValue * 20};
         return sizeList;
     }
 
