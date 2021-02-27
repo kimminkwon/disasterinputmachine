@@ -333,7 +333,7 @@ public class ExcelService {
                 data.setIndexKR(value);
                 break;
             case 2:
-                data.setIndexCN(value);
+                data.setIndexCN(value == "" || value == null ? "EMPTY" : value);
                 break;
             case 3:
                 data.setLclasKR(value);

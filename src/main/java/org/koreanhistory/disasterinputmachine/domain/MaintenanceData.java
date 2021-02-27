@@ -105,7 +105,7 @@ public class MaintenanceData {
                            String area1KR, String area1CN, String area2KR, String area2CN, String area3KR, String area3CN,
                            String referIndex, String remark) {
         this.createBy = createBy; this.modifyBy = modifyBy;
-        this.clasNo = clasNo; this.indexKR = indexKR; this.indexCN = indexCN;
+        this.clasNo = clasNo; this.indexKR = indexKR; this.indexCN = indexCN == "" || indexCN == null ? "EMPTY" : indexCN;
         this.lclasKR = lclasKR; this.lclasCN = lclasCN; this.mclasKR = mclasKR; this.mclasCN = mclasCN; this.sclasKR = sclasKR; this.sclasCN = sclasCN;
         this.articlSumry = articlSumry; this.articlOrginl = articlOrginl; this.ltrtreClas = ltrtreClas; this.ltrtreNM = ltrtreNM; this.sourceKR = sourceKR; this.sourceCN = sourceCN;
         this.yearNameOfTomb = yearNameOfTomb; this.yearAge = yearAge; this.yearAD = yearAD; this.month = month;
@@ -118,7 +118,7 @@ public class MaintenanceData {
 
     public void update(MaintenanceDataModifyDto dto) {
         this.modifyBy = dto.getModifyBy();
-        this.clasNo = dto.getClasNo(); this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN();
+        this.clasNo = dto.getClasNo(); this.indexKR = dto.getIndexKR(); this.indexCN = dto.getIndexCN() == "" || dto.getIndexCN() == null ? "EMPTY" : dto.getIndexCN(); ;
         this.lclasKR = dto.getLclasKR(); this.lclasCN = dto.getLclasCN(); this.mclasKR = dto.getMclasKR(); this.mclasCN = dto.getMclasCN(); this.sclasKR = dto.getSclasKR(); this.sclasCN = dto.getSclasCN();
         this.articlSumry = dto.getArticlSumry(); this.articlOrginl = dto.getArticlOrginl(); this.ltrtreClas = dto.getLtrtreClas(); this.ltrtreNM = dto.getLtrtreNM(); this.sourceKR = dto.getSourceKR(); this.sourceCN = dto.getSourceCN();
         this.yearNameOfTomb = dto.getYearNameOfTomb(); this.yearAge = dto.getYearAge(); this.yearAD = dto.getYearAD(); this.month = dto.getMonth();

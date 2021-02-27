@@ -69,7 +69,7 @@ public class ReservationDataRepositoryTest {
         // given: 예제 데이터 작성
         MakeEntityReservation makeEntityReservation = new MakeEntityReservation();
         List<ReservationData> rdataList = new ArrayList<>();
-        int size = 200000;
+        int size = 100;
         ReservationData entity = makeEntityReservation.getEntity("example");
 
         // when: 예제 데이터 입력
