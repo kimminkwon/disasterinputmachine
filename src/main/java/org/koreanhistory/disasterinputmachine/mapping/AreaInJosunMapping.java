@@ -34,7 +34,9 @@ public class AreaInJosunMapping {
     }
 
     private void makeAreaMap() throws Exception {
-        String path = "src/main/resources/mappingdata/AreaMappingInJosun.xlsx";
+        String path = "C:/Users/User/Desktop/Disaster_Input_Machine/mappingdata/AreaMappingInJosun.xlsx";
+        // String path = "C:/Users/82102/Desktop/STUDY/WEB/disasterinputmachine/src/main/resources/mappingdata/AreaMappingInJosun.xlsx";
+        // String path = "C:/Users/82102/Desktop/Excel/AreaMappingInJosun.xlsx";
         FileInputStream fis = new FileInputStream(path);
 
         Workbook workbook = new XSSFWorkbook(fis);

@@ -32,31 +32,31 @@ public class DynastyCNMapping {
 
     public String[] getYearADAndNameOfTomb(String dynasty, String yearAge) {
         if(dynasty.equals("唐") || dynasty.equals("당") || dynasty.equals("당(唐)"))
-            return dangMap.get(yearAge).split("-");
+            return dangMap.containsKey(yearAge) ? dangMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後梁") || dynasty.equals("후량") || dynasty.equals("후량(後梁)"))
-            return huLiangMap.get(yearAge).split("-");
+            return huLiangMap.containsKey(yearAge) ? huLiangMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後唐") || dynasty.equals("후당") || dynasty.equals("후당(後唐)"))
-            return huDangMap.get(yearAge).split("-");
+            return huDangMap.containsKey(yearAge) ? huDangMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後晉") || dynasty.equals("후진") || dynasty.equals("후진(後晉)"))
-            return huJinMap.get(yearAge).split("-");
+            return huJinMap.containsKey(yearAge) ? huJinMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後漢") || dynasty.equals("후한") || dynasty.equals("후한(後漢)"))
-            return huHanMap.get(yearAge).split("-");
+            return huHanMap.containsKey(yearAge) ? huHanMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後周") || dynasty.equals("후주") || dynasty.equals("후주(後周)"))
-            return huJuMap.get(yearAge).split("-");
+            return huJuMap.containsKey(yearAge) ? huJuMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("宋") || dynasty.equals("송") || dynasty.equals("송(宋)"))
-            return songMap.get(yearAge).split("-");
+            return songMap.containsKey(yearAge) ? songMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("契丹(遼)") || dynasty.equals("遼") || dynasty.equals("契丹") || dynasty.equals("거란(요)") || dynasty.equals("거란") || dynasty.equals("요") || dynasty.equals("거란(요), 契丹(遼)"))
-            return yoMap.get(yearAge).split("-");
+            return yoMap.containsKey(yearAge) ? yoMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("西夏") || dynasty.equals("서하") || dynasty.equals("서하(西夏)"))
-            return seohaMap.get(yearAge).split("-");
+            return seohaMap.containsKey(yearAge) ? seohaMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("金") || dynasty.equals("금") || dynasty.equals("금(金)"))
-            return geomMap.get(yearAge).split("-");
+            return geomMap.containsKey(yearAge) ? geomMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("元") || dynasty.equals("원") || dynasty.equals("원(元)"))
-            return whongMap.get(yearAge).split("-");
+            return whongMap.containsKey(yearAge) ? whongMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("明") || dynasty.equals("명") || dynasty.equals("명(明)"))
-            return mongMap.get(yearAge).split("-");
+            return mongMap.containsKey(yearAge) ? mongMap.get(yearAge).split("-") : new String[]{"", ""};
         else if(dynasty.equals("淸") || dynasty.equals("청") || dynasty.equals("청(淸)"))
-            return chongMap.get(yearAge).split("-");
+            return chongMap.containsKey(yearAge) ? chongMap.get(yearAge).split("-") : new String[]{"", ""};
         else
             return new String[]{"", ""};
     }
@@ -76,7 +76,9 @@ public class DynastyCNMapping {
     }
 
     private void makeAreaMap() throws Exception {
-        String path = "src/main/resources/mappingdata/DynastyCNMapping.xlsx";
+        String path = "C:/Users/User/Desktop/Disaster_Input_Machine/mappingdata/DynastyCNMapping.xlsx";
+        // String path = "C:/Users/82102/Desktop/STUDY/WEB/disasterinputmachine/src/main/resources/mappingdata/DynastyCNMapping.xlsx";
+        // String path = "C:/Users/82102/Desktop/Excel/DynastyCNMapping.xlsx";
         FileInputStream fis = new FileInputStream(path);
 
         Workbook workbook = new XSSFWorkbook(fis);
@@ -163,9 +165,9 @@ public class DynastyCNMapping {
                 Cell value2 = row.getCell(2);
                 key.setCellType(CellType.STRING);
                 value1.setCellType(CellType.STRING);
-                value2.setCellType(CellType.STRING);
+                if(value2 != null) value2.setCellType(CellType.STRING);
                 String value1Str = value1.getStringCellValue() == "" ? " " : value1.getStringCellValue();
-                String value2Str = value2.getStringCellValue() == "" ? " " : value2.getStringCellValue();
+                String value2Str = value2 == null || value2.getStringCellValue() == "" ? " " : value2.getStringCellValue();
 
                 dynastyMap.put(key.getStringCellValue(), value1Str + "-" + value2Str);
             }

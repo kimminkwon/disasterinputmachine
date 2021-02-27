@@ -21,27 +21,26 @@ public class DynastyKRMapping {
     public static synchronized DynastyKRMapping getInstance() {
         if(dynastyKRMapping == null)
             dynastyKRMapping = new DynastyKRMapping();
-
         return dynastyKRMapping;
     }
 
     public String[] getYearADAndAge(String dynasty, String yearNameOfTomb) {
         if(dynasty.equals("新羅") || dynasty.equals("신라") || dynasty.equals("신라(新羅)"))
-            return sinraMap.get(yearNameOfTomb).split("-");
+            return sinraMap.containsKey(yearNameOfTomb) ? sinraMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("高句麗") || dynasty.equals("고구려") || dynasty.equals("고구려(高句麗)"))
-            return goguryeoMap.get(yearNameOfTomb).split("-");
+            return goguryeoMap.containsKey(yearNameOfTomb) ? goguryeoMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("百濟") || dynasty.equals("백제") || dynasty.equals("백제(百濟)"))
-            return baekjeMap.get(yearNameOfTomb).split("-");
+            return baekjeMap.containsKey(yearNameOfTomb) ? baekjeMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("渤海") || dynasty.equals("발해") || dynasty.equals("발해(渤海)"))
-            return balhaeMap.get(yearNameOfTomb).split("-");
+            return balhaeMap.containsKey(yearNameOfTomb) ? balhaeMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後百濟") || dynasty.equals("후백제") || dynasty.equals("후백제(後百濟)"))
-            return huBaekjeMap.get(yearNameOfTomb).split("-");
+            return huBaekjeMap.containsKey(yearNameOfTomb) ? huBaekjeMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("後高句麗") || dynasty.equals("후고구려") || dynasty.equals("후고구려(後高句麗)"))
-            return huGoguryeoMap.get(yearNameOfTomb).split("-");
+            return huGoguryeoMap.containsKey(yearNameOfTomb) ? huGoguryeoMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("高麗") || dynasty.equals("고려") || dynasty.equals("고려(高麗)"))
-            return goryeoMap.get(yearNameOfTomb).split("-");
+            return goryeoMap.containsKey(yearNameOfTomb) ? goryeoMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else if(dynasty.equals("朝鮮") || dynasty.equals("조선") || dynasty.equals("조선(朝鮮)"))
-            return joseonMap.get(yearNameOfTomb).split("-");
+            return joseonMap.containsKey(yearNameOfTomb) ? joseonMap.get(yearNameOfTomb).split("-") : new String[]{"", ""};
         else
             return new String[]{"", ""};
     }
@@ -59,7 +58,9 @@ public class DynastyKRMapping {
     }
 
     private void makeAreaMap() throws Exception {
-        String path = "src/main/resources/mappingdata/DynastyKRMapping.xlsx";
+        String path = "C:/Users/User/Desktop/Disaster_Input_Machine/mappingdata/DynastyKRMapping.xlsx";
+        // String path = "C:/Users/82102/Desktop/STUDY/WEB/disasterinputmachine/src/main/resources/mappingdata/DynastyKRMapping.xlsx";
+        // String path = "C:/Users/82102/Desktop/Excel/DynastyKRMapping.xlsx";
         FileInputStream fis = new FileInputStream(path);
 
         Workbook workbook = new XSSFWorkbook(fis);
@@ -118,9 +119,9 @@ public class DynastyKRMapping {
                 Cell value2 = row.getCell(2);
                 key.setCellType(CellType.STRING);
                 value1.setCellType(CellType.STRING);
-                value2.setCellType(CellType.STRING);
+                if(value2 != null) value2.setCellType(CellType.STRING);
                 String value1Str = value1.getStringCellValue() == "" ? " " : value1.getStringCellValue();
-                String value2Str = value2.getStringCellValue() == "" ? " " : value2.getStringCellValue();
+                String value2Str = value2 == null || value2.getStringCellValue() == "" ? " " : value2.getStringCellValue();
 
                 dynastyMap.put(key.getStringCellValue(), value1Str + "-" + value2Str);
             }
