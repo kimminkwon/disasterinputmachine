@@ -117,6 +117,13 @@ public class ReservationDataService {
         dataExchangeService.reservationToDelete(rnoList);
     }
 
+    @Transactional
+    public void deleteAll(Long[] rnoList) {
+        log.info("IN ReservationDataService: deleteAll() called...");
+        log.info("RNOLIST" + Arrays.toString(rnoList));
+        repository.deleteAllByIdInQuery(Arrays.asList(rnoList));
+    }
+
     private List<String> splitTypesAndKeywords(String str) {
         StringTokenizer tokenizer = new StringTokenizer(str, "-");
         List<String> strList = new ArrayList<>();

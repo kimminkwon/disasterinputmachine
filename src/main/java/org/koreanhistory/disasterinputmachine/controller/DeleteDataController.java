@@ -229,4 +229,26 @@ public class DeleteDataController {
 
         return "redirect:/delete/list";
     }
+
+    @PostMapping("/deleteall")
+    public String deleteAll(@ModelAttribute("dnoList") Long[] dnoList, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN DELETE DATA CONTROLLER: calling deleteAll()...");
+        log.info("DNOLIST" + Arrays.toString(dnoList));
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
+        log.info("TYPE: " + vo.getType());
+        log.info("KEYWORD: " + vo.getKeyword());
+
+        service.deleteAll(dnoList);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/delete/list";
+    }
 }

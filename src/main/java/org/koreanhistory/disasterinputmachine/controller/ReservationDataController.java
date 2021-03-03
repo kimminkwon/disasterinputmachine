@@ -231,4 +231,26 @@ public class ReservationDataController {
 
         return "redirect:/reservation/list";
     }
+
+    @PostMapping("/deleteall")
+    public String deleteAll(@ModelAttribute("rnoList") Long[] rnoList, PageVO vo, RedirectAttributes rttr) {
+        log.info("IN RESERVATION DATA CONTROLLER: calling deleteAll()...");
+        log.info("RNOLIST" + Arrays.toString(rnoList));
+        log.info("PAGE: " + vo.getPage());
+        log.info("SIZE: " + vo.getSize());
+        log.info("TYPE: " + vo.getType());
+        log.info("KEYWORD: " + vo.getKeyword());
+
+        service.deleteAll(rnoList);
+
+        rttr.addFlashAttribute("msg", "success");
+
+        // Paging과 검색 결과를 유지하기 위한 데이터 보내기
+        rttr.addAttribute("page", vo.getPage());
+        rttr.addAttribute("size", vo.getSize());
+        rttr.addAttribute("type", vo.getType());
+        rttr.addAttribute("keyword", vo.getKeyword());
+
+        return "redirect:/reservation/list";
+    }
 }

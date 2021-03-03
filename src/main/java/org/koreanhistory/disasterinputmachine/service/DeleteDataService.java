@@ -119,6 +119,12 @@ public class DeleteDataService {
         dataExchangeService.deleteToMaintanance(dnoList);
     }
 
+    @Transactional
+    public void deleteAll(Long[] dnoList) {
+        log.info("IN DeleteDataService: deleteAll() called...");
+        log.info("DNOLIST" + Arrays.toString(dnoList));
+        repository.deleteAllByIdInQuery(Arrays.asList(dnoList));
+    }
 
     private List<String> splitTypesAndKeywords(String str) {
         StringTokenizer tokenizer = new StringTokenizer(str, "-");

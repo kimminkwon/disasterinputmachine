@@ -120,6 +120,13 @@ public class MaintenanceDataService {
         dataExchangeService.maintenanceToDelete(mnoList);
     }
 
+    @Transactional
+    public void deleteAll(Long[] mnoList) {
+        log.info("IN MaintenanceDataService: deleteAll() called...");
+        log.info("MNOLIST" + Arrays.toString(mnoList));
+        repository.deleteAllByIdInQuery(Arrays.asList(mnoList));
+    }
+
     private List<String> splitTypesAndKeywords(String str) {
         StringTokenizer tokenizer = new StringTokenizer(str, "-");
         List<String> strList = new ArrayList<>();
