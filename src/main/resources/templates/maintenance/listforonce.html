@@ -70,6 +70,7 @@
                 <input type='text' id='searchKeyword' th:value="${pageVO.keyword}" placeholder="keyword1-keyword2-...">
                 <button id='searchBtn'>검색</button>
                 <button id='backToList' class="btn btn-default pull-right" >리스트로 돌아가기</button>
+                <button id='deleteAllBtn' sec:authorize="hasRole('ROLE_ADMIN')" style="margin-right: 10px" class="btn btn-info pull-right">일괄 삭제</button>
                 <button id='toDelete' style="margin-right: 10px" class="btn btn-danger pull-right">삭제 테이블로 이동</button>
                 <button id='toReservation' style="margin-right: 10px" class="btn btn-warning pull-right">보류 테이블로 이동</button>
 
@@ -216,6 +217,22 @@
                 formSelected.attr("action", [[@{'/maintenance/todeleteonce'}]]);
                 formSelected.append("<input type='hidden' name='mnoList' value='" + noArray + "'>");
                 formSelected.submit();
+            });
+
+            // DELETE ALL을 클릭시 일괄로 데이터가 삭제
+            $("#deleteAllBtn").click(function (e){
+                if(confirm("삭제한 데이터는 복구할 수 없습니다. 삭제하시겠습니까?")) {
+                    var noArray = new Array();
+                    var checkedList = $("input[id='checkedList']:checked");
+                    checkedList.each(function (i) {
+                        var tr = checkedList.parent().parent().eq(i);
+                        var td = tr.children();
+                        noArray.push(td.eq(1).text());
+                    });
+                    formSelected.attr("action", [[@{'/maintenance/deleteall'}]]);
+                    formSelected.append("<input type='hidden' name='mnoList' value='" + noArray + "'>");
+                    formSelected.submit();
+                }
             });
 
         });
